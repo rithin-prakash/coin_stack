@@ -1,6 +1,4 @@
-import 'package:coin_stack/features/intros/presentation/pages/intro_money_abroad.dart';
-import 'package:coin_stack/features/intros/presentation/pages/intro_receive_money.dart';
-import 'package:coin_stack/features/intros/presentation/pages/intro_trust_page.dart';
+import 'package:coin_stack/features/intros/presentation/pages/intro_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF304FFE)),
       ),
-      home: const IntroReceiveMoney(),
+      home: const IntroPage(),
     );
   }
 }
