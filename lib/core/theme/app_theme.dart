@@ -10,7 +10,7 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
-        minimumSize: Size(100, 50),
+        minimumSize: Size(AppDimen.inputMinWidth, AppDimen.inputMinHeight),
         textStyle: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
@@ -21,7 +21,7 @@ class AppTheme {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        minimumSize: Size(100, 50),
+        minimumSize: Size(AppDimen.inputMinWidth, AppDimen.inputMinHeight),
         side: BorderSide(color: AppColors.primary),
         textStyle: TextStyle(
           color: AppColors.primary,
@@ -33,7 +33,9 @@ class AppTheme {
     ),
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: TextStyle(fontSize: 16),
-      hintStyle: TextStyle(fontSize: 16),
+      hintStyle: TextStyle(fontSize: 16, color: AppColors.inputBorder),
+      suffixIconColor: AppColors.inputBorder,
+      prefixIconColor: AppColors.inputBorder,
       border: OutlineInputBorder(
         borderSide: BorderSide(width: .9, color: AppColors.inputBorder),
         borderRadius: BorderRadius.circular(AppDimen.inputBorderRadius),

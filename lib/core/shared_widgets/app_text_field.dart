@@ -7,16 +7,23 @@ class AppTextField extends StatelessWidget {
     required this.controlName,
     this.hintText,
     this.labelText,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.obscureText = false,
   });
 
   final String controlName;
   final String? hintText;
   final String? labelText;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final bool? obscureText;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (labelText != null)
           Text(
@@ -29,7 +36,11 @@ class AppTextField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             // labelText: labelText,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
           ),
+          obscureText: obscureText!,
+          obscuringCharacter: '\u25CF',
         ),
       ],
     );
