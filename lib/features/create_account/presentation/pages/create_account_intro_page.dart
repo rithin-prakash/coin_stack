@@ -5,6 +5,7 @@ import 'package:coin_stack/features/create_account/presentation/pages/create_acc
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CreateAccountIntroPage extends StatelessWidget {
   const CreateAccountIntroPage({super.key});
@@ -63,19 +64,33 @@ class CreateAccountIntroPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     text: 'By continuing, you accpet our \n',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: GoogleFonts.poppins().fontFamily,
+                    ),
                     children: [
                       TextSpan(
                         text: 'Terms and Conditions',
-                        style: TextStyle(color: AppColors.primary),
+                        style: TextStyle(
+                          color: AppColors.primary,
+
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                        ),
                       ),
                       TextSpan(
                         text: ' and ',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(
+                          color: Colors.black,
+
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                        ),
                       ),
                       TextSpan(
                         text: 'Privacy Policy',
-                        style: TextStyle(color: AppColors.primary),
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                        ),
                       ),
                     ],
                   ),
