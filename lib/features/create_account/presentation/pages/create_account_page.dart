@@ -58,11 +58,13 @@ class CreateAccountPage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed:
-                        () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => OtpPage()),
-                        ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => OtpPage()),
+                      );
+                    },
                     child: Text('Yes'),
                   ),
                 ),
@@ -90,41 +92,44 @@ class CreateAccountPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AccountProgressIndicator(value: .1),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 16),
-                Text(
-                  "Create an Account",
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Enter your mobile number to verify your account',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(height: 20),
-                Flexible(fit: FlexFit.loose, child: AccountForm()),
-                SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        showVerifyPhoneDialog(context, '+5435454656');
-                      },
-                      child: Text('Sign Up'),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 16),
+                  Text(
+                    "Create an Account",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(height: 8),
+                  Text(
+                    'Enter your mobile number to verify your account',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 20),
+                  Flexible(fit: FlexFit.loose, child: AccountForm()),
+                  SizedBox(height: 20),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(AppDimen.pagePadding),
+            margin: EdgeInsets.only(bottom: 20),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  showVerifyPhoneDialog(context, '+5435454656');
+                },
+                child: Text('Sign Up'),
+              ),
             ),
           ),
         ],

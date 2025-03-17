@@ -89,20 +89,17 @@ class _OtpPageState extends State<OtpPage> {
               ),
             ),
           ),
-          Padding(
+          Container(
             padding: const EdgeInsets.all(AppDimen.pagePadding),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Verify Your Phone'),
-                ),
+            margin: EdgeInsets.only(bottom: 20),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text('Verify Your Phone'),
               ),
             ),
           ),
-          SizedBox(height: 20),
         ],
       ),
     );
