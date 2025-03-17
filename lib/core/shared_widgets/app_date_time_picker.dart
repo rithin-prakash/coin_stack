@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import 'package:intl/intl.dart';
+import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 
-class AppTextField extends StatelessWidget {
-  const AppTextField({
+class AppDateTimePicker extends StatelessWidget {
+  AppDateTimePicker({
     super.key,
     required this.controlName,
     this.hintText,
@@ -21,6 +22,8 @@ class AppTextField extends StatelessWidget {
   final bool? obscureText;
   final String? prefixText;
 
+  final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,19 +35,17 @@ class AppTextField extends StatelessWidget {
             labelText!,
             style: Theme.of(context).inputDecorationTheme.labelStyle,
           ),
-        ReactiveTextField(
+        ReactiveDateTimePicker(
           formControlName: controlName,
-          onTapOutside: (event) => FocusScope.of(context).unfocus(),
+          type: ReactiveDatePickerFieldType.date,
+          dateFormat: DateFormat("dd/MM/yyyy"),
+          lastDate: DateTime.now().subtract(Duration(days: 365 * 18)),
           decoration: InputDecoration(
             hintText: hintText,
-            // labelText: labelText,
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-            prefixText: prefixText,
-            prefixStyle: TextStyle(color: Theme.of(context).primaryColor),
+            prefixIcon: Icon(Icons.calendar_today),
           ),
-          obscureText: obscureText!,
-          obscuringCharacter: '\u25CF',
+          valueBuilder:
+              (_, value) => Text(value ?? '', overflow: TextOverflow.ellipsis),
         ),
       ],
     );
