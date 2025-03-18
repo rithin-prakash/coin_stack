@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
+import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 
-class AppDateTimePicker extends StatelessWidget {
-  AppDateTimePicker({
+class AppAsyncDropdownSearchField extends StatelessWidget {
+  AppAsyncDropdownSearchField({
     super.key,
     required this.controlName,
     this.hintText,
@@ -35,17 +34,17 @@ class AppDateTimePicker extends StatelessWidget {
             labelText!,
             style: Theme.of(context).inputDecorationTheme.labelStyle,
           ),
-        ReactiveDateTimePicker(
+        ReactiveDropdownSearch(
           formControlName: controlName,
-          type: ReactiveDatePickerFieldType.date,
-          dateFormat: DateFormat("dd/MM/yyyy"),
-          lastDate: DateTime.now().subtract(Duration(days: 365 * 18)),
-          decoration: InputDecoration(
-            hintText: hintText,
-            prefixIcon: Icon(Icons.calendar_today),
+          suffixProps: DropdownSuffixProps(
+            dropdownButtonProps: DropdownButtonProps(
+              iconOpened: Icon(Icons.keyboard_arrow_up, size: 24),
+              iconClosed: Icon(Icons.keyboard_arrow_down, size: 24),
+            ),
           ),
-          valueBuilder:
-              (_, value) => Text(value ?? '', overflow: TextOverflow.ellipsis),
+          compareFn: (item1, item2) {
+            return true;
+          },
         ),
       ],
     );

@@ -1,18 +1,16 @@
 import 'package:coin_stack/core/constants/app_dimen.dart';
-import 'package:coin_stack/core/shared_widgets/app_date_time_picker_field.dart';
-import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
+import 'package:coin_stack/core/shared_widgets/app_async_dropdown_search_field.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AddPersonalInfoPage extends StatelessWidget {
-  AddPersonalInfoPage({super.key});
+class AddCountryOfResidence extends StatelessWidget {
+  AddCountryOfResidence({super.key});
   final form = fb.group({
-    'full_name': FormControl<String>(validators: [Validators.required]),
-    'username': FormControl<String>(validators: [Validators.required]),
-    'dob': FormControl<DateTime>(validators: [Validators.required]),
+    'country_of_residence': FormControl<String>(
+      validators: [Validators.required],
+    ),
   });
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +21,7 @@ class AddPersonalInfoPage extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AccountProgressIndicator(value: .1),
+              AccountProgressIndicator(value: .2),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -35,7 +33,7 @@ class AddPersonalInfoPage extends StatelessWidget {
                     children: [
                       SizedBox(height: 16),
                       Text(
-                        "Add your personal info",
+                        "Country of residence",
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -46,25 +44,12 @@ class AddPersonalInfoPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyLarge,
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(height: 16),
-                      AppTextField(
-                        controlName: 'full_name',
-                        labelText: 'Full Name',
-                        hintText: 'Mr. John Doe',
-                      ),
-                      SizedBox(height: 16),
-                      AppTextField(
-                        controlName: 'username',
-                        labelText: 'Username',
-                        hintText: 'username',
-                        prefixText: "@",
-                      ),
-                      SizedBox(height: 16),
-                      AppDateTimePickerField(
-                        controlName: 'dob',
-                        labelText: 'Date of Birth',
-                        hintText: 'DD/MM/YYYY',
-                        prefixIcon: Icon(Icons.calendar_today),
+                      SizedBox(height: 20),
+                      AppAsyncDropdownSearchField(
+                        controlName: 'country_of_residence',
+                        labelText: 'Country',
+                        prefixIcon: Icon(Icons.flag),
+                        hintText: '',
                       ),
                     ],
                   ),

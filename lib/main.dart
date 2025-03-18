@@ -1,4 +1,5 @@
 import 'package:coin_stack/core/theme/app_theme.dart';
+import 'package:coin_stack/setup_account/presentation/pages/add_country_of_residence.dart';
 import 'package:coin_stack/setup_account/presentation/pages/add_personal_info_page.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
-      home: AddPersonalInfoPage(),
+      home: AddCountryOfResidence(),
       // debugShowMaterialGrid: true,
     );
   }
