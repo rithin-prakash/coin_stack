@@ -10,4 +10,5 @@ class AppAssets {
   static const setupAccIntro = '$svgPath/setup_account_intro.svg';
   static const idScan = '$svgPath/id_scan.svg';
   static const takeSelfie = '$svgPath/take_selfie.svg';
+  static const accSuccess = '$svgPath/create_acc_success.svg';
 }
