@@ -7,4 +7,5 @@ class AppAssets {
   static const introReceiveMoney = '$svgPath/receive_money.svg';
   static const createAccount = '$svgPath/create_account.svg';
   static const sms = '$svgPath/sms.svg';
+  static const setupAccIntro = '$svgPath/setup_account_intro.svg';
 }
