@@ -1,7 +1,7 @@
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
-import 'package:coin_stack/features/verify_account/presentation/pages/widgets/account_verify_item.dart';
+import 'package:coin_stack/features/verify_account/presentation/widgets/account_verify_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -32,9 +32,8 @@ class VerifyAccountIntroPage extends StatelessWidget {
                     SizedBox(height: 20),
                     Text(
                       "Setting up your account",
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.headlineLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     Text(
