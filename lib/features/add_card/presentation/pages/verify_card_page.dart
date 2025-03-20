@@ -1,6 +1,7 @@
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
 class VerifyCardPage extends StatelessWidget {
@@ -34,8 +35,8 @@ class VerifyCardPage extends StatelessWidget {
               child: Pinput(
                 length: 6,
                 defaultPinTheme: PinTheme(
-                  width: 56,
-                  height: 56,
+                  width: 50,
+                  height: 50,
                   decoration: BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
@@ -48,6 +49,28 @@ class VerifyCardPage extends StatelessWidget {
                 obscureText: true,
                 obscuringCharacter: '\u25CF',
                 showCursor: false,
+              ),
+            ),
+            SizedBox(height: 20),
+            Align(
+              alignment: Alignment.center,
+              child: RichText(
+                text: TextSpan(
+                  text: "Didn't get the code? ",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: GoogleFonts.poppins().fontFamily,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'Resend',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontFamily: GoogleFonts.poppins().fontFamily,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

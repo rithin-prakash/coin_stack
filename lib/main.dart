@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
-      home: CardListPage(),
+      home: VerifyCardPage(),
       // debugShowMaterialGrid: true,
     );
   }
