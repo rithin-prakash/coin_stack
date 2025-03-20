@@ -14,51 +14,49 @@ class CreatePasscodePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AccountProgressIndicator(value: .6),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 16),
-                  Text(
-                    "Create your passcode",
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 16),
+                Text(
+                  "Create your passcode",
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Create a passcode for your authentication',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.start,
+                ),
+                SizedBox(height: 50),
+                Align(
+                  alignment: Alignment.center,
+                  child: Pinput(
+                    length: 4,
+                    preFilledWidget: Text(
+                      '\u25CF',
+                      style: TextStyle(fontSize: 30, color: Colors.grey),
                     ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Create a passcode for your authentication',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.start,
-                  ),
-                  SizedBox(height: 50),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Pinput(
-                      length: 4,
-                      preFilledWidget: Text(
-                        '\u25CF',
-                        style: TextStyle(fontSize: 30, color: Colors.grey),
-                      ),
-                      defaultPinTheme: PinTheme(
-                        width: 56,
-                        height: 56,
-                        decoration: BoxDecoration(),
-                      ),
-                      obscureText: true,
-                      obscuringCharacter: '\u25CF',
-                      obscuringWidget: Text(
-                        '\u25CF',
-                        style: TextStyle(fontSize: 30),
-                      ),
-                      showCursor: false,
+                    defaultPinTheme: PinTheme(
+                      width: 56,
+                      height: 56,
+                      decoration: BoxDecoration(),
                     ),
+                    obscureText: true,
+                    obscuringCharacter: '\u25CF',
+                    obscuringWidget: Text(
+                      '\u25CF',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                    showCursor: false,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

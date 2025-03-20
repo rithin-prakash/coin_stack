@@ -1,5 +1,6 @@
 import 'package:coin_stack/core/theme/app_theme.dart';
-import 'package:coin_stack/features/passscode/presentation/pages/create_account_success_page.dart';
+import 'package:coin_stack/features/add_card/presentation/pages/card_list_page.dart';
+import 'package:coin_stack/features/add_card/presentation/pages/verify_card_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
-      home: CreateAccountSuccessPage(),
+      home: CardListPage(),
       // debugShowMaterialGrid: true,
     );
   }
