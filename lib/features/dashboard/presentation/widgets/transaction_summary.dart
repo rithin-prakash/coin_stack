@@ -11,7 +11,7 @@ class TransactionSummary extends StatelessWidget {
       height: MediaQuery.sizeOf(context).height * (2 / 3),
       padding: const EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
       margin: EdgeInsets.only(
-        top: 50 + 20,
+        top: 50 + 5,
       ), //considering the stack widget size + margin
       // decoration: BoxDecoration(color: Colors.white.withValues(alpha: .92)),
       child: Column(
