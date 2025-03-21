@@ -1,6 +1,5 @@
 import 'package:coin_stack/core/theme/app_theme.dart';
-import 'package:coin_stack/features/add_card/presentation/pages/card_list_page.dart';
-import 'package:coin_stack/features/add_card/presentation/pages/verify_card_page.dart';
+import 'package:coin_stack/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
-      home: VerifyCardPage(),
+      home: DashboardPage(),
       // debugShowMaterialGrid: true,
     );
   }
