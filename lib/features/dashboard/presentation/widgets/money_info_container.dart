@@ -1,7 +1,17 @@
+import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:flutter/material.dart';
 
-class MoneyInfoContainer extends StatelessWidget {
+final curList = [('US Dollor', 'us'), ('Indian Ruppee', 'in')];
+
+class MoneyInfoContainer extends StatefulWidget {
   const MoneyInfoContainer({super.key});
+
+  @override
+  State<MoneyInfoContainer> createState() => _MoneyInfoContainerState();
+}
+
+class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
+  var selectedCur = curList.first;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +23,40 @@ class MoneyInfoContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          DropdownButton<(String, String)>(
+            value: selectedCur,
+            padding: EdgeInsets.zero,
+            style: const TextStyle(color: Colors.white),
+            icon: Icon(Icons.keyboard_arrow_down_outlined, color: Colors.white),
+            underline: Container(),
+            dropdownColor: Theme.of(context).primaryColorDark,
+            items:
+                curList
+                    .map<DropdownMenuItem<(String, String)>>(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 10,
+                              backgroundImage: AssetImage(
+                                '${AppAssets.countryFlag}/${e.$2}.webp',
+                              ),
+                            ),
+                            SizedBox(width: 6),
+                            Text(e.$1, style: TextStyle(color: Colors.white)),
+                          ],
+                        ),
+                      ),
+                    )
+                    .toList(),
+            onChanged: (v) {
+              if (v == null) return;
+              setState(() {
+                selectedCur = v;
+              });
+            },
+          ),
           Text(
             '\$20000',
             style: Theme.of(
