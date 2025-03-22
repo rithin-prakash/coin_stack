@@ -81,7 +81,11 @@ class _ChooseReceipientPageState extends State<ChooseReceipientPage> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
+              child: ListView.separated(
+                itemCount: 100,
+                separatorBuilder:
+                    (context, index) =>
+                        Divider(height: .3, thickness: .3, color: Colors.grey),
                 controller: listScrollController,
                 itemBuilder: (_, i) {
                   return ListTile(
