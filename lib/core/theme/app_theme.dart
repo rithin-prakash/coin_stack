@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static final lightTheme = ThemeData(
     colorScheme: ColorScheme.light(primary: AppColors.primary),
+    appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade100),
     fontFamily: GoogleFonts.poppins().fontFamily,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
