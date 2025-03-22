@@ -1,8 +1,5 @@
 import 'package:coin_stack/core/theme/app_theme.dart';
-import 'package:coin_stack/features/dashboard/presentation/pages/dashboard_page.dart';
-import 'package:coin_stack/features/transfer_money/presentation/pages/choose_receipient_page.dart';
-import 'package:coin_stack/features/transfer_money/presentation/pages/select_purpose_page.dart';
-import 'package:coin_stack/features/transfer_money/presentation/pages/transfer_money_page.dart';
+import 'package:coin_stack/features/transfer_money/presentation/pages/send_money_success_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
-      home: TransferMoneyPage(),
+      home: SendMoneySuccessPage(),
       // debugShowMaterialGrid: true,
     );
   }

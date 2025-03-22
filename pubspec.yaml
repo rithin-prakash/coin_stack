@@ -24,6 +24,7 @@ dependencies:
   pinput: ^5.0.1
   reactive_date_time_picker: ^5.0.0
   reactive_dropdown_search: ^5.0.5
+  rive: ^0.13.20
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +43,7 @@ flutter:
   assets:
     - assets/svg/
     - assets/country_flags/
+    - assets/rive_anime/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
