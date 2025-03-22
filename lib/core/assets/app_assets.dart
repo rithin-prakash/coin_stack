@@ -1,5 +1,6 @@
 class AppAssets {
   static const svgPath = 'assets/svg';
+  static const countryFlag = 'assets/country_flags';
 
   //svg
   static const introTrust = '$svgPath/trust.svg';
