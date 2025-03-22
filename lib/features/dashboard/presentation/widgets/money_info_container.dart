@@ -12,6 +12,7 @@ class MoneyInfoContainer extends StatefulWidget {
 
 class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
   var selectedCur = curList.first;
+  var amountVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           DropdownButton<(String, String)>(
             value: selectedCur,
@@ -57,11 +58,29 @@ class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
               });
             },
           ),
-          Text(
-            '\$20000',
-            style: Theme.of(
-              context,
-            ).textTheme.displaySmall?.copyWith(color: Colors.white),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                amountVisible ? '\$20000' : '***',
+                style: Theme.of(
+                  context,
+                ).textTheme.displaySmall?.copyWith(color: Colors.white),
+              ),
+              SizedBox(width: 4),
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    amountVisible = !amountVisible;
+                  });
+                },
+                icon: Icon(
+                  amountVisible ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.white60,
+                ),
+              ),
+            ],
           ),
           Text(
             'Available balance',
