@@ -15,6 +15,7 @@ class AppAssets {
   static const accSuccess = '$_svgPath/create_acc_success.svg';
   static const addCardIntro = '$_svgPath/add_card.svg';
   static const support = '$_svgPath/support.svg';
+  static const pageNotFound = '$_svgPath/404.svg';
 
   //rive
   static const confettiRive = '$_rivePath/confetti.riv';
