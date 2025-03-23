@@ -8,6 +8,7 @@ class AppTheme {
     colorScheme: ColorScheme.light(primary: AppColors.primary),
     appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade100),
     fontFamily: GoogleFonts.poppins().fontFamily,
+    scaffoldBackgroundColor: Colors.grey.shade100,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
