@@ -14,7 +14,9 @@ class TransactionSummary extends StatelessWidget {
         top: 50 + 5,
       ), //considering the stack widget size + margin
       // decoration: BoxDecoration(color: Colors.white.withValues(alpha: .92)),
-      child: Column(
+      child: ListView(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,6 +74,76 @@ class TransactionSummary extends StatelessWidget {
                   amountColor: Colors.orange,
                 ),
                 Divider(color: Colors.grey.shade400),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
+                TransactionSummeryItem(
+                  icon: Icons.savings,
+                  iconColor: Colors.deepOrange,
+                  title: 'Saving',
+                  value: '-\$1000',
+                  amountColor: Colors.orange,
+                ),
               ],
             ),
           ),
