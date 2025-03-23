@@ -25,6 +25,11 @@ dependencies:
   reactive_date_time_picker: ^5.0.0
   reactive_dropdown_search: ^5.0.5
   rive: ^0.13.20
+  qr_flutter: ^4.1.0 #qr generation
+  mobile_scanner: ^6.0.7 #qr scanner
+  
+  #data
+  torch_light: ^1.1.0
 
 dev_dependencies:
   flutter_test:
