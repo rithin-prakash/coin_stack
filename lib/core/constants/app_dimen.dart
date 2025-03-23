@@ -4,4 +4,5 @@ class AppDimen {
   static const inputBorderRadius = 16.0;
   static const inputMinHeight = 50.0;
   static const inputMinWidth = 100.0;
+  static const containerBorderRadius = 10.0;
 }
