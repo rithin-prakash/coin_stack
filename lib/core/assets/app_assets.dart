@@ -14,6 +14,7 @@ class AppAssets {
   static const takeSelfie = '$_svgPath/take_selfie.svg';
   static const accSuccess = '$_svgPath/create_acc_success.svg';
   static const addCardIntro = '$_svgPath/add_card.svg';
+  static const support = '$_svgPath/support.svg';
 
   //rive
   static const confettiRive = '$_rivePath/confetti.riv';
