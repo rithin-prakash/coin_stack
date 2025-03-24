@@ -10,7 +10,6 @@ class TransactionHistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugDumpRenderTree();
     return Scaffold(
       appBar: AppBar(
         title: Text('Spending'),

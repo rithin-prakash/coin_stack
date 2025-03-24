@@ -8,9 +8,13 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Profile')),
+      appBar: AppBar(title: Text('Profile'), scrolledUnderElevation: 0.0),
       body: Padding(
-        padding: const EdgeInsets.all(AppDimen.pagePadding),
+        padding: const EdgeInsets.only(
+          top: AppDimen.pagePadding,
+          left: AppDimen.pagePadding,
+          right: AppDimen.pagePadding,
+        ),
         child: ListView(
           children: [ProfileContainer(), SizedBox(height: 20), ProfileMenu()],
         ),

@@ -11,12 +11,16 @@ class SupportPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(AppDimen.pagePadding),
+        padding: const EdgeInsets.only(
+          top: AppDimen.pagePadding,
+          left: AppDimen.pagePadding,
+          right: AppDimen.pagePadding,
+        ),
         child: Column(
           children: [
             SvgPicture.asset(
               AppAssets.support,
-              width: MediaQuery.sizeOf(context).width,
+              width: MediaQuery.sizeOf(context).width - 80,
             ),
             SizedBox(height: 20),
             SizedBox(height: 20),
@@ -33,7 +37,7 @@ class SupportPage extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Spacer(),
             SizedBox(
               width: double.infinity,
@@ -49,7 +53,7 @@ class SupportPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
@@ -64,7 +68,7 @@ class SupportPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
           ],
         ),
       ),
