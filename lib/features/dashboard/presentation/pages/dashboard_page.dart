@@ -3,8 +3,53 @@ import 'package:coin_stack/features/dashboard/presentation/widgets/money_info_co
 import 'package:coin_stack/features/dashboard/presentation/widgets/transaction_summary.dart';
 import 'package:flutter/material.dart';
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
+
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
+  late final scrollController = ScrollController();
+
+  Color bgColor = Colors.black;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        bgColor = Theme.of(context).primaryColor;
+      });
+      scrollController.addListener(_scrolling);
+      scrollController.position.isScrollingNotifier.addListener(
+        _scrollNotifier,
+      );
+    });
+  }
+
+  _scrolling() {
+    print('scrolling');
+  }
+
+  _scrollNotifier() {
+    if (!scrollController.position.isScrollingNotifier.value) {
+      print('scroll is stopped');
+    } else {
+      print('scroll is started');
+    }
+  }
+
+  @override
+  void dispose() {
+    // scrollController.position.isScrollingNotifier.removeListener(
+    //   _scrollNotifier,
+    // );
+    scrollController.removeListener(_scrolling);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,18 +84,28 @@ class DashboardPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Column(children: [MoneyInfoContainer(), TransactionSummary()]),
-            Positioned(
-              top: MediaQuery.sizeOf(context).height * (1 / 3) - 50,
-              right: 15,
-              left: 15,
-              child: MainFeatureContainer(),
+      body: Stack(
+        children: [
+          // Container(
+          //   height: MediaQuery.sizeOf(context).height * (1 / 3),
+          //   width: double.infinity,
+          //   color: bgColor,
+          // ),
+          SingleChildScrollView(
+            controller: scrollController,
+            child: Stack(
+              children: [
+                Column(children: [MoneyInfoContainer(), TransactionSummary()]),
+                Positioned(
+                  top: MediaQuery.sizeOf(context).height * (1 / 3) - 50,
+                  right: 15,
+                  left: 15,
+                  child: MainFeatureContainer(),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:coin_stack/features/profile/presentation/pages/profile_page.dart';
 import 'package:coin_stack/features/support/presentation/pages/support_page.dart';
@@ -31,20 +32,91 @@ class _DashboardMainState extends State<DashboardMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.amber,
-        unselectedItemColor: Colors.blueGrey,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'History'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Support'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppDimen.containerBorderRadius),
+        ),
+
+        child: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.shifting,
+          selectedItemColor: Theme.of(context).primaryColor,
+          unselectedItemColor: Colors.blueGrey,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              activeIcon: Column(
+                children: [
+                  Icon(Icons.home),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                    width: 4,
+                    height: 4,
+                  ),
+                ],
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'History',
+              activeIcon: Column(
+                children: [
+                  Icon(Icons.person),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                    width: 4,
+                    height: 4,
+                  ),
+                ],
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Support',
+              activeIcon: Column(
+                children: [
+                  Icon(Icons.settings),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                    width: 4,
+                    height: 4,
+                  ),
+                ],
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+              activeIcon: Column(
+                children: [
+                  Icon(Icons.person),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                    width: 4,
+                    height: 4,
+                  ),
+                ],
+              ),
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
