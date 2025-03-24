@@ -37,7 +37,7 @@ class PageNotFound extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'Our dedicated team is here to to assist you with any questions or issues releated Coin Stack mobile app',
+              'Oops! It looks like the page you are looking is not found or has been moved. Please try again or go back to the home page',
               style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),

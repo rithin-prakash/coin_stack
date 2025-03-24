@@ -1,5 +1,5 @@
 import 'package:coin_stack/core/theme/app_theme.dart';
-import 'package:coin_stack/features/page_not_found/presentation/pages/page_not_found.dart';
+import 'package:coin_stack/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
-      home: PageNotFound(),
+      home: ProfilePage(),
       localizationsDelegates: [
         // GlobalMaterialLocalizations.delegate,
         MonthYearPickerLocalizations.delegate,
