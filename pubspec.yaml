@@ -28,6 +28,7 @@ dependencies:
   qr_flutter: ^4.1.0 #qr generation
   mobile_scanner: ^6.0.7 #qr scanner
   month_year_picker: ^0.4.0+1
+  flutter_native_splash: ^2.4.5
   
   #data
   torch_light: ^1.1.0
