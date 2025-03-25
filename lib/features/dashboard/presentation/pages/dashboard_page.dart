@@ -68,6 +68,9 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ],
         title: TextField(
+          onTapOutside: (event) => FocusScope.of(context).unfocus(),
+          style: TextStyle(color: Colors.white),
+          cursorColor: Colors.white,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.all(0),
             hintText: 'Search "Payments"',
