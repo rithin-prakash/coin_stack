@@ -28,6 +28,12 @@ dependencies:
   qr_flutter: ^4.1.0 #qr generation
   mobile_scanner: ^6.0.7 #qr scanner
   month_year_picker: ^0.4.0+1
+
+
+  #domain
+  dartz:
+  freezed:
+  freezed_annotation:
   
   #data
   torch_light: ^1.1.0
@@ -38,6 +44,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^5.0.0
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
