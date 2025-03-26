@@ -1,10 +1,11 @@
+import 'package:coin_stack/core/app_router/app_router.dart';
 import 'package:coin_stack/core/theme/app_theme.dart';
-import 'package:coin_stack/features/dashboard/presentation/pages/dashboard_main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,10 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final _appRouter = AppRouter();
+
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
-      home: DashboardMain(),
+      routerConfig: _appRouter.config(),
       localizationsDelegates: [
         // GlobalMaterialLocalizations.delegate,
         MonthYearPickerLocalizations.delegate,
