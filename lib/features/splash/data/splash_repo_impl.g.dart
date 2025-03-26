@@ -1,28 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'is_first_opening.dart';
+part of 'splash_repo_impl.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isFirstOpeningHash() => r'ed7a7f06570483a97f5e3f40829793eb526539b6';
+String _$splashRepoHash() => r'97583e843f0168b37e686012855b8db6912ae8e4';
 
-/// See also [isFirstOpening].
-@ProviderFor(isFirstOpening)
-final isFirstOpeningProvider = AutoDisposeFutureProvider<bool>.internal(
-  isFirstOpening,
-  name: r'isFirstOpeningProvider',
+/// See also [splashRepo].
+@ProviderFor(splashRepo)
+final splashRepoProvider = AutoDisposeProvider<SplashRepo>.internal(
+  splashRepo,
+  name: r'splashRepoProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$isFirstOpeningHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$splashRepoHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef IsFirstOpeningRef = AutoDisposeFutureProviderRef<bool>;
+typedef SplashRepoRef = AutoDisposeProviderRef<SplashRepo>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -31,7 +31,11 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
           x.when(
             data: (data) {
-              context.replaceRoute(CreateAccountIntroPageRoute());
+              if (data) {
+                context.replaceRoute(IntroPageRoute());
+              } else {
+                context.replaceRoute(CreateAccountIntroPageRoute());
+              }
               return Container();
             },
             error: (error, stackTrace) => Container(),

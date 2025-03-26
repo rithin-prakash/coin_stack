@@ -8,17 +8,17 @@ void main() {
   runApp(ProviderScope(child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final _appRouter = AppRouter();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appRouter = ref.read(routerProvider);
 
     return MaterialApp.router(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
-      routerConfig: _appRouter.config(),
+      routerConfig: appRouter.config(),
       localizationsDelegates: [
         // GlobalMaterialLocalizations.delegate,
         MonthYearPickerLocalizations.delegate,

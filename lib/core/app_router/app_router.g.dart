@@ -1,28 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'is_first_opening.dart';
+part of 'app_router.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isFirstOpeningHash() => r'ed7a7f06570483a97f5e3f40829793eb526539b6';
+String _$routerHash() => r'db190cf8ce490e26c05b3248ad3a82d64dfdfe1e';
 
-/// See also [isFirstOpening].
-@ProviderFor(isFirstOpening)
-final isFirstOpeningProvider = AutoDisposeFutureProvider<bool>.internal(
-  isFirstOpening,
-  name: r'isFirstOpeningProvider',
+/// See also [router].
+@ProviderFor(router)
+final routerProvider = AutoDisposeProvider<RootStackRouter>.internal(
+  router,
+  name: r'routerProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$isFirstOpeningHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$routerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef IsFirstOpeningRef = AutoDisposeFutureProviderRef<bool>;
+typedef RouterRef = AutoDisposeProviderRef<RootStackRouter>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
