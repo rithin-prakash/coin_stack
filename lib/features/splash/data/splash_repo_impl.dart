@@ -11,6 +11,6 @@ SplashRepo splashRepo(ref) => SplashRepoImpl();
 class SplashRepoImpl implements SplashRepo {
   @override
   Future<Either<Failure, bool>> isOpeningFirstTime() async {
-    return Right(true);
+    return Right(false);
   }
 }

@@ -1,19 +1,21 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
-import 'package:coin_stack/features/create_account/presentation/pages/create_account_page.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/account_notifier.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
-class CreateAccountIntroPage extends StatelessWidget {
+class CreateAccountIntroPage extends ConsumerWidget {
   const CreateAccountIntroPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(backgroundColor: Colors.white),
@@ -46,10 +48,11 @@ class CreateAccountIntroPage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => CreateAccountPage()),
-                      );
+                      ref
+                          .read(accountNotifierProvider.notifier)
+                          .setAccountType(true);
+
+                      context.navigateTo(CreateAccountPageRoute());
                     },
                     child: Text('Sign Up'),
                   ),
@@ -58,7 +61,13 @@ class CreateAccountIntroPage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      ref
+                          .read(accountNotifierProvider.notifier)
+                          .setAccountType(false);
+
+                      context.navigateTo(CreateAccountPageRoute());
+                    },
                     child: Text('Log In'),
                   ),
                 ),

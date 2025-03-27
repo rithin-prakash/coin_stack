@@ -1,12 +1,17 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/pages/otp_page.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/account_notifier.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CreateAccountPage extends StatelessWidget {
+@RoutePage()
+class CreateAccountPage extends ConsumerWidget {
   const CreateAccountPage({super.key});
 
   showVerifyPhoneDialog(BuildContext context, String phone) {
@@ -29,13 +34,13 @@ class CreateAccountPage extends StatelessWidget {
                 ),
                 SvgPicture.asset(
                   AppAssets.sms,
-                  width: MediaQuery.sizeOf(context).width - 100,
+                  width: MediaQuery.sizeOf(context).width - 200,
                 ),
                 Text(
                   'Verify your phone number before we send the code',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 8),
@@ -85,13 +90,14 @@ class CreateAccountPage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isNewAcc = ref.watch(accountNotifierProvider);
     return Scaffold(
       appBar: AppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AccountProgressIndicator(value: .1),
+          if (isNewAcc) AccountProgressIndicator(value: .1),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
@@ -101,7 +107,7 @@ class CreateAccountPage extends StatelessWidget {
                 children: [
                   SizedBox(height: 16),
                   Text(
-                    "Create an Account",
+                    isNewAcc ? "Create an Account" : "Login to CoinStack",
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -126,9 +132,13 @@ class CreateAccountPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  showVerifyPhoneDialog(context, '+5435454656');
+                  if (isNewAcc) {
+                    showVerifyPhoneDialog(context, '+5435454656');
+                  } else {
+                    context.replaceRoute(DashboardMainRoute());
+                  }
                 },
-                child: Text('Sign Up'),
+                child: isNewAcc ? Text('Sign Up') : Text('Log In'),
               ),
             ),
           ),
