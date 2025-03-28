@@ -4,6 +4,7 @@ import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/pages/otp_page.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/account_notifier.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -130,16 +131,34 @@ class CreateAccountPage extends ConsumerWidget {
             margin: EdgeInsets.only(bottom: 20),
             child: SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (isNewAcc) {
-                    showVerifyPhoneDialog(context, '+5435454656');
-                  } else {
-                    context.replaceRoute(DashboardMainRoute());
-                  }
-                },
-                child: isNewAcc ? Text('Sign Up') : Text('Log In'),
-              ),
+              child:
+                  isNewAcc
+                      ? ElevatedButton(
+                        onPressed: () {
+                          if (ref.read(createAccFormProvider).valid) {
+                            var phone =
+                                ref
+                                    .read(createAccFormProvider)
+                                    .control(caPhone)
+                                    .value;
+                            var code =
+                                ref
+                                    .read(createAccFormProvider)
+                                    .control(caPhoneCode)
+                                    .value;
+                            showVerifyPhoneDialog(context, '$code$phone');
+                          } else {
+                            ref.read(createAccFormProvider).markAllAsTouched();
+                          }
+                        },
+                        child: Text('Sign Up'),
+                      )
+                      : ElevatedButton(
+                        onPressed: () {
+                          context.replaceRoute(DashboardMainRoute());
+                        },
+                        child: Text('Log In'),
+                      ),
             ),
           ),
         ],

@@ -17,7 +17,7 @@ class MyApp extends ConsumerWidget {
     final appRouter = ref.read(routerProvider);
 
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'CoinStack',
       theme: AppTheme.lightTheme,
       routerConfig: appRouter.config(),
       localizationsDelegates: [

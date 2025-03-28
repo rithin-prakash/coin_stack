@@ -11,6 +11,7 @@ class AppTextField extends StatelessWidget {
     this.suffixIcon,
     this.obscureText = false,
     this.prefixText,
+    this.validationMsg,
   });
 
   final String controlName;
@@ -20,6 +21,7 @@ class AppTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool? obscureText;
   final String? prefixText;
+  final Map<String, String Function(Object)>? validationMsg;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class AppTextField extends StatelessWidget {
           ),
         ReactiveTextField(
           formControlName: controlName,
+          validationMessages: validationMsg,
           onTapOutside: (event) => FocusScope.of(context).unfocus(),
           decoration: InputDecoration(
             hintText: hintText,
@@ -41,6 +44,7 @@ class AppTextField extends StatelessWidget {
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             prefixText: prefixText,
+            errorMaxLines: 3,
             prefixStyle: TextStyle(color: Theme.of(context).primaryColor),
           ),
           obscureText: obscureText!,

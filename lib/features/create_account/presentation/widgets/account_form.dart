@@ -1,45 +1,57 @@
 import 'package:coin_stack/core/shared_widgets/app_phone_code_field.dart';
 import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
-import 'package:country_code_picker/country_code_picker.dart';
+import 'package:coin_stack/core/utls/validation_helper.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AccountForm extends StatelessWidget {
-  AccountForm({super.key});
+class AccountForm extends ConsumerStatefulWidget {
+  const AccountForm({super.key});
 
-  final form = fb.group({
-    'password': Validators.email,
-    'phone': Validators.email,
-    'code': FormControl<CountryCode>(validators: [Validators.required]),
-  });
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _State();
+}
 
+class _State extends ConsumerState<AccountForm> {
+  var showPassword = false;
   @override
   Widget build(BuildContext context) {
     return ReactiveFormBuilder(
-      form: () => form,
+      form: () => ref.read(createAccFormProvider),
       builder: (context, form, child) {
         return Column(
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppPhoneCodeField(controlName: 'code', labelText: 'Phone'),
+                AppPhoneCodeField(controlName: caPhoneCode, labelText: 'Phone'),
                 SizedBox(width: 8),
                 Expanded(
                   child: AppTextField(
-                    controlName: 'phone',
+                    controlName: caPhone,
                     hintText: 'Mobile Number',
+                    labelText: "",
+                    validationMsg: generateValidationMessages(phone, 'Phone'),
                   ),
                 ),
               ],
             ),
             SizedBox(height: 12),
             AppTextField(
-              controlName: 'password',
+              controlName: caPassword,
               hintText: '\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF',
               prefixIcon: Icon(Icons.lock),
-              suffixIcon: Icon(Icons.visibility),
-              obscureText: true,
+              suffixIcon: IconButton(
+                icon: Icon(Icons.visibility),
+                onPressed:
+                    () => setState(() {
+                      showPassword = !showPassword;
+                    }),
+              ),
+              obscureText: showPassword,
+              validationMsg: generateValidationMessages(password, 'Password'),
             ),
           ],
         );

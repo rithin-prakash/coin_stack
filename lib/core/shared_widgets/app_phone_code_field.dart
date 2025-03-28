@@ -49,6 +49,7 @@ class AppPhoneCodeField extends ReactiveFormField<CountryCode, CountryCode> {
                  ),
                  padding: EdgeInsets.zero,
                  child: CountryCodePicker(
+                   initialSelection: field.value?.code,
                    padding: EdgeInsets.zero,
                    onChanged: (value) {
                      field.didChange(value);
