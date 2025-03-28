@@ -19,5 +19,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: IntroPageRoute.page),
     AutoRoute(page: CreateAccountPageRoute.page),
     AutoRoute(page: DashboardMainRoute.page),
+    AutoRoute(page: OtpPageRoute.page),
+    AutoRoute(page: AddEmailPageRoute.page),
   ];
 }

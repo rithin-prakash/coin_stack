@@ -1,20 +1,21 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpPage extends StatefulWidget {
+@RoutePage()
+class OtpPage extends ConsumerWidget {
   const OtpPage({super.key});
 
   @override
-  State<OtpPage> createState() => _OtpPageState();
-}
-
-class _OtpPageState extends State<OtpPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final form = ref.read(createAccFormProvider);
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -37,7 +38,7 @@ class _OtpPageState extends State<OtpPage> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'We send 6 digit code to +886775849',
+                    'We send 6 digit code to ${form.control(caPhoneCode).value} ${form.control(caPhone).value}',
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.start,
                   ),
@@ -95,7 +96,9 @@ class _OtpPageState extends State<OtpPage> {
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.replaceRoute(AddEmailPageRoute());
+                },
                 child: Text('Verify Your Phone'),
               ),
             ),
