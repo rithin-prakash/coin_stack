@@ -1,30 +1,52 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
+import 'package:coin_stack/features/setup_account/presentation/providers/address_form.dart';
+import 'package:coin_stack/features/setup_account/presentation/providers/update_address.dart';
+import 'package:coin_stack/features/setup_account/presentation/providers/update_address_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AddHomeAddressPage extends StatelessWidget {
-  AddHomeAddressPage({super.key});
-
-  final form = fb.group({
-    'address_lane': FormControl<String>(validators: [Validators.required]),
-    'city': FormControl<String>(validators: [Validators.required]),
-    'pin': FormControl<String>(
-      validators: [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(6),
-      ],
-    ),
-  });
+@RoutePage()
+class AddHomeAddressPage extends ConsumerWidget {
+  const AddHomeAddressPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(updateAddressProvider, (p, v) {
+      if (v is UpdateAddressSuccess) {
+        context.replaceRoute(AddPersonalInfoPageRoute());
+      }
+      if (v is UpdateAddressLoading) {
+        showDialog(
+          context: context,
+          barrierColor: Colors.grey,
+          barrierDismissible: false,
+          builder:
+              (_) => Dialog(
+                backgroundColor: Colors.grey.shade100,
+                child: Center(child: CircularProgressIndicator()),
+              ),
+        );
+      } else if (p is UpdateAddressLoading) {
+        Navigator.pop(context);
+      } else if (v is UpdateAddressFailure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(v.failure.message),
+          ),
+        );
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(),
       body: ReactiveFormBuilder(
-        form: () => form,
+        form: () => ref.read(addressFormProvider),
         builder: (_, form, _) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

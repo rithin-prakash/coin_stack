@@ -9,149 +9,186 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i10;
 import 'package:coin_stack/features/create_account/presentation/pages/create_account_intro_page.dart'
-    as _i2;
-import 'package:coin_stack/features/create_account/presentation/pages/create_account_page.dart'
-    as _i3;
-import 'package:coin_stack/features/create_account/presentation/pages/otp_page.dart'
-    as _i6;
-import 'package:coin_stack/features/dashboard/presentation/pages/dashboard_main.dart'
     as _i4;
-import 'package:coin_stack/features/intros/presentation/pages/intro_page.dart'
+import 'package:coin_stack/features/create_account/presentation/pages/create_account_page.dart'
     as _i5;
+import 'package:coin_stack/features/create_account/presentation/pages/otp_page.dart'
+    as _i8;
+import 'package:coin_stack/features/dashboard/presentation/pages/dashboard_main.dart'
+    as _i6;
+import 'package:coin_stack/features/intros/presentation/pages/intro_page.dart'
+    as _i7;
 import 'package:coin_stack/features/setup_account/presentation/pages/add_email_page.dart'
     as _i1;
+import 'package:coin_stack/features/setup_account/presentation/pages/add_home_address_page.dart'
+    as _i2;
+import 'package:coin_stack/features/setup_account/presentation/pages/add_personal_info_page.dart'
+    as _i3;
 import 'package:coin_stack/features/splash/presentation/pages/splash_page.dart'
-    as _i7;
-import 'package:flutter/material.dart' as _i9;
+    as _i9;
+import 'package:flutter/material.dart' as _i11;
 
 /// generated route for
 /// [_i1.AddEmailPage]
-class AddEmailPageRoute extends _i8.PageRouteInfo<AddEmailPageRouteArgs> {
-  AddEmailPageRoute({_i9.Key? key, List<_i8.PageRouteInfo>? children})
-    : super(
-        AddEmailPageRoute.name,
-        args: AddEmailPageRouteArgs(key: key),
-        initialChildren: children,
-      );
+class AddEmailPageRoute extends _i10.PageRouteInfo<void> {
+  const AddEmailPageRoute({List<_i10.PageRouteInfo>? children})
+    : super(AddEmailPageRoute.name, initialChildren: children);
 
   static const String name = 'AddEmailPageRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<AddEmailPageRouteArgs>(
-        orElse: () => const AddEmailPageRouteArgs(),
-      );
-      return _i1.AddEmailPage(key: args.key);
+      return const _i1.AddEmailPage();
     },
   );
 }
 
-class AddEmailPageRouteArgs {
-  const AddEmailPageRouteArgs({this.key});
+/// generated route for
+/// [_i2.AddHomeAddressPage]
+class AddHomeAddressPageRoute extends _i10.PageRouteInfo<void> {
+  const AddHomeAddressPageRoute({List<_i10.PageRouteInfo>? children})
+    : super(AddHomeAddressPageRoute.name, initialChildren: children);
 
-  final _i9.Key? key;
+  static const String name = 'AddHomeAddressPageRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      return const _i2.AddHomeAddressPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i3.AddPersonalInfoPage]
+class AddPersonalInfoPageRoute
+    extends _i10.PageRouteInfo<AddPersonalInfoPageRouteArgs> {
+  AddPersonalInfoPageRoute({_i11.Key? key, List<_i10.PageRouteInfo>? children})
+    : super(
+        AddPersonalInfoPageRoute.name,
+        args: AddPersonalInfoPageRouteArgs(key: key),
+        initialChildren: children,
+      );
+
+  static const String name = 'AddPersonalInfoPageRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<AddPersonalInfoPageRouteArgs>(
+        orElse: () => const AddPersonalInfoPageRouteArgs(),
+      );
+      return _i3.AddPersonalInfoPage(key: args.key);
+    },
+  );
+}
+
+class AddPersonalInfoPageRouteArgs {
+  const AddPersonalInfoPageRouteArgs({this.key});
+
+  final _i11.Key? key;
 
   @override
   String toString() {
-    return 'AddEmailPageRouteArgs{key: $key}';
+    return 'AddPersonalInfoPageRouteArgs{key: $key}';
   }
 }
 
 /// generated route for
-/// [_i2.CreateAccountIntroPage]
-class CreateAccountIntroPageRoute extends _i8.PageRouteInfo<void> {
-  const CreateAccountIntroPageRoute({List<_i8.PageRouteInfo>? children})
+/// [_i4.CreateAccountIntroPage]
+class CreateAccountIntroPageRoute extends _i10.PageRouteInfo<void> {
+  const CreateAccountIntroPageRoute({List<_i10.PageRouteInfo>? children})
     : super(CreateAccountIntroPageRoute.name, initialChildren: children);
 
   static const String name = 'CreateAccountIntroPageRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i2.CreateAccountIntroPage();
+      return const _i4.CreateAccountIntroPage();
     },
   );
 }
 
 /// generated route for
-/// [_i3.CreateAccountPage]
-class CreateAccountPageRoute extends _i8.PageRouteInfo<void> {
-  const CreateAccountPageRoute({List<_i8.PageRouteInfo>? children})
+/// [_i5.CreateAccountPage]
+class CreateAccountPageRoute extends _i10.PageRouteInfo<void> {
+  const CreateAccountPageRoute({List<_i10.PageRouteInfo>? children})
     : super(CreateAccountPageRoute.name, initialChildren: children);
 
   static const String name = 'CreateAccountPageRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i3.CreateAccountPage();
+      return const _i5.CreateAccountPage();
     },
   );
 }
 
 /// generated route for
-/// [_i4.DashboardMain]
-class DashboardMainRoute extends _i8.PageRouteInfo<void> {
-  const DashboardMainRoute({List<_i8.PageRouteInfo>? children})
+/// [_i6.DashboardMain]
+class DashboardMainRoute extends _i10.PageRouteInfo<void> {
+  const DashboardMainRoute({List<_i10.PageRouteInfo>? children})
     : super(DashboardMainRoute.name, initialChildren: children);
 
   static const String name = 'DashboardMainRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i4.DashboardMain();
+      return const _i6.DashboardMain();
     },
   );
 }
 
 /// generated route for
-/// [_i5.IntroPage]
-class IntroPageRoute extends _i8.PageRouteInfo<void> {
-  const IntroPageRoute({List<_i8.PageRouteInfo>? children})
+/// [_i7.IntroPage]
+class IntroPageRoute extends _i10.PageRouteInfo<void> {
+  const IntroPageRoute({List<_i10.PageRouteInfo>? children})
     : super(IntroPageRoute.name, initialChildren: children);
 
   static const String name = 'IntroPageRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i5.IntroPage();
+      return const _i7.IntroPage();
     },
   );
 }
 
 /// generated route for
-/// [_i6.OtpPage]
-class OtpPageRoute extends _i8.PageRouteInfo<void> {
-  const OtpPageRoute({List<_i8.PageRouteInfo>? children})
+/// [_i8.OtpPage]
+class OtpPageRoute extends _i10.PageRouteInfo<void> {
+  const OtpPageRoute({List<_i10.PageRouteInfo>? children})
     : super(OtpPageRoute.name, initialChildren: children);
 
   static const String name = 'OtpPageRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i6.OtpPage();
+      return const _i8.OtpPage();
     },
   );
 }
 
 /// generated route for
-/// [_i7.SplashPage]
-class SplashPageRoute extends _i8.PageRouteInfo<void> {
-  const SplashPageRoute({List<_i8.PageRouteInfo>? children})
+/// [_i9.SplashPage]
+class SplashPageRoute extends _i10.PageRouteInfo<void> {
+  const SplashPageRoute({List<_i10.PageRouteInfo>? children})
     : super(SplashPageRoute.name, initialChildren: children);
 
   static const String name = 'SplashPageRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i7.SplashPage();
+      return const _i9.SplashPage();
     },
   );
 }

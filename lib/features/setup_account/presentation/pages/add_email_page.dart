@@ -1,24 +1,52 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
+import 'package:coin_stack/features/setup_account/presentation/providers/email_form.dart';
+import 'package:coin_stack/features/setup_account/presentation/providers/update_email.dart';
+import 'package:coin_stack/features/setup_account/presentation/providers/update_email_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @RoutePage()
-class AddEmailPage extends StatelessWidget {
-  AddEmailPage({super.key});
-  final form = fb.group({
-    'email': FormControl<String>(
-      validators: [Validators.required, Validators.email],
-    ),
-  });
+class AddEmailPage extends ConsumerWidget {
+  const AddEmailPage({super.key});
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(updateEmailProvider, (p, v) {
+      if (v is UpdateEmailSuccess) {
+        context.replaceRoute(AddHomeAddressPageRoute());
+      }
+      if (v is UpdateEmailLoading) {
+        showDialog(
+          context: context,
+          barrierColor: Colors.grey,
+          barrierDismissible: false,
+          builder:
+              (_) => Dialog(
+                backgroundColor: Colors.grey.shade100,
+                child: Center(child: CircularProgressIndicator()),
+              ),
+        );
+      } else if (p is UpdateEmailLoading) {
+        Navigator.pop(context);
+      } else if (v is UpdateEmailFailure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(v.failure.message),
+          ),
+        );
+      }
+    });
     return Scaffold(
       appBar: AppBar(),
       body: ReactiveFormBuilder(
-        form: () => form,
+        form: () => ref.read(emailFormProvider),
         builder: (_, form, _) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +93,14 @@ class AddEmailPage extends StatelessWidget {
                   child: ReactiveFormConsumer(
                     builder:
                         (_, form, _) => ElevatedButton(
-                          onPressed: !form.valid ? null : () {},
+                          onPressed:
+                              !form.valid
+                                  ? null
+                                  : () {
+                                    ref
+                                        .read(updateEmailProvider.notifier)
+                                        .updateEmail();
+                                  },
                           child: Text('Continue'),
                         ),
                   ),
