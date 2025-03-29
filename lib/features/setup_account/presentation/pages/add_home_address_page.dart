@@ -76,21 +76,21 @@ class AddHomeAddressPage extends ConsumerWidget {
                       ),
                       SizedBox(height: 16),
                       AppTextField(
-                        controlName: 'address_lane',
+                        controlName: upAddress,
                         labelText: 'Address Line',
                         hintText: 'John Doe',
                       ),
                       SizedBox(height: 16),
 
                       AppTextField(
-                        controlName: 'city',
+                        controlName: upCity,
                         labelText: 'City',
                         hintText: 'City, State',
                       ),
                       SizedBox(height: 16),
 
                       AppTextField(
-                        controlName: 'pin',
+                        controlName: upPin,
                         labelText: 'Postcode',
                         hintText: 'Eg: 653256',
                       ),

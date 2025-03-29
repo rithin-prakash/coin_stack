@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/shared_widgets/app_async_dropdown_search_field.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+@RoutePage()
 class AddCountryOfResidence extends StatelessWidget {
   AddCountryOfResidence({super.key});
   final form = fb.group({
