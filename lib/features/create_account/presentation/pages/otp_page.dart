@@ -29,6 +29,9 @@ class _OtpPageState extends ConsumerState<OtpPage> {
   Widget build(BuildContext context) {
     ref.listen(generateOtpProvider, (prev, next) {
       if (next is GenerateOtpFailure) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.failure.message)));
         Navigator.pop(context);
       }
     });
@@ -108,19 +111,25 @@ class _OtpPageState extends ConsumerState<OtpPage> {
               ),
             ),
           ),
-          // if (generateOtp == GenerateOtpState.loading())
-          //   CircularProgressIndicator()
-          // else
+
           Container(
             padding: const EdgeInsets.all(AppDimen.pagePadding),
             margin: EdgeInsets.only(bottom: 20),
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  context.replaceRoute(AddEmailPageRoute());
-                },
-                child: Text('Verify Your Phone'),
+                onPressed:
+                    generateOtp is GenerateOtpLoading
+                        ? null
+                        : () {
+                          context.replaceRoute(AddEmailPageRoute());
+                        },
+                child:
+                    generateOtp is GenerateOtpLoading
+                        ? CircularProgressIndicator.adaptive(
+                          backgroundColor: Colors.white,
+                        )
+                        : Text('Verify Your Phone'),
               ),
             ),
           ),

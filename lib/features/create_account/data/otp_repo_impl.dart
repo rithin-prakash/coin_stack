@@ -19,6 +19,6 @@ class OtpRepoImpl implements OtpRepo {
   @override
   Future<Either<Failure, Null>> generateOtp(GenerateOtpRequest req) async {
     await Future.delayed(Duration(seconds: 3));
-    return Right(null);
+    return Left(ServerFailure(message: 'Server failed'));
   }
 }
