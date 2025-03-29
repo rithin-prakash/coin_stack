@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
-import 'package:coin_stack/features/create_account/presentation/pages/otp_page.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/account_notifier.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/generate_otp.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -63,15 +63,17 @@ class CreateAccountPage extends ConsumerWidget {
                 SizedBox(height: 8),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => OtpPage()),
+                  child: Consumer(
+                    builder: (context, ref, _) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          context.navigateTo(OtpPageRoute());
+                          ref.read(generateOtpProvider.notifier).generateOtp();
+                        },
+                        child: Text('Yes'),
                       );
                     },
-                    child: Text('Yes'),
                   ),
                 ),
                 SizedBox(height: 8),

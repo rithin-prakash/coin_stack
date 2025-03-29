@@ -3,6 +3,8 @@ import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/generate_otp.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/generate_otp_state.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,11 +12,27 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
 @RoutePage()
-class OtpPage extends ConsumerWidget {
+class OtpPage extends ConsumerStatefulWidget {
   const OtpPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _OtpPageState();
+}
+
+class _OtpPageState extends ConsumerState<OtpPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen(generateOtpProvider, (prev, next) {
+      if (next is GenerateOtpFailure) {
+        Navigator.pop(context);
+      }
+    });
+    final generateOtp = ref.watch(generateOtpProvider);
     final form = ref.read(createAccFormProvider);
     return Scaffold(
       appBar: AppBar(),
@@ -90,6 +108,9 @@ class OtpPage extends ConsumerWidget {
               ),
             ),
           ),
+          // if (generateOtp == GenerateOtpState.loading())
+          //   CircularProgressIndicator()
+          // else
           Container(
             padding: const EdgeInsets.all(AppDimen.pagePadding),
             margin: EdgeInsets.only(bottom: 20),

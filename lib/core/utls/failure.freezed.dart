@@ -15,22 +15,22 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Failure {
 
-
+ String get message; set message(String value);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Failure);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Failure&&(identical(other.message, message) || other.message == message));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,message);
 
 @override
 String toString() {
-  return 'Failure()';
+  return 'Failure(message: $message)';
 }
 
 
