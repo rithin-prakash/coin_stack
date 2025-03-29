@@ -185,32 +185,66 @@ $FailureCopyWith<$Res> get failure {
 
 
 class GenerateOtpSuccess implements GenerateOtpState {
-  const GenerateOtpSuccess();
+  const GenerateOtpSuccess(this.val);
   
 
+ final  String? val;
 
-
+/// Create a copy of GenerateOtpState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GenerateOtpSuccessCopyWith<GenerateOtpSuccess> get copyWith => _$GenerateOtpSuccessCopyWithImpl<GenerateOtpSuccess>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GenerateOtpSuccess);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GenerateOtpSuccess&&(identical(other.val, val) || other.val == val));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,val);
 
 @override
 String toString() {
-  return 'GenerateOtpState.success()';
+  return 'GenerateOtpState.success(val: $val)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $GenerateOtpSuccessCopyWith<$Res> implements $GenerateOtpStateCopyWith<$Res> {
+  factory $GenerateOtpSuccessCopyWith(GenerateOtpSuccess value, $Res Function(GenerateOtpSuccess) _then) = _$GenerateOtpSuccessCopyWithImpl;
+@useResult
+$Res call({
+ String? val
+});
 
 
+
+
+}
+/// @nodoc
+class _$GenerateOtpSuccessCopyWithImpl<$Res>
+    implements $GenerateOtpSuccessCopyWith<$Res> {
+  _$GenerateOtpSuccessCopyWithImpl(this._self, this._then);
+
+  final GenerateOtpSuccess _self;
+  final $Res Function(GenerateOtpSuccess) _then;
+
+/// Create a copy of GenerateOtpState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? val = freezed,}) {
+  return _then(GenerateOtpSuccess(
+freezed == val ? _self.val : val // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
 
 // dart format on

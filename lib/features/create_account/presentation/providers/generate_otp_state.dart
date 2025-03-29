@@ -8,5 +8,5 @@ class GenerateOtpState with _$GenerateOtpState {
   const factory GenerateOtpState.initial() = GenerateOtpStateInitial;
   const factory GenerateOtpState.loading() = GenerateOtpLoading;
   const factory GenerateOtpState.failure(Failure failure) = GenerateOtpFailure;
-  const factory GenerateOtpState.success() = GenerateOtpSuccess;
+  const factory GenerateOtpState.success(String? val) = GenerateOtpSuccess;
 }

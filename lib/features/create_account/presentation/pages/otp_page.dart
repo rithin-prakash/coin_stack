@@ -5,7 +5,10 @@ import 'package:coin_stack/core/theme/app_colors.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/generate_otp.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/generate_otp_state.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/verify_otp.dart';
+import 'package:coin_stack/features/create_account/presentation/providers/verify_otp_state.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,6 +28,8 @@ class _OtpPageState extends ConsumerState<OtpPage> {
     super.initState();
   }
 
+  final pinController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     ref.listen(generateOtpProvider, (prev, next) {
@@ -35,7 +40,19 @@ class _OtpPageState extends ConsumerState<OtpPage> {
         Navigator.pop(context);
       }
     });
+
+    ref.listen(verifyOtpProvider, (_, v) {
+      if (v is VerifyOtpSuccess) {
+        context.replaceRoute(AddEmailPageRoute());
+      } else if (v is VerifyOtpFailure) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(v.failure.message)));
+      }
+    });
     final generateOtp = ref.watch(generateOtpProvider);
+    final verifyOtp = ref.watch(verifyOtpProvider);
+
     final form = ref.read(createAccFormProvider);
     return Scaffold(
       appBar: AppBar(),
@@ -67,6 +84,7 @@ class _OtpPageState extends ConsumerState<OtpPage> {
                   Align(
                     alignment: Alignment.center,
                     child: Pinput(
+                      controller: pinController,
                       length: 6,
                       defaultPinTheme: PinTheme(
                         width: 56,
@@ -85,6 +103,14 @@ class _OtpPageState extends ConsumerState<OtpPage> {
                       showCursor: false,
                     ),
                   ),
+                  if (kDebugMode && generateOtp is GenerateOtpSuccess)
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        generateOtp.val!,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   SizedBox(height: 20),
                   Align(
                     alignment: Alignment.center,
@@ -111,7 +137,6 @@ class _OtpPageState extends ConsumerState<OtpPage> {
               ),
             ),
           ),
-
           Container(
             padding: const EdgeInsets.all(AppDimen.pagePadding),
             margin: EdgeInsets.only(bottom: 20),
@@ -119,13 +144,17 @@ class _OtpPageState extends ConsumerState<OtpPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed:
-                    generateOtp is GenerateOtpLoading
+                    generateOtp is GenerateOtpLoading ||
+                            verifyOtp is VerifyOtpLoading
                         ? null
                         : () {
-                          context.replaceRoute(AddEmailPageRoute());
+                          ref
+                              .read(verifyOtpProvider.notifier)
+                              .verifyOtp(pinController.text);
                         },
                 child:
-                    generateOtp is GenerateOtpLoading
+                    generateOtp is GenerateOtpLoading ||
+                            verifyOtp is VerifyOtpLoading
                         ? CircularProgressIndicator.adaptive(
                           backgroundColor: Colors.white,
                         )

@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'generate_otp.dart';
+part of 'verify_otp.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$generateOtpHash() => r'2278c432ff8594e935cdfbc167016268cb7c0dbb';
+String _$verifyOtpHash() => r'552424021085ebafee05c6d6759694e7c52a08c4';
 
-/// See also [GenerateOtp].
-@ProviderFor(GenerateOtp)
-final generateOtpProvider =
-    NotifierProvider<GenerateOtp, GenerateOtpState>.internal(
-      GenerateOtp.new,
-      name: r'generateOtpProvider',
+/// See also [VerifyOtp].
+@ProviderFor(VerifyOtp)
+final verifyOtpProvider =
+    AutoDisposeNotifierProvider<VerifyOtp, VerifyOtpState>.internal(
+      VerifyOtp.new,
+      name: r'verifyOtpProvider',
       debugGetCreateSourceHash:
           const bool.fromEnvironment('dart.vm.product')
               ? null
-              : _$generateOtpHash,
+              : _$verifyOtpHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$GenerateOtp = Notifier<GenerateOtpState>;
+typedef _$VerifyOtp = AutoDisposeNotifier<VerifyOtpState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

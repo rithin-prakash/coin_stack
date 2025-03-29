@@ -34,7 +34,7 @@ class GenerateOtp extends _$GenerateOtp {
 
     res.fold(
       (l) => state = GenerateOtpState.failure(l),
-      (r) => state = GenerateOtpState.success(),
+      (r) => state = GenerateOtpState.success(r),
     );
   }
 }
