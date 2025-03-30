@@ -19,6 +19,7 @@ class UserProfileRepoRestApiImpl implements UserProfileRepo {
   UserProfileRepoRestApiImpl(this._remoteApi);
   @override
   Future<Either<Failure, User>> fetchUserProfile() async {
+    return Left(ServerFailure(message: ''));
     final u = {'phone': '232333223', 'phoneCode': '+91', 'phoneVerified': true};
     return Right(User.fromJson(u));
   }

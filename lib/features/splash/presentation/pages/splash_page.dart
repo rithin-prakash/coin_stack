@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/app_router/app_router.gr.dart';
+import 'package:coin_stack/features/profile/presentation/providers/user_profile.dart';
 import 'package:coin_stack/features/splash/presentation/provider/is_first_opening.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   Widget build(BuildContext context) {
     final x = ref.watch(isFirstOpeningProvider);
+    final user = ref.watch(userProfileProvider);
 
     return Scaffold(
       body: Column(
@@ -28,20 +30,28 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         children: [
           Image.asset('assets/icon/icon.png'),
           SizedBox(height: 20),
-
-          x.when(
+          user.when(
             data: (data) {
-              if (data) {
-                context.replaceRoute(IntroPageRoute());
-              } else {
-                context.replaceRoute(CreateAccountIntroPageRoute());
-              }
+              context.replaceRoute(DashboardMainRoute());
               return Container();
             },
-            error: (error, stackTrace) => Container(),
-            loading: () {
-              return CircularProgressIndicator();
+            error: (_, _) {
+              return x.when(
+                data: (data) {
+                  if (data) {
+                    context.replaceRoute(IntroPageRoute());
+                  } else {
+                    context.replaceRoute(CreateAccountIntroPageRoute());
+                  }
+                  return Container();
+                },
+                error: (error, stackTrace) => Container(),
+                loading: () {
+                  return CircularProgressIndicator();
+                },
+              );
             },
+            loading: () => CircularProgressIndicator(),
           ),
         ],
       ),
