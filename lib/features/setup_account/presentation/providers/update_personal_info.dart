@@ -13,7 +13,7 @@ class UpdatePersonalInfo extends _$UpdatePersonalInfo {
     return UpdatePersonalInfoState.initial();
   }
 
-  updateEmail() async {
+  updateInfo() async {
     state = UpdatePersonalInfoState.loading();
     final fullName =
         ref.read(personalInfoFormProvider).control(upFullName).value;

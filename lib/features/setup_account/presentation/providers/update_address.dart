@@ -13,7 +13,7 @@ class UpdateAddress extends _$UpdateAddress {
     return UpdateAddressState.initial();
   }
 
-  updateEmail() async {
+  updateAddress() async {
     state = UpdateAddressState.loading();
     final address = ref.read(addressFormProvider).control(upAddress).value;
     final city = ref.read(addressFormProvider).control(upCity).value;

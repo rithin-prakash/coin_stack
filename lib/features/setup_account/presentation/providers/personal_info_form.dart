@@ -7,7 +7,7 @@ const String upFullName = 'full_name';
 const String upUsername = 'username';
 const String upDob = 'dob';
 
-@riverpod
+@Riverpod(keepAlive: true)
 FormGroup personalInfoForm(ref) {
   final form = fb.group({
     upFullName: FormControl<String>(validators: [Validators.required]),

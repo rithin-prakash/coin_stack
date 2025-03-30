@@ -7,7 +7,7 @@ const upAddress = 'address_line';
 const upCity = 'city';
 const upPin = 'pin';
 
-@riverpod
+@Riverpod(keepAlive: true)
 FormGroup addressForm(ref) {
   final form = fb.group({
     upAddress: FormControl<String>(validators: [Validators.required]),

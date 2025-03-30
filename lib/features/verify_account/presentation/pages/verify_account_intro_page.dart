@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
@@ -5,6 +6,7 @@ import 'package:coin_stack/features/verify_account/presentation/widgets/account_
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+@RoutePage()
 class VerifyAccountIntroPage extends StatelessWidget {
   const VerifyAccountIntroPage({super.key});
 

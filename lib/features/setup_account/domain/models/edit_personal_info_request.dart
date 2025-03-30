@@ -8,7 +8,7 @@ abstract class EditPersonalRequest with _$EditPersonalRequest {
   factory EditPersonalRequest({
     required String fullName,
     required String username,
-    required String dob,
+    required DateTime dob,
   }) = _EditPersonalRequest;
 
   factory EditPersonalRequest.fromJson(Map<String, dynamic> json) =>

@@ -1,30 +1,31 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'update_personal_info.dart';
+part of 'update_country_of_residence.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$updatePersonalInfoHash() =>
-    r'f9c31e9387a857973adbad7969c54b4ed5285966';
+String _$updateCountryOfResidenceHash() =>
+    r'25f5a9c7672083985cd7d8634c311813a14cd65d';
 
-/// See also [UpdatePersonalInfo].
-@ProviderFor(UpdatePersonalInfo)
-final updatePersonalInfoProvider = AutoDisposeNotifierProvider<
-  UpdatePersonalInfo,
-  UpdatePersonalInfoState
+/// See also [UpdateCountryOfResidence].
+@ProviderFor(UpdateCountryOfResidence)
+final updateCountryOfResidenceProvider = AutoDisposeNotifierProvider<
+  UpdateCountryOfResidence,
+  UpdateCountryOfResidenceState
 >.internal(
-  UpdatePersonalInfo.new,
-  name: r'updatePersonalInfoProvider',
+  UpdateCountryOfResidence.new,
+  name: r'updateCountryOfResidenceProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$updatePersonalInfoHash,
+          : _$updateCountryOfResidenceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$UpdatePersonalInfo = AutoDisposeNotifier<UpdatePersonalInfoState>;
+typedef _$UpdateCountryOfResidence =
+    AutoDisposeNotifier<UpdateCountryOfResidenceState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

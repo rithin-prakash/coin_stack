@@ -6,11 +6,11 @@ part of 'address_form.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$addressFormHash() => r'a73ab407aa38b81c04092df14cc98db2a17dc07f';
+String _$addressFormHash() => r'1b3ff0c304508bceb83e63cb282a9544882eb9de';
 
 /// See also [addressForm].
 @ProviderFor(addressForm)
-final addressFormProvider = AutoDisposeProvider<FormGroup>.internal(
+final addressFormProvider = Provider<FormGroup>.internal(
   addressForm,
   name: r'addressFormProvider',
   debugGetCreateSourceHash:
@@ -21,6 +21,6 @@ final addressFormProvider = AutoDisposeProvider<FormGroup>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AddressFormRef = AutoDisposeProviderRef<FormGroup>;
+typedef AddressFormRef = ProviderRef<FormGroup>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -106,7 +106,14 @@ class AddHomeAddressPage extends ConsumerWidget {
                   child: ReactiveFormConsumer(
                     builder:
                         (_, form, _) => ElevatedButton(
-                          onPressed: !form.valid ? null : () {},
+                          onPressed:
+                              !form.valid
+                                  ? null
+                                  : () {
+                                    ref
+                                        .read(updateAddressProvider.notifier)
+                                        .updateAddress();
+                                  },
                           child: Text('Continue'),
                         ),
                   ),

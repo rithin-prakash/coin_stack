@@ -101,6 +101,12 @@ class _OtpPageState extends ConsumerState<OtpPage> {
                       obscureText: true,
                       obscuringCharacter: '\u25CF',
                       showCursor: false,
+                      validator: (value) {
+                        if (value == null || value.length != 6) {
+                          return 'Pin shoulb be valid';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   if (kDebugMode && generateOtp is GenerateOtpSuccess)

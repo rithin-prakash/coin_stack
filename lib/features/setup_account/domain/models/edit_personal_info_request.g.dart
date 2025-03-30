@@ -10,7 +10,7 @@ _EditPersonalRequest _$EditPersonalRequestFromJson(Map<String, dynamic> json) =>
     _EditPersonalRequest(
       fullName: json['fullName'] as String,
       username: json['username'] as String,
-      dob: json['dob'] as String,
+      dob: DateTime.parse(json['dob'] as String),
     );
 
 Map<String, dynamic> _$EditPersonalRequestToJson(
@@ -18,5 +18,5 @@ Map<String, dynamic> _$EditPersonalRequestToJson(
 ) => <String, dynamic>{
   'fullName': instance.fullName,
   'username': instance.username,
-  'dob': instance.dob,
+  'dob': instance.dob.toIso8601String(),
 };

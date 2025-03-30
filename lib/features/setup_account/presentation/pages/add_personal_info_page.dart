@@ -107,7 +107,16 @@ class AddPersonalInfoPage extends ConsumerWidget {
                   child: ReactiveFormConsumer(
                     builder:
                         (_, form, _) => ElevatedButton(
-                          onPressed: !form.valid ? null : () {},
+                          onPressed:
+                              !form.valid
+                                  ? null
+                                  : () {
+                                    ref
+                                        .read(
+                                          updatePersonalInfoProvider.notifier,
+                                        )
+                                        .updateInfo();
+                                  },
                           child: Text('Continue'),
                         ),
                   ),

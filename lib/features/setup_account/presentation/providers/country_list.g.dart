@@ -1,28 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'personal_info_form.dart';
+part of 'country_list.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$personalInfoFormHash() => r'd24d2b3301767d99d0ab795a8ca83661083e6b93';
+String _$countryListHash() => r'ad7c825e78d8c904a343cb85a635d5c0d76413eb';
 
-/// See also [personalInfoForm].
-@ProviderFor(personalInfoForm)
-final personalInfoFormProvider = Provider<FormGroup>.internal(
-  personalInfoForm,
-  name: r'personalInfoFormProvider',
+/// See also [countryList].
+@ProviderFor(countryList)
+final countryListProvider = FutureProvider<List<Country>>.internal(
+  countryList,
+  name: r'countryListProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$personalInfoFormHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$countryListHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef PersonalInfoFormRef = ProviderRef<FormGroup>;
+typedef CountryListRef = FutureProviderRef<List<Country>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
