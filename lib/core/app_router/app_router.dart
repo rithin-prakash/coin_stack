@@ -24,5 +24,6 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: AddHomeAddressPageRoute.page),
     AutoRoute(page: AddPersonalInfoPageRoute.page),
     AutoRoute(page: AddCountryOfResidenceRoute.page),
+    AutoRoute(page: VerifyAccountIntroPageRoute.page),
   ];
 }
