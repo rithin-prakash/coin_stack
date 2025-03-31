@@ -1,21 +1,19 @@
 import 'package:coin_stack/core/app_router/app_router.dart';
 import 'package:coin_stack/core/theme/app_theme.dart';
-import 'package:coin_stack/provider_observer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 
 void main() {
-  runApp(ProviderScope(observers: [AppProviderObserver()], child: MyApp()));
+  runApp(MyApp());
 }
 
-class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
+
+  final appRouter = AppRouter();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final appRouter = ref.read(routerProvider);
-
+  Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'CoinStack',
       theme: AppTheme.lightTheme,

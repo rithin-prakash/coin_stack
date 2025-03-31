@@ -16,7 +16,7 @@ class AddCountryOfResidence extends ConsumerWidget {
   const AddCountryOfResidence({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     ref.listen(updateCountryOfResidenceProvider, (p, v) {
       if (v is UpdateCountryOfResidenceSuccess) {
         context.replaceRoute(VerifyAccountIntroPageRoute());

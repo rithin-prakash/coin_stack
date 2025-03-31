@@ -3,19 +3,17 @@ import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
-import 'package:coin_stack/features/create_account/presentation/providers/account_notifier.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
-class CreateAccountIntroPage extends ConsumerWidget {
+class CreateAccountIntroPage extends StatelessWidget {
   const CreateAccountIntroPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(backgroundColor: Colors.white),
@@ -48,10 +46,6 @@ class CreateAccountIntroPage extends ConsumerWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      ref
-                          .read(accountNotifierProvider.notifier)
-                          .setAccountType(true);
-
                       context.navigateTo(CreateAccountPageRoute());
                     },
                     child: Text('Sign Up'),
@@ -62,10 +56,6 @@ class CreateAccountIntroPage extends ConsumerWidget {
                   width: double.infinity,
                   child: OutlinedButton(
                     onPressed: () async {
-                      ref
-                          .read(accountNotifierProvider.notifier)
-                          .setAccountType(false);
-
                       context.navigateTo(CreateAccountPageRoute());
                     },
                     child: Text('Log In'),

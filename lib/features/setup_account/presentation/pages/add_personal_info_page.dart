@@ -16,7 +16,7 @@ class AddPersonalInfoPage extends ConsumerWidget {
   const AddPersonalInfoPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     ref.listen(updatePersonalInfoProvider, (p, v) {
       if (v is UpdatePersonalInfoSuccess) {
         context.replaceRoute(AddCountryOfResidenceRoute());

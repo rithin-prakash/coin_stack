@@ -1,11 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/app_router/app_router.gr.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'app_router.g.dart';
-
-@riverpod
-RootStackRouter router(ref) => AppRouter();
 
 @AutoRouterConfig(replaceInRouteName: 'Page')
 class AppRouter extends RootStackRouter {

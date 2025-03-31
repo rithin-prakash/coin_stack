@@ -1,13 +1,6 @@
 import 'package:coin_stack/core/api_config/remote_api.dart';
 import 'package:coin_stack/core/utls/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'remote_api_dio_impl.g.dart';
-
-@Riverpod(keepAlive: true)
-RemoteApi remoteApi(Ref red) => RemoteApiDioImpl();
 
 class RemoteApiDioImpl implements RemoteApi {
   @override

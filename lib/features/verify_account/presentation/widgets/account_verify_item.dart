@@ -10,7 +10,7 @@ class OtpVerifyItem extends AccountVerifyItem {
   const OtpVerifyItem({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final user = ref.watch(userProfileProvider);
     return ListTile(
       leading: CircleAvatar(
@@ -51,7 +51,7 @@ class DocumentVerifyItem extends AccountVerifyItem {
   const DocumentVerifyItem({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final user = ref.watch(userProfileProvider);
 
     return ListTile(
@@ -93,7 +93,7 @@ class VerifPhotoItem extends AccountVerifyItem {
   const VerifPhotoItem({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final user = ref.watch(userProfileProvider);
 
     return ListTile(

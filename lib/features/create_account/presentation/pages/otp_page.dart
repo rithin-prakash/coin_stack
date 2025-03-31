@@ -1,28 +1,21 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
-import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
-import 'package:coin_stack/features/create_account/presentation/providers/generate_otp.dart';
-import 'package:coin_stack/features/create_account/presentation/providers/generate_otp_state.dart';
-import 'package:coin_stack/features/create_account/presentation/providers/verify_otp.dart';
-import 'package:coin_stack/features/create_account/presentation/providers/verify_otp_state.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
 @RoutePage()
-class OtpPage extends ConsumerStatefulWidget {
+class OtpPage extends StatefulWidget {
   const OtpPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _OtpPageState();
+  State<StatefulWidget> createState() => _OtpPageState();
 }
 
-class _OtpPageState extends ConsumerState<OtpPage> {
+class _OtpPageState extends State<OtpPage> {
   @override
   void initState() {
     super.initState();
@@ -32,28 +25,6 @@ class _OtpPageState extends ConsumerState<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(generateOtpProvider, (prev, next) {
-      if (next is GenerateOtpFailure) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(next.failure.message)));
-        Navigator.pop(context);
-      }
-    });
-
-    ref.listen(verifyOtpProvider, (_, v) {
-      if (v is VerifyOtpSuccess) {
-        context.replaceRoute(AddEmailPageRoute());
-      } else if (v is VerifyOtpFailure) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(v.failure.message)));
-      }
-    });
-    final generateOtp = ref.watch(generateOtpProvider);
-    final verifyOtp = ref.watch(verifyOtpProvider);
-
-    final form = ref.read(createAccFormProvider);
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -76,7 +47,7 @@ class _OtpPageState extends ConsumerState<OtpPage> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'We send 6 digit code to ${form.control(caPhoneCode).value} ${form.control(caPhone).value}',
+                    'We send 6 digit code to', // ${form.control(caPhoneCode).value} ${form.control(caPhone).value}',
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.start,
                   ),
@@ -109,11 +80,11 @@ class _OtpPageState extends ConsumerState<OtpPage> {
                       },
                     ),
                   ),
-                  if (kDebugMode && generateOtp is GenerateOtpSuccess)
+                  if (kDebugMode)
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        generateOtp.val!,
+                        'generateOtp.val!,',
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -149,22 +120,11 @@ class _OtpPageState extends ConsumerState<OtpPage> {
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed:
-                    generateOtp is GenerateOtpLoading ||
-                            verifyOtp is VerifyOtpLoading
-                        ? null
-                        : () {
-                          ref
-                              .read(verifyOtpProvider.notifier)
-                              .verifyOtp(pinController.text);
-                        },
-                child:
-                    generateOtp is GenerateOtpLoading ||
-                            verifyOtp is VerifyOtpLoading
-                        ? CircularProgressIndicator.adaptive(
-                          backgroundColor: Colors.white,
-                        )
-                        : Text('Verify Your Phone'),
+                onPressed: null,
+                child: CircularProgressIndicator.adaptive(
+                  backgroundColor: Colors.white,
+                ),
+                // : Text('Verify Your Phone'),
               ),
             ),
           ),

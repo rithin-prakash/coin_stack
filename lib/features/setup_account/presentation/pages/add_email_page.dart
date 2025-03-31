@@ -16,7 +16,7 @@ class AddEmailPage extends ConsumerWidget {
   const AddEmailPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     ref.listen(updateEmailProvider, (p, v) {
       if (v is UpdateEmailSuccess) {
         context.replaceRoute(AddHomeAddressPageRoute());

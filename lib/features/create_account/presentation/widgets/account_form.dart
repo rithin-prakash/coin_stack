@@ -3,22 +3,21 @@ import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
 import 'package:coin_stack/core/utls/validation_helper.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AccountForm extends ConsumerStatefulWidget {
+class AccountForm extends StatefulWidget {
   const AccountForm({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _State();
+  State<StatefulWidget> createState() => _State();
 }
 
-class _State extends ConsumerState<AccountForm> {
+class _State extends State<AccountForm> {
   var showPassword = false;
   @override
   Widget build(BuildContext context) {
     return ReactiveFormBuilder(
-      form: () => ref.read(createAccFormProvider),
+      form: () => null,
       builder: (context, form, child) {
         return Column(
           children: [

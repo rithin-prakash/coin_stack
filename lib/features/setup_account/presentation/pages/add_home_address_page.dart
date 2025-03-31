@@ -15,7 +15,7 @@ class AddHomeAddressPage extends ConsumerWidget {
   const AddHomeAddressPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     ref.listen(updateAddressProvider, (p, v) {
       if (v is UpdateAddressSuccess) {
         context.replaceRoute(AddPersonalInfoPageRoute());
