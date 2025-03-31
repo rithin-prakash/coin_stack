@@ -1,7 +1,6 @@
 import 'package:coin_stack/core/shared_widgets/app_phone_code_field.dart';
 import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
 import 'package:coin_stack/core/utls/validation_helper.dart';
-import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 

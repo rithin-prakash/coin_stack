@@ -1,8 +1,7 @@
 import 'package:coin_stack/features/profile/presentation/providers/user_profile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-abstract class AccountVerifyItem extends ConsumerWidget {
+abstract class AccountVerifyItem extends StatelessWidget {
   const AccountVerifyItem({super.key});
 }
 
@@ -11,7 +10,6 @@ class OtpVerifyItem extends AccountVerifyItem {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userProfileProvider);
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: Theme.of(context).primaryColor.withValues(alpha: .1),
@@ -52,8 +50,6 @@ class DocumentVerifyItem extends AccountVerifyItem {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userProfileProvider);
-
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: Theme.of(context).primaryColor.withValues(alpha: .1),
@@ -94,8 +90,6 @@ class VerifPhotoItem extends AccountVerifyItem {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userProfileProvider);
-
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: Theme.of(context).primaryColor.withValues(alpha: .1),

@@ -1,19 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/app_router/app_router.gr.dart';
-import 'package:coin_stack/features/profile/presentation/providers/user_profile.dart';
-import 'package:coin_stack/features/splash/presentation/provider/is_first_opening.dart';
+import 'package:coin_stack/di/di_config.dart';
+import 'package:coin_stack/features/splash/presentation/bloc/first_opening_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class SplashPage extends ConsumerStatefulWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SplashPageState();
+  State<StatefulWidget> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends ConsumerState<SplashPage> {
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
@@ -21,39 +21,25 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    final x = ref.watch(isFirstOpeningProvider);
-    final user = ref.watch(userProfileProvider);
-
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset('assets/icon/icon.png'),
-          SizedBox(height: 20),
-          user.when(
-            data: (data) {
-              context.replaceRoute(DashboardMainRoute());
-              return Container();
-            },
-            error: (_, _) {
-              return x.when(
-                data: (data) {
-                  if (data) {
-                    context.replaceRoute(IntroPageRoute());
-                  } else {
-                    context.replaceRoute(CreateAccountIntroPageRoute());
-                  }
-                  return Container();
-                },
-                error: (error, stackTrace) => Container(),
-                loading: () {
-                  return CircularProgressIndicator();
-                },
-              );
-            },
-            loading: () => CircularProgressIndicator(),
-          ),
-        ],
+    return BlocProvider(
+      create: (_) => getIt<FirstOpeningCubit>(),
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/icon/icon.png'),
+            SizedBox(height: 20),
+            BlocListener<FirstOpeningCubit, bool>(
+              listener: (_, s) {
+                if (s) {
+                  context.replaceRoute(IntroPageRoute());
+                } else {
+                  context.replaceRoute(CreateAccountIntroPageRoute());
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

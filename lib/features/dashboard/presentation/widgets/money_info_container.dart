@@ -3,27 +3,22 @@ import 'package:coin_stack/features/profile/domain/models/currency.dart';
 import 'package:coin_stack/features/profile/presentation/providers/primary_currency.dart';
 import 'package:coin_stack/features/profile/presentation/providers/supported_currency.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
 final curList = [('US Dollor', 'us'), ('Indian Ruppee', 'in')];
 
-class MoneyInfoContainer extends ConsumerStatefulWidget {
+class MoneyInfoContainer extends StatefulWidget {
   const MoneyInfoContainer({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _MoneyInfoContainerState();
+  State<StatefulWidget> createState() => _MoneyInfoContainerState();
 }
 
-class _MoneyInfoContainerState extends ConsumerState<MoneyInfoContainer> {
+class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
   var amountVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    final dropdownCurr = ref.read(supportedCurrenciesProvider);
-    final primaryCur = ref.read(primaryCurrencyProvider);
-
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).primaryColor),
       height: MediaQuery.sizeOf(context).height * (1 / 3),

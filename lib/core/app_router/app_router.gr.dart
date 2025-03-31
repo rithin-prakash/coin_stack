@@ -35,66 +35,141 @@ import 'package:coin_stack/features/verify_account/presentation/pages/verify_acc
 
 /// generated route for
 /// [_i1.AddCountryOfResidence]
-class AddCountryOfResidenceRoute extends _i12.PageRouteInfo<void> {
-  const AddCountryOfResidenceRoute({List<_i12.PageRouteInfo>? children})
-    : super(AddCountryOfResidenceRoute.name, initialChildren: children);
+class AddCountryOfResidenceRoute
+    extends _i12.PageRouteInfo<AddCountryOfResidenceRouteArgs> {
+  AddCountryOfResidenceRoute({dynamic key, List<_i12.PageRouteInfo>? children})
+    : super(
+        AddCountryOfResidenceRoute.name,
+        args: AddCountryOfResidenceRouteArgs(key: key),
+        initialChildren: children,
+      );
 
   static const String name = 'AddCountryOfResidenceRoute';
 
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i1.AddCountryOfResidence();
+      final args = data.argsAs<AddCountryOfResidenceRouteArgs>(
+        orElse: () => const AddCountryOfResidenceRouteArgs(),
+      );
+      return _i1.AddCountryOfResidence(key: args.key);
     },
   );
 }
 
+class AddCountryOfResidenceRouteArgs {
+  const AddCountryOfResidenceRouteArgs({this.key});
+
+  final dynamic key;
+
+  @override
+  String toString() {
+    return 'AddCountryOfResidenceRouteArgs{key: $key}';
+  }
+}
+
 /// generated route for
 /// [_i2.AddEmailPage]
-class AddEmailPageRoute extends _i12.PageRouteInfo<void> {
-  const AddEmailPageRoute({List<_i12.PageRouteInfo>? children})
-    : super(AddEmailPageRoute.name, initialChildren: children);
+class AddEmailPageRoute extends _i12.PageRouteInfo<AddEmailPageRouteArgs> {
+  AddEmailPageRoute({dynamic key, List<_i12.PageRouteInfo>? children})
+    : super(
+        AddEmailPageRoute.name,
+        args: AddEmailPageRouteArgs(key: key),
+        initialChildren: children,
+      );
 
   static const String name = 'AddEmailPageRoute';
 
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i2.AddEmailPage();
+      final args = data.argsAs<AddEmailPageRouteArgs>(
+        orElse: () => const AddEmailPageRouteArgs(),
+      );
+      return _i2.AddEmailPage(key: args.key);
     },
   );
 }
 
+class AddEmailPageRouteArgs {
+  const AddEmailPageRouteArgs({this.key});
+
+  final dynamic key;
+
+  @override
+  String toString() {
+    return 'AddEmailPageRouteArgs{key: $key}';
+  }
+}
+
 /// generated route for
 /// [_i3.AddHomeAddressPage]
-class AddHomeAddressPageRoute extends _i12.PageRouteInfo<void> {
-  const AddHomeAddressPageRoute({List<_i12.PageRouteInfo>? children})
-    : super(AddHomeAddressPageRoute.name, initialChildren: children);
+class AddHomeAddressPageRoute
+    extends _i12.PageRouteInfo<AddHomeAddressPageRouteArgs> {
+  AddHomeAddressPageRoute({dynamic key, List<_i12.PageRouteInfo>? children})
+    : super(
+        AddHomeAddressPageRoute.name,
+        args: AddHomeAddressPageRouteArgs(key: key),
+        initialChildren: children,
+      );
 
   static const String name = 'AddHomeAddressPageRoute';
 
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i3.AddHomeAddressPage();
+      final args = data.argsAs<AddHomeAddressPageRouteArgs>(
+        orElse: () => const AddHomeAddressPageRouteArgs(),
+      );
+      return _i3.AddHomeAddressPage(key: args.key);
     },
   );
 }
 
+class AddHomeAddressPageRouteArgs {
+  const AddHomeAddressPageRouteArgs({this.key});
+
+  final dynamic key;
+
+  @override
+  String toString() {
+    return 'AddHomeAddressPageRouteArgs{key: $key}';
+  }
+}
+
 /// generated route for
 /// [_i4.AddPersonalInfoPage]
-class AddPersonalInfoPageRoute extends _i12.PageRouteInfo<void> {
-  const AddPersonalInfoPageRoute({List<_i12.PageRouteInfo>? children})
-    : super(AddPersonalInfoPageRoute.name, initialChildren: children);
+class AddPersonalInfoPageRoute
+    extends _i12.PageRouteInfo<AddPersonalInfoPageRouteArgs> {
+  AddPersonalInfoPageRoute({dynamic key, List<_i12.PageRouteInfo>? children})
+    : super(
+        AddPersonalInfoPageRoute.name,
+        args: AddPersonalInfoPageRouteArgs(key: key),
+        initialChildren: children,
+      );
 
   static const String name = 'AddPersonalInfoPageRoute';
 
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i4.AddPersonalInfoPage();
+      final args = data.argsAs<AddPersonalInfoPageRouteArgs>(
+        orElse: () => const AddPersonalInfoPageRouteArgs(),
+      );
+      return _i4.AddPersonalInfoPage(key: args.key);
     },
   );
+}
+
+class AddPersonalInfoPageRouteArgs {
+  const AddPersonalInfoPageRouteArgs({this.key});
+
+  final dynamic key;
+
+  @override
+  String toString() {
+    return 'AddPersonalInfoPageRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
