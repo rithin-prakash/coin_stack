@@ -1,3 +1,4 @@
+import 'package:coin_stack/features/profile/domain/models/currency.dart';
 import 'package:coin_stack/features/setup_account/domain/models/country.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,6 +21,8 @@ abstract class User with _$User {
     @Default(false) bool phoneVerified,
     @Default(false) bool idVerified,
     @Default(false) bool photoVerified,
+    @Default(1) int step,
+    @JsonKey(name: 'primaryCurrency') required Currency primaryCurr,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

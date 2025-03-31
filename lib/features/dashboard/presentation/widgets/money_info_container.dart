@@ -1,21 +1,29 @@
 import 'package:coin_stack/core/assets/app_assets.dart';
+import 'package:coin_stack/features/profile/domain/models/currency.dart';
+import 'package:coin_stack/features/profile/presentation/providers/primary_currency.dart';
+import 'package:coin_stack/features/profile/presentation/providers/supported_currency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shimmer/shimmer.dart';
 
 final curList = [('US Dollor', 'us'), ('Indian Ruppee', 'in')];
 
-class MoneyInfoContainer extends StatefulWidget {
+class MoneyInfoContainer extends ConsumerStatefulWidget {
   const MoneyInfoContainer({super.key});
 
   @override
-  State<MoneyInfoContainer> createState() => _MoneyInfoContainerState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _MoneyInfoContainerState();
 }
 
-class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
-  var selectedCur = curList.first;
+class _MoneyInfoContainerState extends ConsumerState<MoneyInfoContainer> {
   var amountVisible = false;
 
   @override
   Widget build(BuildContext context) {
+    final dropdownCurr = ref.read(supportedCurrenciesProvider);
+    final primaryCur = ref.read(primaryCurrencyProvider);
+
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).primaryColor),
       height: MediaQuery.sizeOf(context).height * (1 / 3),
@@ -24,40 +32,66 @@ class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          DropdownButton<(String, String)>(
-            value: selectedCur,
-            padding: EdgeInsets.zero,
-            style: const TextStyle(color: Colors.white),
-            icon: Icon(Icons.keyboard_arrow_down_outlined, color: Colors.white),
-            underline: Container(),
-            dropdownColor: Theme.of(context).primaryColorDark,
-            items:
-                curList
-                    .map<DropdownMenuItem<(String, String)>>(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 10,
-                              backgroundImage: AssetImage(
-                                '${AppAssets.countryFlag}/${e.$2}.webp',
+          primaryCur.when(
+            data: (c) {
+              return dropdownCurr.when(
+                data: (data) {
+                  return DropdownButton<Currency>(
+                    value: c,
+                    padding: EdgeInsets.zero,
+                    style: const TextStyle(color: Colors.white),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: Colors.white,
+                    ),
+                    underline: Container(),
+                    dropdownColor: Theme.of(context).primaryColorDark,
+                    items:
+                        data
+                            .map<DropdownMenuItem<Currency>>(
+                              (e) => DropdownMenuItem<Currency>(
+                                value: e,
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 10,
+                                      backgroundImage: AssetImage(
+                                        '${AppAssets.countryFlag}/${e.flagCode}.webp',
+                                      ),
+                                    ),
+                                    SizedBox(width: 6),
+                                    Text(
+                                      e.name,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 6),
-                            Text(e.$1, style: TextStyle(color: Colors.white)),
-                          ],
-                        ),
-                      ),
-                    )
-                    .toList(),
-            onChanged: (v) {
-              if (v == null) return;
-              setState(() {
-                selectedCur = v;
-              });
+                            )
+                            .toList(),
+                    onChanged: (v) {
+                      if (v == null) return;
+                    },
+                  );
+                },
+                error: (_, __) => Container(),
+                loading:
+                    () => Shimmer.fromColors(
+                      baseColor: Colors.red,
+                      highlightColor: Colors.yellow,
+                      child: Container(color: Colors.grey),
+                    ),
+              );
             },
+            error: (_, __) => Container(),
+            loading:
+                () => Shimmer.fromColors(
+                  baseColor: Colors.red,
+                  highlightColor: Colors.yellow,
+                  child: Container(color: Colors.grey),
+                ),
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

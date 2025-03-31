@@ -23,6 +23,10 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
   phoneVerified: json['phoneVerified'] as bool? ?? false,
   idVerified: json['idVerified'] as bool? ?? false,
   photoVerified: json['photoVerified'] as bool? ?? false,
+  step: (json['step'] as num?)?.toInt() ?? 1,
+  primaryCurr: Currency.fromJson(
+    json['primaryCurrency'] as Map<String, dynamic>,
+  ),
 );
 
 Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
@@ -39,4 +43,6 @@ Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
   'phoneVerified': instance.phoneVerified,
   'idVerified': instance.idVerified,
   'photoVerified': instance.photoVerified,
+  'step': instance.step,
+  'primaryCurrency': instance.primaryCurr,
 };
