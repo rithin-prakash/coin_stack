@@ -2,7 +2,7 @@ import 'package:coin_stack/features/create_account/data/otp_repo_impl.dart';
 import 'package:coin_stack/features/create_account/domain/models/verify_otp_request.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/create_account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/providers/verify_otp_state.dart';
-import 'package:coin_stack/features/profile/presentation/providers/user_profile.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

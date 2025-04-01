@@ -4,7 +4,9 @@ import 'package:coin_stack/features/profile/domain/models/currency.dart';
 import 'package:coin_stack/features/profile/domain/models/user.dart';
 import 'package:coin_stack/features/profile/domain/repos/user_profile_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: UserProfileRepo)
 class UserProfileRepoRestApiImpl implements UserProfileRepo {
   final RemoteApi _remoteApi;
 

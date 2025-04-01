@@ -1,4 +1,4 @@
-import 'package:coin_stack/features/profile/presentation/providers/user_profile.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 
 abstract class AccountVerifyItem extends StatelessWidget {

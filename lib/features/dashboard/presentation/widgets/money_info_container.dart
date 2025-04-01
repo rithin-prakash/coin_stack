@@ -1,7 +1,7 @@
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/features/profile/domain/models/currency.dart';
-import 'package:coin_stack/features/profile/presentation/providers/primary_currency.dart';
-import 'package:coin_stack/features/profile/presentation/providers/supported_currency.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/primary_currency.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/supported_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
