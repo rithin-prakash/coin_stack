@@ -1,3 +1,4 @@
+import 'package:coin_stack/app_bloc_observer.dart';
 import 'package:coin_stack/core/app_router/app_router.dart';
 import 'package:coin_stack/core/theme/app_theme.dart';
 import 'package:coin_stack/di/di_config.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 
 void main() {
+  Bloc.observer = AppBlocObserver();
   runApp(MyApp());
 }
 

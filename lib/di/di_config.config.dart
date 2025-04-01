@@ -13,6 +13,12 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../core/api_config/remote_api.dart' as _i285;
+import '../features/create_account/data/sign_up_repo_impl.dart' as _i510;
+import '../features/create_account/domain/repos/sign_up_repo.dart' as _i764;
+import '../features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart'
+    as _i175;
+import '../features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart'
+    as _i135;
 import '../features/profile/data/user_profile_repo_rest_api_impl.dart' as _i959;
 import '../features/profile/domain/repos/user_profile_repo.dart' as _i619;
 import '../features/profile/presentation/bloc/support_currency_bloc/support_currency_list_bloc.dart'
@@ -30,7 +36,14 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
     gh.lazySingleton<_i73.SplashRepo>(() => _i702.SplashRepoImpl());
+    gh.lazySingleton<_i764.SignUpRepo>(
+      () => _i510.SignUpRepoImpl(gh<_i285.RemoteApi>()),
+    );
+    gh.factory<_i135.SignUpBloc>(
+      () => _i135.SignUpBloc(gh<_i764.SignUpRepo>()),
+    );
     gh.factory<_i319.FirstOpeningCubit>(
       () => _i319.FirstOpeningCubit(gh<_i73.SplashRepo>()),
     );
