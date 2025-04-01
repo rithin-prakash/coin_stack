@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 @RoutePage()
@@ -85,13 +87,19 @@ class CreateAccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isNewAcc = true;
     return Scaffold(
       appBar: AppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (isNewAcc) AccountProgressIndicator(value: .1),
+          BlocBuilder<AccountNotifierBloc, bool>(
+            builder: (context, isNewAcc) {
+              if (isNewAcc) {
+                return AccountProgressIndicator(value: .1);
+              }
+              return Container();
+            },
+          ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
@@ -100,11 +108,15 @@ class CreateAccountPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(height: 16),
-                  Text(
-                    isNewAcc ? "Create an Account" : "Login to CoinStack",
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  BlocBuilder<AccountNotifierBloc, bool>(
+                    builder: (context, isNewAcc) {
+                      return Text(
+                        isNewAcc ? "Create an Account" : "Login to CoinStack",
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: 8),
                   Text(
@@ -124,20 +136,24 @@ class CreateAccountPage extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 20),
             child: SizedBox(
               width: double.infinity,
-              child:
-                  isNewAcc
-                      ? ElevatedButton(
-                        onPressed: () {
-                          // showVerifyPhoneDialog(context, '$code$phone');
-                        },
-                        child: Text('Sign Up'),
-                      )
-                      : ElevatedButton(
-                        onPressed: () {
-                          context.replaceRoute(DashboardMainRoute());
-                        },
-                        child: Text('Log In'),
-                      ),
+              child: BlocBuilder<AccountNotifierBloc, bool>(
+                builder: (context, isNewAcc) {
+                  if (isNewAcc) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        // showVerifyPhoneDialog(context, '$code$phone');
+                      },
+                      child: Text('Sign Up'),
+                    );
+                  }
+                  return ElevatedButton(
+                    onPressed: () {
+                      context.replaceRoute(DashboardMainRoute());
+                    },
+                    child: Text('Log In'),
+                  );
+                },
+              ),
             ),
           ),
         ],
