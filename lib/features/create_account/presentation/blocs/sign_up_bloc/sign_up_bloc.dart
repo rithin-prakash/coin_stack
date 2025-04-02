@@ -35,15 +35,16 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       ),
     });
 
-    on<SignUpGenerateOtp>(generateOtp);
-    on<SignUpVerifyOtp>(verifyOtp);
+    on<SignUpGenerateOtp>(_generateOtp);
+    on<SignUpVerifyOtp>(_verifyOtp);
   }
 
   String get phoneValue => form.control(caPhone).value;
   String get phoneCode =>
       (form.control(caPhoneCode).value as CountryCode).dialCode!;
 
-  generateOtp(event, emit) async {
+  _generateOtp(event, emit) async {
+    emit(SignUpGenerateOtpLoading());
     final password = form.control(caPassword).value;
 
     var param = GenerateOtpRequest(
@@ -60,7 +61,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     );
   }
 
-  verifyOtp(SignUpVerifyOtp event, emit) async {
+  _verifyOtp(SignUpVerifyOtp event, emit) async {
+    emit(SignUpVerifyOtpLoading());
+
     final code = form.control(caPhoneCode).value as CountryCode;
     final phone = form.control(caPhone).value;
 

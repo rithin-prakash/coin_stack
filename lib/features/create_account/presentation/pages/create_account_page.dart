@@ -2,8 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
+import 'package:coin_stack/core/utls/ui_helper.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_event.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_state.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +68,7 @@ class CreateAccountPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      context.navigateTo(OtpPageRoute());
+                      context.read<SignUpBloc>().add(SignUpGenerateOtp());
                     },
                     child: Text('Yes'),
                   ),
@@ -90,81 +93,90 @@ class CreateAccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          BlocBuilder<AccountNotifierBloc, bool>(
-            builder: (context, isNewAcc) {
-              if (isNewAcc) {
-                return AccountProgressIndicator(value: .1);
-              }
-              return Container();
-            },
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 16),
-                  BlocBuilder<AccountNotifierBloc, bool>(
-                    builder: (context, isNewAcc) {
-                      return Text(
-                        isNewAcc ? "Create an Account" : "Login to CoinStack",
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Enter your mobile number to verify your account',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.start,
-                  ),
-                  SizedBox(height: 20),
-                  Flexible(fit: FlexFit.loose, child: AccountForm()),
-                  SizedBox(height: 20),
-                ],
+      body: BlocListener<SignUpBloc, SignUpState>(
+        listener: (context, state) {
+          if (state is SignUpGenerateOtpLoading) {
+            showLoader(context);
+          } else if (state is SignUpGenerateOtpLoaded) {
+            Navigator.pop(context);
+            context.navigateTo(OtpPageRoute());
+          }
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BlocBuilder<AccountNotifierBloc, bool>(
+              builder: (context, isNewAcc) {
+                if (isNewAcc) {
+                  return AccountProgressIndicator(value: .1);
+                }
+                return Container();
+              },
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: 16),
+                    BlocBuilder<AccountNotifierBloc, bool>(
+                      builder: (context, isNewAcc) {
+                        return Text(
+                          isNewAcc ? "Create an Account" : "Login to CoinStack",
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Enter your mobile number to verify your account',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      textAlign: TextAlign.start,
+                    ),
+                    SizedBox(height: 20),
+                    Flexible(fit: FlexFit.loose, child: AccountForm()),
+                    SizedBox(height: 20),
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.all(AppDimen.pagePadding),
-            margin: EdgeInsets.only(bottom: 20),
-            child: SizedBox(
-              width: double.infinity,
-              child: BlocBuilder<AccountNotifierBloc, bool>(
-                builder: (context, isNewAcc) {
-                  if (isNewAcc) {
+            Container(
+              padding: EdgeInsets.all(AppDimen.pagePadding),
+              margin: EdgeInsets.only(bottom: 20),
+              child: SizedBox(
+                width: double.infinity,
+                child: BlocBuilder<AccountNotifierBloc, bool>(
+                  builder: (context, isNewAcc) {
+                    if (isNewAcc) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          if (context.read<SignUpBloc>().form.valid) {
+                            final code = context.read<SignUpBloc>().phoneCode;
+                            final phone = context.read<SignUpBloc>().phoneValue;
+
+                            showVerifyPhoneDialog(context, '$code$phone');
+                          } else {
+                            context.read<SignUpBloc>().form.markAllAsTouched();
+                          }
+                        },
+                        child: Text('Sign Up'),
+                      );
+                    }
                     return ElevatedButton(
                       onPressed: () {
-                        if (context.read<SignUpBloc>().form.valid) {
-                          final code = context.read<SignUpBloc>().phoneCode;
-                          final phone = context.read<SignUpBloc>().phoneValue;
-
-                          showVerifyPhoneDialog(context, '$code$phone');
-                        } else {
-                          context.read<SignUpBloc>().form.markAllAsTouched();
-                        }
+                        context.replaceRoute(DashboardMainRoute());
                       },
-                      child: Text('Sign Up'),
+                      child: Text('Log In'),
                     );
-                  }
-                  return ElevatedButton(
-                    onPressed: () {
-                      context.replaceRoute(DashboardMainRoute());
-                    },
-                    child: Text('Log In'),
-                  );
-                },
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
