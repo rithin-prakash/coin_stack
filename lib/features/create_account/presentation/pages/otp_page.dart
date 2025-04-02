@@ -1,9 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
+import 'package:coin_stack/core/shared_widgets/app_snackbar.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_event.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_state.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
@@ -22,6 +28,7 @@ class _OtpPageState extends State<OtpPage> {
   }
 
   final pinController = TextEditingController();
+  final form = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,42 +59,56 @@ class _OtpPageState extends State<OtpPage> {
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(height: 20),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Pinput(
-                      controller: pinController,
-                      length: 6,
-                      defaultPinTheme: PinTheme(
-                        width: 56,
-                        height: 56,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 2,
-                              color: AppColors.inputBorder,
+                  Form(
+                    key: form,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Pinput(
+                        controller: pinController,
+                        length: 6,
+                        defaultPinTheme: PinTheme(
+                          width: 56,
+                          height: 56,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 2,
+                                color: AppColors.inputBorder,
+                              ),
                             ),
                           ),
                         ),
+                        obscureText: true,
+                        obscuringCharacter: '\u25CF',
+                        showCursor: false,
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Pin shoulb not be empty';
+                          } else if (value.length != 6) {
+                            return 'Pin shoulb be valid';
+                          }
+                          return null;
+                        },
                       ),
-                      obscureText: true,
-                      obscuringCharacter: '\u25CF',
-                      showCursor: false,
-                      validator: (value) {
-                        if (value == null || value.length != 6) {
-                          return 'Pin shoulb be valid';
-                        }
-                        return null;
-                      },
                     ),
                   ),
-                  if (kDebugMode)
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'generateOtp.val!,',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                  BlocBuilder<SignUpBloc, SignUpState>(
+                    builder: (context, state) {
+                      if (state is SignUpGenerateOtpLoaded && kDebugMode) {
+                        return Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              state.otp ?? '',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      }
+                      return SizedBox();
+                    },
+                  ),
                   SizedBox(height: 20),
                   Align(
                     alignment: Alignment.center,
@@ -119,12 +140,36 @@ class _OtpPageState extends State<OtpPage> {
             margin: EdgeInsets.only(bottom: 20),
             child: SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                onPressed: null,
-                child: CircularProgressIndicator.adaptive(
-                  backgroundColor: Colors.white,
-                ),
-                // : Text('Verify Your Phone'),
+              child: BlocConsumer<SignUpBloc, SignUpState>(
+                listener: (context, state) {
+                  if (state is SignUpVerifyOtpLoaded) {
+                    context.replaceRoute(AddEmailPageRoute());
+                  } else if (state is SignUpVerifyOtpFailure) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(AppSnackbar(data: state.failure.message));
+                  }
+                },
+                builder: (_, s) {
+                  return ElevatedButton(
+                    onPressed:
+                        (s is SignUpVerifyOtpLoading)
+                            ? null
+                            : () {
+                              if (form.currentState!.validate()) {
+                                context.read<SignUpBloc>().add(
+                                  SignUpEvent.verifyOtp(pinController.text),
+                                );
+                              }
+                            },
+                    child:
+                        (s is SignUpVerifyOtpLoading)
+                            ? CircularProgressIndicator.adaptive(
+                              backgroundColor: Colors.white,
+                            )
+                            : Text('Verify Your Phone'),
+                  );
+                },
               ),
             ),
           ),

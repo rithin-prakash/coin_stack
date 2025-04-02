@@ -63,20 +63,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i619.UserProfileRepo>(
       () => _i959.UserProfileRepoRestApiImpl(gh<_i285.RemoteApi>()),
     );
-    gh.factory<_i488.AddressBloc>(
-      () => _i488.AddressBloc(gh<_i257.EditAccInfoRepo>()),
-    );
     gh.factory<_i173.PersonalInfoBloc>(
       () => _i173.PersonalInfoBloc(gh<_i257.EditAccInfoRepo>()),
     );
     gh.factory<_i564.CountryOfResidenceBloc>(
       () => _i564.CountryOfResidenceBloc(gh<_i257.EditAccInfoRepo>()),
     );
-    gh.factory<_i55.EmailBloc>(
-      () => _i55.EmailBloc(gh<_i257.EditAccInfoRepo>()),
+    gh.factory<_i488.AddressBloc>(
+      () => _i488.AddressBloc(gh<_i257.EditAccInfoRepo>()),
     );
     gh.factory<_i222.CountryListBloc>(
       () => _i222.CountryListBloc(gh<_i257.EditAccInfoRepo>()),
+    );
+    gh.factory<_i55.EmailBloc>(
+      () => _i55.EmailBloc(gh<_i257.EditAccInfoRepo>()),
     );
     gh.lazySingleton<_i764.SignUpRepo>(
       () => _i510.SignUpRepoImpl(gh<_i285.RemoteApi>()),

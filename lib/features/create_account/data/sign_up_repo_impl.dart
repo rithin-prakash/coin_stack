@@ -21,6 +21,6 @@ class SignUpRepoImpl implements SignUpRepo {
   @override
   Future<Either<Failure, Null>> verifyOtp(VerifyOtpRequest req) async {
     await Future.delayed(Duration(seconds: 3));
-    return Right(null);
+    return Left(ServerFailure(message: 'otp not valid'));
   }
 }
