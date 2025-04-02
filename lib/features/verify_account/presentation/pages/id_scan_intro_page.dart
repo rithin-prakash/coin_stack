@@ -1,4 +1,5 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
@@ -12,7 +13,8 @@ class IdScanIntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(backgroundColor: Colors.white),
       body: Column(
         children: [
           AccountProgressIndicator(value: .3),
@@ -51,7 +53,9 @@ class IdScanIntroPage extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: FloatingActionButton(
                     shape: const CircleBorder(),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.replaceRoute(TakeSelfieIntroPageRoute());
+                    },
                     child: Icon(Icons.qr_code_2),
                   ),
                 ),

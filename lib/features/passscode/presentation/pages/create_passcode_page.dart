@@ -1,8 +1,10 @@
+import 'package:auto_route/annotations.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
+@RoutePage()
 class CreatePasscodePage extends StatelessWidget {
   const CreatePasscodePage({super.key});
 
