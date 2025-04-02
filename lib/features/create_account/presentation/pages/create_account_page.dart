@@ -3,6 +3,7 @@ import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +142,14 @@ class CreateAccountPage extends StatelessWidget {
                   if (isNewAcc) {
                     return ElevatedButton(
                       onPressed: () {
-                        // showVerifyPhoneDialog(context, '$code$phone');
+                        if (context.read<SignUpBloc>().form.valid) {
+                          final code = context.read<SignUpBloc>().phoneCode;
+                          final phone = context.read<SignUpBloc>().phoneValue;
+
+                          showVerifyPhoneDialog(context, '$code$phone');
+                        } else {
+                          context.read<SignUpBloc>().form.markAllAsTouched();
+                        }
                       },
                       child: Text('Sign Up'),
                     );

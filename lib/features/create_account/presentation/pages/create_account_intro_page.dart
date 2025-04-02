@@ -3,7 +3,6 @@ import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
-import 'package:coin_stack/di/di_config.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -17,98 +16,95 @@ class CreateAccountIntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<AccountNotifierBloc>(),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(backgroundColor: Colors.white),
-        body: Column(
-          children: [
-            AccountProgressIndicator(value: .1),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    AppAssets.createAccount,
-                    // width: MediaQuery.sizeOf(context).width,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(backgroundColor: Colors.white),
+      body: Column(
+        children: [
+          AccountProgressIndicator(value: .1),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  AppAssets.createAccount,
+                  // width: MediaQuery.sizeOf(context).width,
+                ),
+                Text(
+                  "Create your Coinstack account",
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    "Create your Coinstack account",
-                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  'Coinstack is powerful tool that allows you to easily send, receive and track all your transactions',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context.read<AccountNotifierBloc>().creatingAcc(true);
+                      context.navigateTo(CreateAccountPageRoute());
+                    },
+                    child: Text('Sign Up'),
+                  ),
+                ),
+                SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      context.read<AccountNotifierBloc>().creatingAcc(false);
+                      context.navigateTo(CreateAccountPageRoute());
+                    },
+                    child: Text('Log In'),
+                  ),
+                ),
+                SizedBox(height: 20),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: 'By continuing, you accpet our \n',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: GoogleFonts.poppins().fontFamily,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'Coinstack is powerful tool that allows you to easily send, receive and track all your transactions',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        context.read<AccountNotifierBloc>().creatingAcc(true);
-                        context.navigateTo(CreateAccountPageRoute());
-                      },
-                      child: Text('Sign Up'),
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () async {
-                        context.read<AccountNotifierBloc>().creatingAcc(false);
-                        context.navigateTo(CreateAccountPageRoute());
-                      },
-                      child: Text('Log In'),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: 'By continuing, you accpet our \n',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: GoogleFonts.poppins().fontFamily,
+                    children: [
+                      TextSpan(
+                        text: 'Terms and Conditions',
+                        style: TextStyle(
+                          color: AppColors.primary,
+
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                        ),
                       ),
-                      children: [
-                        TextSpan(
-                          text: 'Terms and Conditions',
-                          style: TextStyle(
-                            color: AppColors.primary,
+                      TextSpan(
+                        text: ' and ',
+                        style: TextStyle(
+                          color: Colors.black,
 
-                            fontFamily: GoogleFonts.poppins().fontFamily,
-                          ),
+                          fontFamily: GoogleFonts.poppins().fontFamily,
                         ),
-                        TextSpan(
-                          text: ' and ',
-                          style: TextStyle(
-                            color: Colors.black,
-
-                            fontFamily: GoogleFonts.poppins().fontFamily,
-                          ),
+                      ),
+                      TextSpan(
+                        text: 'Privacy Policy',
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontFamily: GoogleFonts.poppins().fontFamily,
                         ),
-                        TextSpan(
-                          text: 'Privacy Policy',
-                          style: TextStyle(
-                            color: AppColors.primary,
-                            fontFamily: GoogleFonts.poppins().fontFamily,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

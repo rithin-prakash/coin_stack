@@ -22,20 +22,25 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<FirstOpeningCubit>(),
+      create: (_) => getIt<FirstOpeningCubit>()..getValue(),
       child: Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/icon/icon.png'),
             SizedBox(height: 20),
-            BlocListener<FirstOpeningCubit, bool>(
-              listener: (_, s) {
-                if (s) {
-                  context.replaceRoute(IntroPageRoute());
-                } else {
-                  context.replaceRoute(CreateAccountIntroPageRoute());
-                }
+            Builder(
+              builder: (context) {
+                return BlocListener<FirstOpeningCubit, bool>(
+                  listener: (_, s) {
+                    if (s) {
+                      context.replaceRoute(IntroPageRoute());
+                    } else {
+                      context.replaceRoute(CreateAccountIntroPageRoute());
+                    }
+                  },
+                  child: SizedBox(),
+                );
               },
             ),
           ],

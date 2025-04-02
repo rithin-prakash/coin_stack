@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 class SplashRepoImpl implements SplashRepo {
   @override
   Future<Either<Failure, bool>> isOpeningFirstTime() async {
+    await Future.delayed(Duration(seconds: 1));
     return Right(false);
   }
 }

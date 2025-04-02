@@ -30,7 +30,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       ),
       caPhone: FormControl<String>(validators: generateValidations(phone)),
       caPhoneCode: FormControl<CountryCode>(
-        value: CountryCode(code: '+91'),
+        value: CountryCode(code: '+91', dialCode: '+91'),
         validators: [Validators.required],
       ),
     });
@@ -39,15 +39,17 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpVerifyOtp>(verifyOtp);
   }
 
+  String get phoneValue => form.control(caPhone).value;
+  String get phoneCode =>
+      (form.control(caPhoneCode).value as CountryCode).dialCode!;
+
   generateOtp(event, emit) async {
-    final code = form.control(caPhoneCode).value as CountryCode;
-    final phone = form.control(caPhone).value;
     final password = form.control(caPassword).value;
 
     var param = GenerateOtpRequest(
       password: password,
-      phone: phone,
-      phoneCode: code.code!,
+      phone: phoneValue,
+      phoneCode: phoneCode,
     );
 
     final res = await _signUpRepo.generateOtp(param);
