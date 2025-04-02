@@ -26,6 +26,8 @@ import '../features/profile/presentation/bloc/support_currency_bloc/support_curr
     as _i566;
 import '../features/profile/presentation/bloc/user_bloc/user_bloc.dart'
     as _i486;
+import '../features/setup_account/data/edit_account_info_repo_rest_api_impl.dart'
+    as _i1064;
 import '../features/setup_account/domain/repos/edit_acc_info_repo.dart'
     as _i257;
 import '../features/setup_account/presentation/blocs/address_bloc/address_bloc.dart'
@@ -62,6 +64,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i619.UserProfileRepo>(
       () => _i959.UserProfileRepoRestApiImpl(gh<_i285.RemoteApi>()),
+    );
+    gh.lazySingleton<_i257.EditAccInfoRepo>(
+      () => _i1064.EditAccountInfoRepoRestApiImpl(gh<_i285.RemoteApi>()),
     );
     gh.factory<_i173.PersonalInfoBloc>(
       () => _i173.PersonalInfoBloc(gh<_i257.EditAccInfoRepo>()),

@@ -1,9 +1,14 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
+import 'package:coin_stack/features/profile/domain/models/user.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_state.dart';
 import 'package:coin_stack/features/verify_account/presentation/widgets/account_verify_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 @RoutePage()
@@ -57,10 +62,18 @@ class VerifyAccountIntroPage extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (_) => CreateAccountPage()),
-                          // );
+                          var data =
+                              context.read<UserCubit>().state as UserLoaded;
+                          {
+                            if (data.u.idVerified != IdVerifiedStatus.success) {
+                              if (!context.mounted) return;
+                              context.navigateTo(IdScanIntroPageRoute());
+                            } else if (data.u.photoVerified !=
+                                PhotoVerifiedStatus.success) {
+                              if (!context.mounted) return;
+                              context.navigateTo(TakeSelfieIntroPageRoute());
+                            }
+                          }
                         },
                         child: Text('Continue'),
                       ),

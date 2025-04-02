@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- String get phone; String get phoneCode; String? get email; String? get addressLine; String? get city; String? get pincode; String? get fullName; String? get username; DateTime? get dob; Country? get residentCountry; bool get phoneVerified; bool get idVerified; bool get photoVerified; int get step;@JsonKey(name: 'primaryCurrency') Currency get primaryCurr;
+ String get phone; String get phoneCode; String? get email; String? get addressLine; String? get city; String? get pincode; String? get fullName; String? get username; DateTime? get dob; Country? get residentCountry;@PhoneVerifiedStatusConverter() PhoneVerifiedStatus get phoneVerified;@IdVerifiedStatusConverter() IdVerifiedStatus get idVerified;@PhotoVerifiedStatusConverter() PhotoVerifiedStatus get photoVerified; int get step;@JsonKey(name: 'primaryCurrency') Currency get primaryCurr;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- String phone, String phoneCode, String? email, String? addressLine, String? city, String? pincode, String? fullName, String? username, DateTime? dob, Country? residentCountry, bool phoneVerified, bool idVerified, bool photoVerified, int step,@JsonKey(name: 'primaryCurrency') Currency primaryCurr
+ String phone, String phoneCode, String? email, String? addressLine, String? city, String? pincode, String? fullName, String? username, DateTime? dob, Country? residentCountry,@PhoneVerifiedStatusConverter() PhoneVerifiedStatus phoneVerified,@IdVerifiedStatusConverter() IdVerifiedStatus idVerified,@PhotoVerifiedStatusConverter() PhotoVerifiedStatus photoVerified, int step,@JsonKey(name: 'primaryCurrency') Currency primaryCurr
 });
 
 
@@ -79,9 +79,9 @@ as String?,username: freezed == username ? _self.username : username // ignore: 
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as DateTime?,residentCountry: freezed == residentCountry ? _self.residentCountry : residentCountry // ignore: cast_nullable_to_non_nullable
 as Country?,phoneVerified: null == phoneVerified ? _self.phoneVerified : phoneVerified // ignore: cast_nullable_to_non_nullable
-as bool,idVerified: null == idVerified ? _self.idVerified : idVerified // ignore: cast_nullable_to_non_nullable
-as bool,photoVerified: null == photoVerified ? _self.photoVerified : photoVerified // ignore: cast_nullable_to_non_nullable
-as bool,step: null == step ? _self.step : step // ignore: cast_nullable_to_non_nullable
+as PhoneVerifiedStatus,idVerified: null == idVerified ? _self.idVerified : idVerified // ignore: cast_nullable_to_non_nullable
+as IdVerifiedStatus,photoVerified: null == photoVerified ? _self.photoVerified : photoVerified // ignore: cast_nullable_to_non_nullable
+as PhotoVerifiedStatus,step: null == step ? _self.step : step // ignore: cast_nullable_to_non_nullable
 as int,primaryCurr: null == primaryCurr ? _self.primaryCurr : primaryCurr // ignore: cast_nullable_to_non_nullable
 as Currency,
   ));
@@ -115,7 +115,7 @@ $CurrencyCopyWith<$Res> get primaryCurr {
 @JsonSerializable()
 
 class _User implements User {
-   _User({required this.phone, required this.phoneCode, this.email, this.addressLine, this.city, this.pincode, this.fullName, this.username, this.dob, this.residentCountry, this.phoneVerified = false, this.idVerified = false, this.photoVerified = false, this.step = 1, @JsonKey(name: 'primaryCurrency') required this.primaryCurr});
+   _User({required this.phone, required this.phoneCode, this.email, this.addressLine, this.city, this.pincode, this.fullName, this.username, this.dob, this.residentCountry, @PhoneVerifiedStatusConverter() this.phoneVerified = PhoneVerifiedStatus.initiated, @IdVerifiedStatusConverter() this.idVerified = IdVerifiedStatus.initiated, @PhotoVerifiedStatusConverter() this.photoVerified = PhotoVerifiedStatus.initiated, this.step = 1, @JsonKey(name: 'primaryCurrency') required this.primaryCurr});
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override final  String phone;
@@ -128,9 +128,9 @@ class _User implements User {
 @override final  String? username;
 @override final  DateTime? dob;
 @override final  Country? residentCountry;
-@override@JsonKey() final  bool phoneVerified;
-@override@JsonKey() final  bool idVerified;
-@override@JsonKey() final  bool photoVerified;
+@override@JsonKey()@PhoneVerifiedStatusConverter() final  PhoneVerifiedStatus phoneVerified;
+@override@JsonKey()@IdVerifiedStatusConverter() final  IdVerifiedStatus idVerified;
+@override@JsonKey()@PhotoVerifiedStatusConverter() final  PhotoVerifiedStatus photoVerified;
 @override@JsonKey() final  int step;
 @override@JsonKey(name: 'primaryCurrency') final  Currency primaryCurr;
 
@@ -167,7 +167,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- String phone, String phoneCode, String? email, String? addressLine, String? city, String? pincode, String? fullName, String? username, DateTime? dob, Country? residentCountry, bool phoneVerified, bool idVerified, bool photoVerified, int step,@JsonKey(name: 'primaryCurrency') Currency primaryCurr
+ String phone, String phoneCode, String? email, String? addressLine, String? city, String? pincode, String? fullName, String? username, DateTime? dob, Country? residentCountry,@PhoneVerifiedStatusConverter() PhoneVerifiedStatus phoneVerified,@IdVerifiedStatusConverter() IdVerifiedStatus idVerified,@PhotoVerifiedStatusConverter() PhotoVerifiedStatus photoVerified, int step,@JsonKey(name: 'primaryCurrency') Currency primaryCurr
 });
 
 
@@ -197,9 +197,9 @@ as String?,username: freezed == username ? _self.username : username // ignore: 
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as DateTime?,residentCountry: freezed == residentCountry ? _self.residentCountry : residentCountry // ignore: cast_nullable_to_non_nullable
 as Country?,phoneVerified: null == phoneVerified ? _self.phoneVerified : phoneVerified // ignore: cast_nullable_to_non_nullable
-as bool,idVerified: null == idVerified ? _self.idVerified : idVerified // ignore: cast_nullable_to_non_nullable
-as bool,photoVerified: null == photoVerified ? _self.photoVerified : photoVerified // ignore: cast_nullable_to_non_nullable
-as bool,step: null == step ? _self.step : step // ignore: cast_nullable_to_non_nullable
+as PhoneVerifiedStatus,idVerified: null == idVerified ? _self.idVerified : idVerified // ignore: cast_nullable_to_non_nullable
+as IdVerifiedStatus,photoVerified: null == photoVerified ? _self.photoVerified : photoVerified // ignore: cast_nullable_to_non_nullable
+as PhotoVerifiedStatus,step: null == step ? _self.step : step // ignore: cast_nullable_to_non_nullable
 as int,primaryCurr: null == primaryCurr ? _self.primaryCurr : primaryCurr // ignore: cast_nullable_to_non_nullable
 as Currency,
   ));

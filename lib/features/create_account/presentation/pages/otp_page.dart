@@ -7,6 +7,7 @@ import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bl
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_event.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_state.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -143,7 +144,12 @@ class _OtpPageState extends State<OtpPage> {
               child: BlocConsumer<SignUpBloc, SignUpState>(
                 listener: (context, state) {
                   if (state is SignUpVerifyOtpLoaded) {
-                    context.replaceRoute(AddEmailPageRoute());
+                    context.router.pushAndPopUntil(
+                      VerifyAccountIntroPageRoute(),
+                      predicate: (route) => false,
+                    );
+
+                    context.read<UserCubit>().loadUser();
                   } else if (state is SignUpVerifyOtpFailure) {
                     ScaffoldMessenger.of(
                       context,

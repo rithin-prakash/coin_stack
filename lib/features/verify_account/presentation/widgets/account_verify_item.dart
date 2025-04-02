@@ -1,3 +1,4 @@
+import 'package:coin_stack/features/profile/domain/models/user.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_state.dart';
 import 'package:flutter/material.dart';
@@ -30,19 +31,21 @@ class OtpVerifyItem extends AccountVerifyItem {
               child: CircularProgressIndicator(),
             );
           } else if (s is UserLoaded) {
-            return s.u.phoneVerified
+            return s.u.phoneVerified == PhoneVerifiedStatus.success
                 ? CircleAvatar(
                   radius: 16,
                   backgroundColor: Theme.of(context).primaryColor,
                   child: Icon(Icons.done),
                 )
-                : CircleAvatar(
+                : s.u.phoneVerified == PhoneVerifiedStatus.failed
+                ? CircleAvatar(
                   radius: 16,
                   backgroundColor: Theme.of(context).primaryColor,
                   child: Icon(Icons.close),
-                );
+                )
+                : SizedBox(width: 26, height: 26);
           }
-          return Container();
+          return SizedBox(width: 26, height: 26);
         },
       ),
     );
@@ -72,19 +75,21 @@ class DocumentVerifyItem extends AccountVerifyItem {
               child: CircularProgressIndicator(),
             );
           } else if (s is UserLoaded) {
-            return s.u.idVerified
+            return s.u.idVerified == IdVerifiedStatus.success
                 ? CircleAvatar(
                   radius: 16,
                   backgroundColor: Theme.of(context).primaryColor,
                   child: Icon(Icons.done),
                 )
-                : CircleAvatar(
+                : s.u.idVerified == IdVerifiedStatus.failed
+                ? CircleAvatar(
                   radius: 16,
                   backgroundColor: Theme.of(context).primaryColor,
                   child: Icon(Icons.close),
-                );
+                )
+                : SizedBox(width: 26, height: 26);
           }
-          return Container();
+          return SizedBox(width: 26, height: 26);
         },
       ),
     );
@@ -114,19 +119,21 @@ class VerifPhotoItem extends AccountVerifyItem {
               child: CircularProgressIndicator(),
             );
           } else if (s is UserLoaded) {
-            return s.u.photoVerified
+            return s.u.photoVerified == PhotoVerifiedStatus.success
                 ? CircleAvatar(
                   radius: 16,
                   backgroundColor: Theme.of(context).primaryColor,
                   child: Icon(Icons.done),
                 )
-                : CircleAvatar(
+                : s.u.photoVerified == PhotoVerifiedStatus.failed
+                ? CircleAvatar(
                   radius: 16,
                   backgroundColor: Theme.of(context).primaryColor,
                   child: Icon(Icons.close),
-                );
+                )
+                : SizedBox(width: 26, height: 26);
           }
-          return Container();
+          return SizedBox(width: 26, height: 26);
         },
       ),
     );

@@ -20,9 +20,24 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
       json['residentCountry'] == null
           ? null
           : Country.fromJson(json['residentCountry'] as Map<String, dynamic>),
-  phoneVerified: json['phoneVerified'] as bool? ?? false,
-  idVerified: json['idVerified'] as bool? ?? false,
-  photoVerified: json['photoVerified'] as bool? ?? false,
+  phoneVerified:
+      json['phoneVerified'] == null
+          ? PhoneVerifiedStatus.initiated
+          : const PhoneVerifiedStatusConverter().fromJson(
+            json['phoneVerified'] as String,
+          ),
+  idVerified:
+      json['idVerified'] == null
+          ? IdVerifiedStatus.initiated
+          : const IdVerifiedStatusConverter().fromJson(
+            json['idVerified'] as String,
+          ),
+  photoVerified:
+      json['photoVerified'] == null
+          ? PhotoVerifiedStatus.initiated
+          : const PhotoVerifiedStatusConverter().fromJson(
+            json['photoVerified'] as String,
+          ),
   step: (json['step'] as num?)?.toInt() ?? 1,
   primaryCurr: Currency.fromJson(
     json['primaryCurrency'] as Map<String, dynamic>,
@@ -40,9 +55,13 @@ Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
   'username': instance.username,
   'dob': instance.dob?.toIso8601String(),
   'residentCountry': instance.residentCountry,
-  'phoneVerified': instance.phoneVerified,
-  'idVerified': instance.idVerified,
-  'photoVerified': instance.photoVerified,
+  'phoneVerified': const PhoneVerifiedStatusConverter().toJson(
+    instance.phoneVerified,
+  ),
+  'idVerified': const IdVerifiedStatusConverter().toJson(instance.idVerified),
+  'photoVerified': const PhotoVerifiedStatusConverter().toJson(
+    instance.photoVerified,
+  ),
   'step': instance.step,
   'primaryCurrency': instance.primaryCurr,
 };

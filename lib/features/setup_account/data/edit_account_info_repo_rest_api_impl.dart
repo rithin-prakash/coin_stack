@@ -6,7 +6,9 @@ import 'package:coin_stack/features/setup_account/domain/models/edit_email_reque
 import 'package:coin_stack/features/setup_account/domain/models/edit_personal_info_request.dart';
 import 'package:coin_stack/features/setup_account/domain/repos/edit_acc_info_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: EditAccInfoRepo)
 class EditAccountInfoRepoRestApiImpl implements EditAccInfoRepo {
   final RemoteApi _remoteApi;
 

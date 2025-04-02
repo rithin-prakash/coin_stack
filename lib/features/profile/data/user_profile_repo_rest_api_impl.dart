@@ -17,7 +17,7 @@ class UserProfileRepoRestApiImpl implements UserProfileRepo {
     final u = {
       'phone': '232333223',
       'phoneCode': '+91',
-      'phoneVerified': true,
+      'phoneVerified': 'success',
       'primaryCurrency': {'name': 'US Dollor', 'code': 'USD', 'flagCode': 'us'},
     };
     return Right(User.fromJson(u));

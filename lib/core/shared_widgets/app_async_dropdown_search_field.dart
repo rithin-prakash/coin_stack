@@ -12,6 +12,9 @@ class AppAsyncDropdownSearchField<T> extends StatefulWidget {
     this.obscureText = false,
     this.prefixText,
     this.asyncItems,
+    required this.compareFn,
+    required this.initialCall,
+    this.validationMessages,
   });
 
   final String controlName;
@@ -21,7 +24,10 @@ class AppAsyncDropdownSearchField<T> extends StatefulWidget {
   final Widget? suffixIcon;
   final bool? obscureText;
   final String? prefixText;
-  final Future<List<T>>? asyncItems;
+  final Future<List<T>> Function()? asyncItems;
+  final bool Function(T, T) compareFn;
+  final VoidCallback initialCall;
+  final Map<String, String Function(Object)>? validationMessages;
 
   @override
   State<AppAsyncDropdownSearchField<T>> createState() =>
@@ -31,6 +37,12 @@ class AppAsyncDropdownSearchField<T> extends StatefulWidget {
 class _AppAsyncDropdownSearchFieldState<T>
     extends State<AppAsyncDropdownSearchField<T>> {
   final controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.initialCall();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,21 +57,18 @@ class _AppAsyncDropdownSearchFieldState<T>
           ),
         ReactiveDropdownSearch<T, T>(
           formControlName: widget.controlName,
+          validationMessages: widget.validationMessages,
           items:
-              widget.asyncItems == null
-                  ? null
-                  : (filter, loadProps) {
-                    return widget.asyncItems!;
-                  },
+              widget.asyncItems != null
+                  ? (s, __) => widget.asyncItems!()
+                  : null,
           suffixProps: DropdownSuffixProps(
             dropdownButtonProps: DropdownButtonProps(
               iconOpened: Icon(Icons.keyboard_arrow_up, size: 24),
               iconClosed: Icon(Icons.keyboard_arrow_down, size: 24),
             ),
           ),
-          compareFn: (item1, item2) {
-            return true;
-          },
+          compareFn: widget.compareFn,
         ),
       ],
     );

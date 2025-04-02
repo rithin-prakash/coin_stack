@@ -11,6 +11,6 @@ class CountryListBloc extends Cubit<List<Country>> {
   getCountries() async {
     final res = await _repo.countriesList();
 
-    return res.fold((l) => [], (r) => r);
+    return res.fold((l) => emit([]), (r) => emit(r));
   }
 }
