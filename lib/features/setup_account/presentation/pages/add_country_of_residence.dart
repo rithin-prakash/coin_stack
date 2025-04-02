@@ -1,53 +1,22 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/shared_widgets/app_async_dropdown_search_field.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
-import 'package:coin_stack/features/setup_account/presentation/providers/country_list.dart';
-import 'package:coin_stack/features/setup_account/presentation/providers/country_of_residence_form.dart';
-import 'package:coin_stack/features/setup_account/presentation/providers/update_country_of_residence.dart';
-import 'package:coin_stack/features/setup_account/presentation/providers/update_country_of_residence_state.dart';
+import 'package:coin_stack/features/setup_account/presentation/blocs/country_of_residence_bloc/country_of_residence_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @RoutePage()
-class AddCountryOfResidence extends ConsumerWidget {
+class AddCountryOfResidence extends StatelessWidget {
   const AddCountryOfResidence({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(updateCountryOfResidenceProvider, (p, v) {
-      if (v is UpdateCountryOfResidenceSuccess) {
-        context.replaceRoute(VerifyAccountIntroPageRoute());
-      }
-      if (v is UpdateCountryOfResidenceLoading) {
-        showDialog(
-          context: context,
-          barrierColor: Colors.grey,
-          barrierDismissible: false,
-          builder:
-              (_) => Dialog(
-                backgroundColor: Colors.grey.shade100,
-                child: Center(child: CircularProgressIndicator()),
-              ),
-        );
-      } else if (p is UpdateCountryOfResidenceLoading) {
-        Navigator.pop(context);
-      } else if (v is UpdateCountryOfResidenceFailure) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.red,
-            content: Text(v.failure.message),
-          ),
-        );
-      }
-    });
-
     return Scaffold(
       appBar: AppBar(),
       body: ReactiveFormBuilder(
-        form: () => ref.read(countryOfResidenceFormProvider),
+        form: () => context.read<CountryOfResidenceBloc>().form,
         builder: (_, form, _) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +50,7 @@ class AddCountryOfResidence extends ConsumerWidget {
                         labelText: 'Country',
                         prefixIcon: Icon(Icons.flag),
                         hintText: '',
-                        asyncItems: ref.watch(countryListProvider.future),
+                        asyncItems: null,
                       ),
                     ],
                   ),
@@ -99,11 +68,8 @@ class AddCountryOfResidence extends ConsumerWidget {
                               !form.valid
                                   ? null
                                   : () {
-                                    ref
-                                        .read(
-                                          updateCountryOfResidenceProvider
-                                              .notifier,
-                                        )
+                                    context
+                                        .read<CountryOfResidenceBloc>()
                                         .updateResidentCountry();
                                   },
                           child: Text('Continue'),

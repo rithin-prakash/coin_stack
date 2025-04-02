@@ -1,6 +1,7 @@
 import 'package:coin_stack/app_bloc_observer.dart';
 import 'package:coin_stack/core/app_router/app_router.dart';
 import 'package:coin_stack/core/theme/app_theme.dart';
+import 'package:coin_stack/di/build_env.dart';
 import 'package:coin_stack/di/di_config.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:month_year_picker/month_year_picker.dart';
 
 void main() {
   Bloc.observer = AppBlocObserver();
+  configureDependencies(BuildEnv.mock);
   runApp(MyApp());
 }
 

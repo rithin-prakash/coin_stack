@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class UserCubit extends Cubit {
+class UserCubit extends Cubit<UserState> {
   final UserProfileRepo _profileRepo;
   UserCubit(this._profileRepo) : super(UserState.initial());
 

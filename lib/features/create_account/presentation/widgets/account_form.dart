@@ -1,7 +1,9 @@
 import 'package:coin_stack/core/shared_widgets/app_phone_code_field.dart';
 import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
 import 'package:coin_stack/core/utls/validation_helper.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AccountForm extends StatefulWidget {
@@ -16,7 +18,7 @@ class _State extends State<AccountForm> {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormBuilder(
-      form: () => null,
+      form: () => context.read<SignUpBloc>().form,
       builder: (context, form, child) {
         return Column(
           children: [
@@ -31,7 +33,10 @@ class _State extends State<AccountForm> {
                     controlName: caPhone,
                     hintText: 'Mobile Number',
                     labelText: "",
-                    validationMsg: generateValidationMessages(phone, 'Phone'),
+                    validationMsg: generateValidationMessages(
+                      context.read<SignUpBloc>().phone,
+                      'Phone',
+                    ),
                   ),
                 ),
               ],
@@ -49,7 +54,10 @@ class _State extends State<AccountForm> {
                     }),
               ),
               obscureText: showPassword,
-              validationMsg: generateValidationMessages(password, 'Password'),
+              validationMsg: generateValidationMessages(
+                context.read<SignUpBloc>().password,
+                'Password',
+              ),
             ),
           ],
         );

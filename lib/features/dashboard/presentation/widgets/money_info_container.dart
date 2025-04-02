@@ -1,9 +1,8 @@
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/features/profile/domain/models/currency.dart';
-import 'package:coin_stack/features/profile/presentation/bloc/primary_currency.dart';
-import 'package:coin_stack/features/profile/presentation/bloc/supported_currency.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/support_currency_bloc/support_currency_list_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 final curList = [('US Dollor', 'us'), ('Indian Ruppee', 'in')];
 
@@ -27,64 +26,46 @@ class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          primaryCur.when(
-            data: (c) {
-              return dropdownCurr.when(
-                data: (data) {
-                  return DropdownButton<Currency>(
-                    value: c,
-                    padding: EdgeInsets.zero,
-                    style: const TextStyle(color: Colors.white),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_outlined,
-                      color: Colors.white,
-                    ),
-                    underline: Container(),
-                    dropdownColor: Theme.of(context).primaryColorDark,
-                    items:
-                        data
-                            .map<DropdownMenuItem<Currency>>(
-                              (e) => DropdownMenuItem<Currency>(
-                                value: e,
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 10,
-                                      backgroundImage: AssetImage(
-                                        '${AppAssets.countryFlag}/${e.flagCode}.webp',
-                                      ),
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      e.name,
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ],
+          BlocBuilder<SupportCurrencyListCubit, List<Currency>>(
+            builder: (_, state) {
+              return DropdownButton<Currency>(
+                value: state.first,
+                padding: EdgeInsets.zero,
+                style: const TextStyle(color: Colors.white),
+                icon: Icon(
+                  Icons.keyboard_arrow_down_outlined,
+                  color: Colors.white,
+                ),
+                underline: Container(),
+                dropdownColor: Theme.of(context).primaryColorDark,
+                items:
+                    state
+                        .map<DropdownMenuItem<Currency>>(
+                          (e) => DropdownMenuItem<Currency>(
+                            value: e,
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 10,
+                                  backgroundImage: AssetImage(
+                                    '${AppAssets.countryFlag}/${e.flagCode}.webp',
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList(),
-                    onChanged: (v) {
-                      if (v == null) return;
-                    },
-                  );
+                                SizedBox(width: 6),
+                                Text(
+                                  e.name,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                        .toList(),
+                onChanged: (v) {
+                  if (v == null) return;
                 },
-                error: (_, __) => Container(),
-                loading:
-                    () => Shimmer.fromColors(
-                      baseColor: Colors.red,
-                      highlightColor: Colors.yellow,
-                      child: Container(color: Colors.grey),
-                    ),
               );
             },
-            error: (_, __) => Container(),
-            loading:
-                () => Shimmer.fromColors(
-                  baseColor: Colors.red,
-                  highlightColor: Colors.yellow,
-                  child: Container(color: Colors.grey),
-                ),
           ),
 
           Row(

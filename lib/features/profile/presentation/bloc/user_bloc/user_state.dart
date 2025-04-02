@@ -6,8 +6,8 @@ part 'user_state.freezed.dart';
 
 @freezed
 abstract class UserState with _$UserState {
- const factory UserState.initial() = UserInitial();
- const factory UserState.loading() = UserLoading();
- const factory UserState.loaded(User u) = UserLoaded();
- const factory UserState.failure(Failure f) = UserFailed();
+  const factory UserState.initial() = UserInitial;
+  const factory UserState.loading() = UserLoading;
+  const factory UserState.loaded(User u) = UserLoaded;
+  const factory UserState.failure(Failure f) = UserFailed;
 }

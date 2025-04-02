@@ -1,5 +1,7 @@
 import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class AccountVerifyItem extends StatelessWidget {
   const AccountVerifyItem({super.key});
@@ -19,27 +21,29 @@ class OtpVerifyItem extends AccountVerifyItem {
         ),
       ),
       title: Text('Phone Verified'),
-      trailing: user.when(
-        data: (data) {
-          return data.phoneVerified
-              ? CircleAvatar(
-                radius: 16,
-                backgroundColor: Theme.of(context).primaryColor,
-                child: Icon(Icons.done),
-              )
-              : CircleAvatar(
-                radius: 16,
-                backgroundColor: Theme.of(context).primaryColor,
-                child: Icon(Icons.close),
-              );
-        },
-        error: (_, _) => Container(),
-        loading:
-            () => SizedBox(
+      trailing: BlocBuilder<UserCubit, UserState>(
+        builder: (_, s) {
+          if (s is UserLoading) {
+            return SizedBox(
               width: 26,
               height: 26,
               child: CircularProgressIndicator(),
-            ),
+            );
+          } else if (s is UserLoaded) {
+            return s.u.phoneVerified
+                ? CircleAvatar(
+                  radius: 16,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Icon(Icons.done),
+                )
+                : CircleAvatar(
+                  radius: 16,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Icon(Icons.close),
+                );
+          }
+          return Container();
+        },
       ),
     );
   }
@@ -59,27 +63,29 @@ class DocumentVerifyItem extends AccountVerifyItem {
         ),
       ),
       title: Text('Checking Document ID'),
-      trailing: user.when(
-        data: (data) {
-          return data.idVerified
-              ? CircleAvatar(
-                radius: 16,
-                backgroundColor: Theme.of(context).primaryColor,
-                child: Icon(Icons.done),
-              )
-              : CircleAvatar(
-                radius: 16,
-                backgroundColor: Theme.of(context).primaryColor,
-                child: Icon(Icons.close),
-              );
-        },
-        error: (_, _) => Container(),
-        loading:
-            () => SizedBox(
+      trailing: BlocBuilder<UserCubit, UserState>(
+        builder: (_, s) {
+          if (s is UserLoading) {
+            return SizedBox(
               width: 26,
               height: 26,
               child: CircularProgressIndicator(),
-            ),
+            );
+          } else if (s is UserLoaded) {
+            return s.u.idVerified
+                ? CircleAvatar(
+                  radius: 16,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Icon(Icons.done),
+                )
+                : CircleAvatar(
+                  radius: 16,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Icon(Icons.close),
+                );
+          }
+          return Container();
+        },
       ),
     );
   }
@@ -99,27 +105,29 @@ class VerifPhotoItem extends AccountVerifyItem {
         ),
       ),
       title: Text('Verify Photo'),
-      trailing: user.when(
-        data: (data) {
-          return data.photoVerified
-              ? CircleAvatar(
-                radius: 16,
-                backgroundColor: Theme.of(context).primaryColor,
-                child: Icon(Icons.done),
-              )
-              : CircleAvatar(
-                radius: 16,
-                backgroundColor: Theme.of(context).primaryColor,
-                child: Icon(Icons.close),
-              );
-        },
-        error: (_, _) => Container(),
-        loading:
-            () => SizedBox(
+      trailing: BlocBuilder<UserCubit, UserState>(
+        builder: (_, s) {
+          if (s is UserLoading) {
+            return SizedBox(
               width: 26,
               height: 26,
               child: CircularProgressIndicator(),
-            ),
+            );
+          } else if (s is UserLoaded) {
+            return s.u.photoVerified
+                ? CircleAvatar(
+                  radius: 16,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Icon(Icons.done),
+                )
+                : CircleAvatar(
+                  radius: 16,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Icon(Icons.close),
+                );
+          }
+          return Container();
+        },
       ),
     );
   }
