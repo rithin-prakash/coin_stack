@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GenerateOtpRequest {
 
- String get phoneCode; String get phone; String get password;
+ String get phoneCode; String get phone;
 /// Create a copy of GenerateOtpRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $GenerateOtpRequestCopyWith<GenerateOtpRequest> get copyWith => _$GenerateOtpReq
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GenerateOtpRequest&&(identical(other.phoneCode, phoneCode) || other.phoneCode == phoneCode)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GenerateOtpRequest&&(identical(other.phoneCode, phoneCode) || other.phoneCode == phoneCode)&&(identical(other.phone, phone) || other.phone == phone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,phoneCode,phone,password);
+int get hashCode => Object.hash(runtimeType,phoneCode,phone);
 
 @override
 String toString() {
-  return 'GenerateOtpRequest(phoneCode: $phoneCode, phone: $phone, password: $password)';
+  return 'GenerateOtpRequest(phoneCode: $phoneCode, phone: $phone)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $GenerateOtpRequestCopyWith<$Res>  {
   factory $GenerateOtpRequestCopyWith(GenerateOtpRequest value, $Res Function(GenerateOtpRequest) _then) = _$GenerateOtpRequestCopyWithImpl;
 @useResult
 $Res call({
- String phoneCode, String phone, String password
+ String phoneCode, String phone
 });
 
 
@@ -66,11 +66,10 @@ class _$GenerateOtpRequestCopyWithImpl<$Res>
 
 /// Create a copy of GenerateOtpRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? phoneCode = null,Object? phone = null,Object? password = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? phoneCode = null,Object? phone = null,}) {
   return _then(_self.copyWith(
 phoneCode: null == phoneCode ? _self.phoneCode : phoneCode // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -82,12 +81,11 @@ as String,
 @JsonSerializable()
 
 class _GenerateOtpRequest implements GenerateOtpRequest {
-   _GenerateOtpRequest({required this.phoneCode, required this.phone, required this.password});
+   _GenerateOtpRequest({required this.phoneCode, required this.phone});
   factory _GenerateOtpRequest.fromJson(Map<String, dynamic> json) => _$GenerateOtpRequestFromJson(json);
 
 @override final  String phoneCode;
 @override final  String phone;
-@override final  String password;
 
 /// Create a copy of GenerateOtpRequest
 /// with the given fields replaced by the non-null parameter values.
@@ -102,16 +100,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GenerateOtpRequest&&(identical(other.phoneCode, phoneCode) || other.phoneCode == phoneCode)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GenerateOtpRequest&&(identical(other.phoneCode, phoneCode) || other.phoneCode == phoneCode)&&(identical(other.phone, phone) || other.phone == phone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,phoneCode,phone,password);
+int get hashCode => Object.hash(runtimeType,phoneCode,phone);
 
 @override
 String toString() {
-  return 'GenerateOtpRequest(phoneCode: $phoneCode, phone: $phone, password: $password)';
+  return 'GenerateOtpRequest(phoneCode: $phoneCode, phone: $phone)';
 }
 
 
@@ -122,7 +120,7 @@ abstract mixin class _$GenerateOtpRequestCopyWith<$Res> implements $GenerateOtpR
   factory _$GenerateOtpRequestCopyWith(_GenerateOtpRequest value, $Res Function(_GenerateOtpRequest) _then) = __$GenerateOtpRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String phoneCode, String phone, String password
+ String phoneCode, String phone
 });
 
 
@@ -139,11 +137,10 @@ class __$GenerateOtpRequestCopyWithImpl<$Res>
 
 /// Create a copy of GenerateOtpRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? phoneCode = null,Object? phone = null,Object? password = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? phoneCode = null,Object? phone = null,}) {
   return _then(_GenerateOtpRequest(
 phoneCode: null == phoneCode ? _self.phoneCode : phoneCode // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

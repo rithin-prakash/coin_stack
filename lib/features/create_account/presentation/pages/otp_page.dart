@@ -6,6 +6,7 @@ import 'package:coin_stack/core/theme/app_colors.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_event.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_state.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sigup_form_bloc/signup_form_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -163,8 +164,16 @@ class _OtpPageState extends State<OtpPage> {
                             ? null
                             : () {
                               if (form.currentState!.validate()) {
+                                final code =
+                                    context.read<SignupFormBloc>().phoneCode;
+                                final phone =
+                                    context.read<SignupFormBloc>().phoneValue;
                                 context.read<SignUpBloc>().add(
-                                  SignUpEvent.verifyOtp(pinController.text),
+                                  SignUpEvent.verifyOtp(
+                                    otp: pinController.text,
+                                    phone: phone,
+                                    phoneCode: code,
+                                  ),
                                 );
                               }
                             },

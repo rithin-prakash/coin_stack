@@ -7,6 +7,7 @@ import 'package:coin_stack/features/create_account/presentation/blocs/account_no
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_event.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_state.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sigup_form_bloc/signup_form_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_form.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,11 @@ class CreateAccountPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      context.read<SignUpBloc>().add(SignUpGenerateOtp());
+                      final code = context.read<SignupFormBloc>().phoneCode;
+                      final phone = context.read<SignupFormBloc>().phoneValue;
+                      context.read<SignUpBloc>().add(
+                        SignUpGenerateOtp(phone: phone, phoneCode: code),
+                      );
                     },
                     child: Text('Yes'),
                   ),
@@ -153,13 +158,18 @@ class CreateAccountPage extends StatelessWidget {
                     if (isNewAcc) {
                       return ElevatedButton(
                         onPressed: () {
-                          if (context.read<SignUpBloc>().form.valid) {
-                            final code = context.read<SignUpBloc>().phoneCode;
-                            final phone = context.read<SignUpBloc>().phoneValue;
+                          if (context.read<SignupFormBloc>().form.valid) {
+                            final code =
+                                context.read<SignupFormBloc>().phoneCode;
+                            final phone =
+                                context.read<SignupFormBloc>().phoneValue;
 
                             showVerifyPhoneDialog(context, '$code$phone');
                           } else {
-                            context.read<SignUpBloc>().form.markAllAsTouched();
+                            context
+                                .read<SignupFormBloc>()
+                                .form
+                                .markAllAsTouched();
                           }
                         },
                         child: Text('Sign Up'),
@@ -167,7 +177,9 @@ class CreateAccountPage extends StatelessWidget {
                     }
                     return ElevatedButton(
                       onPressed: () {
-                        context.replaceRoute(DashboardMainRoute());
+                        if (context.read<SignupFormBloc>().form.valid) {
+                          context.replaceRoute(DashboardMainRoute());
+                        }
                       },
                       child: Text('Log In'),
                     );

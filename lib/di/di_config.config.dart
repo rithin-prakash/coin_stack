@@ -20,6 +20,8 @@ import '../features/create_account/presentation/blocs/account_notifier_bloc/acco
     as _i175;
 import '../features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart'
     as _i135;
+import '../features/create_account/presentation/blocs/sigup_form_bloc/signup_form_bloc.dart'
+    as _i528;
 import '../features/passscode/presentation/blocs/create_passcode_bloc/create_passcode_bloc.dart'
     as _i525;
 import '../features/profile/data/user_profile_repo_rest_api_impl.dart' as _i959;
@@ -56,6 +58,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
+    gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
     gh.lazySingleton<_i73.SplashRepo>(() => _i702.SplashRepoImpl());
     gh.factory<_i319.FirstOpeningCubit>(
       () => _i319.FirstOpeningCubit(gh<_i73.SplashRepo>()),

@@ -8,7 +8,6 @@ abstract class GenerateOtpRequest with _$GenerateOtpRequest {
   factory GenerateOtpRequest({
     required String phoneCode,
     required String phone,
-    required String password,
   }) = _GenerateOtpRequest;
 
   factory GenerateOtpRequest.fromJson(Map<String, dynamic> json) =>

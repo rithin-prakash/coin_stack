@@ -10,12 +10,7 @@ _GenerateOtpRequest _$GenerateOtpRequestFromJson(Map<String, dynamic> json) =>
     _GenerateOtpRequest(
       phoneCode: json['phoneCode'] as String,
       phone: json['phone'] as String,
-      password: json['password'] as String,
     );
 
 Map<String, dynamic> _$GenerateOtpRequestToJson(_GenerateOtpRequest instance) =>
-    <String, dynamic>{
-      'phoneCode': instance.phoneCode,
-      'phone': instance.phone,
-      'password': instance.password,
-    };
+    <String, dynamic>{'phoneCode': instance.phoneCode, 'phone': instance.phone};
