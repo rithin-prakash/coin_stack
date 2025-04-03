@@ -3,7 +3,10 @@ import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 @RoutePage()
@@ -54,7 +57,19 @@ class TakeSelfieIntroPage extends StatelessWidget {
                   child: FloatingActionButton(
                     shape: const CircleBorder(),
                     onPressed: () {
-                      context.replaceRoute(CreatePasscodePageRoute());
+                      final user =
+                          (context.read<UserCubit>().state as UserLoaded);
+                      if (user.u.isPasscodeSet) {
+                        context.router.pushAndPopUntil(
+                          DashboardMainRoute(),
+                          predicate: (_) => false,
+                        );
+                      } else {
+                        context.router.pushAndPopUntil(
+                          PasscodePageRoute(),
+                          predicate: (_) => false,
+                        );
+                      }
                     },
                     child: Icon(Icons.camera_alt_outlined),
                   ),

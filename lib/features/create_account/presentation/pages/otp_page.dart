@@ -145,7 +145,7 @@ class _OtpPageState extends State<OtpPage> {
                 listener: (context, state) {
                   if (state is SignUpVerifyOtpLoaded) {
                     context.router.pushAndPopUntil(
-                      VerifyAccountIntroPageRoute(),
+                      PasscodePageRoute(),
                       predicate: (route) => false,
                     );
 

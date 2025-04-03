@@ -15,15 +15,15 @@ import 'package:coin_stack/features/create_account/presentation/pages/create_acc
 import 'package:coin_stack/features/create_account/presentation/pages/create_account_page.dart'
     as _i6;
 import 'package:coin_stack/features/create_account/presentation/pages/otp_page.dart'
-    as _i12;
-import 'package:coin_stack/features/dashboard/presentation/pages/dashboard_main.dart'
-    as _i9;
-import 'package:coin_stack/features/intros/presentation/pages/intro_page.dart'
     as _i11;
+import 'package:coin_stack/features/dashboard/presentation/pages/dashboard_main.dart'
+    as _i8;
+import 'package:coin_stack/features/intros/presentation/pages/intro_page.dart'
+    as _i10;
 import 'package:coin_stack/features/passscode/presentation/pages/create_account_success_page.dart'
     as _i7;
-import 'package:coin_stack/features/passscode/presentation/pages/create_passcode_page.dart'
-    as _i8;
+import 'package:coin_stack/features/passscode/presentation/pages/passcode_page.dart'
+    as _i12;
 import 'package:coin_stack/features/setup_account/presentation/pages/add_country_of_residence.dart'
     as _i1;
 import 'package:coin_stack/features/setup_account/presentation/pages/add_email_page.dart'
@@ -35,7 +35,7 @@ import 'package:coin_stack/features/setup_account/presentation/pages/add_persona
 import 'package:coin_stack/features/splash/presentation/pages/splash_page.dart'
     as _i13;
 import 'package:coin_stack/features/verify_account/presentation/pages/id_scan_intro_page.dart'
-    as _i10;
+    as _i9;
 import 'package:coin_stack/features/verify_account/presentation/pages/take_selfie_intro_page.dart'
     as _i14;
 import 'package:coin_stack/features/verify_account/presentation/pages/verify_account_intro_page.dart'
@@ -154,23 +154,7 @@ class CreateAccountSuccessPageRoute extends _i16.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.CreatePasscodePage]
-class CreatePasscodePageRoute extends _i16.PageRouteInfo<void> {
-  const CreatePasscodePageRoute({List<_i16.PageRouteInfo>? children})
-    : super(CreatePasscodePageRoute.name, initialChildren: children);
-
-  static const String name = 'CreatePasscodePageRoute';
-
-  static _i16.PageInfo page = _i16.PageInfo(
-    name,
-    builder: (data) {
-      return const _i8.CreatePasscodePage();
-    },
-  );
-}
-
-/// generated route for
-/// [_i9.DashboardMain]
+/// [_i8.DashboardMain]
 class DashboardMainRoute extends _i16.PageRouteInfo<void> {
   const DashboardMainRoute({List<_i16.PageRouteInfo>? children})
     : super(DashboardMainRoute.name, initialChildren: children);
@@ -180,13 +164,13 @@ class DashboardMainRoute extends _i16.PageRouteInfo<void> {
   static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
-      return const _i9.DashboardMain();
+      return const _i8.DashboardMain();
     },
   );
 }
 
 /// generated route for
-/// [_i10.IdScanIntroPage]
+/// [_i9.IdScanIntroPage]
 class IdScanIntroPageRoute extends _i16.PageRouteInfo<void> {
   const IdScanIntroPageRoute({List<_i16.PageRouteInfo>? children})
     : super(IdScanIntroPageRoute.name, initialChildren: children);
@@ -196,13 +180,13 @@ class IdScanIntroPageRoute extends _i16.PageRouteInfo<void> {
   static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
-      return const _i10.IdScanIntroPage();
+      return const _i9.IdScanIntroPage();
     },
   );
 }
 
 /// generated route for
-/// [_i11.IntroPage]
+/// [_i10.IntroPage]
 class IntroPageRoute extends _i16.PageRouteInfo<void> {
   const IntroPageRoute({List<_i16.PageRouteInfo>? children})
     : super(IntroPageRoute.name, initialChildren: children);
@@ -212,13 +196,13 @@ class IntroPageRoute extends _i16.PageRouteInfo<void> {
   static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
-      return const _i11.IntroPage();
+      return const _i10.IntroPage();
     },
   );
 }
 
 /// generated route for
-/// [_i12.OtpPage]
+/// [_i11.OtpPage]
 class OtpPageRoute extends _i16.PageRouteInfo<void> {
   const OtpPageRoute({List<_i16.PageRouteInfo>? children})
     : super(OtpPageRoute.name, initialChildren: children);
@@ -228,7 +212,23 @@ class OtpPageRoute extends _i16.PageRouteInfo<void> {
   static _i16.PageInfo page = _i16.PageInfo(
     name,
     builder: (data) {
-      return const _i12.OtpPage();
+      return const _i11.OtpPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i12.PasscodePage]
+class PasscodePageRoute extends _i16.PageRouteInfo<void> {
+  const PasscodePageRoute({List<_i16.PageRouteInfo>? children})
+    : super(PasscodePageRoute.name, initialChildren: children);
+
+  static const String name = 'PasscodePageRoute';
+
+  static _i16.PageInfo page = _i16.PageInfo(
+    name,
+    builder: (data) {
+      return const _i12.PasscodePage();
     },
   );
 }

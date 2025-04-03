@@ -49,4 +49,10 @@ class EditAccountInfoRepoRestApiImpl implements EditAccInfoRepo {
     await Future.delayed(Duration(seconds: 1));
     return Right(null);
   }
+
+  @override
+  Future<Either<Failure, Null>> createPasscode(String code) async {
+    await Future.delayed(Duration(seconds: 1));
+    return Right(null);
+  }
 }

@@ -1,4 +1,6 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
@@ -12,7 +14,8 @@ class CreateAccountSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(backgroundColor: Colors.white),
       body: Column(
         children: [
           AccountProgressIndicator(value: 1),
@@ -26,8 +29,9 @@ class CreateAccountSuccessPage extends StatelessWidget {
                     AppAssets.accSuccess,
                     width: MediaQuery.sizeOf(context).width - 100,
                   ),
+                  SizedBox(height: 16),
                   Text(
-                    "Congrajulations\nWelcom to CoinStack",
+                    "Congratulations!\nWelcome to CoinStack",
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -35,7 +39,7 @@ class CreateAccountSuccessPage extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   Text(
-                    'We are happy to have you. It\'s time to send, receive and track your expense',
+                    'We are happy to have you. It\'s time to send, receive and track your expense.',
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
@@ -47,7 +51,15 @@ class CreateAccountSuccessPage extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
             width: double.infinity,
-            child: ElevatedButton(onPressed: () {}, child: Text('Continue')),
+            child: ElevatedButton(
+              onPressed: () {
+                context.router.pushAndPopUntil(
+                  DashboardMainRoute(),
+                  predicate: (_) => false,
+                );
+              },
+              child: Text('Continue'),
+            ),
           ),
           SizedBox(height: 20),
         ],

@@ -42,6 +42,7 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
   primaryCurr: Currency.fromJson(
     json['primaryCurrency'] as Map<String, dynamic>,
   ),
+  isPasscodeSet: json['isPasscodeSet'] ?? false,
 );
 
 Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
@@ -64,4 +65,5 @@ Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
   ),
   'step': instance.step,
   'primaryCurrency': instance.primaryCurr,
+  'isPasscodeSet': instance.isPasscodeSet,
 };

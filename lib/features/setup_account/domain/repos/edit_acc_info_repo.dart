@@ -11,4 +11,5 @@ abstract interface class EditAccInfoRepo {
   Future<Either<Failure, Null>> updatePersonalInfo(EditPersonalRequest req);
   Future<Either<Failure, List<Country>>> countriesList();
   Future<Either<Failure, Null>> updateCountryOfResidence(Country req);
+  Future<Either<Failure, Null>> createPasscode(String code);
 }

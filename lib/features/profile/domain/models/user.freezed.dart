@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- String get phone; String get phoneCode; String? get email; String? get addressLine; String? get city; String? get pincode; String? get fullName; String? get username; DateTime? get dob; Country? get residentCountry;@PhoneVerifiedStatusConverter() PhoneVerifiedStatus get phoneVerified;@IdVerifiedStatusConverter() IdVerifiedStatus get idVerified;@PhotoVerifiedStatusConverter() PhotoVerifiedStatus get photoVerified; int get step;@JsonKey(name: 'primaryCurrency') Currency get primaryCurr;
+ String get phone; String get phoneCode; String? get email; String? get addressLine; String? get city; String? get pincode; String? get fullName; String? get username; DateTime? get dob; Country? get residentCountry;@PhoneVerifiedStatusConverter() PhoneVerifiedStatus get phoneVerified;@IdVerifiedStatusConverter() IdVerifiedStatus get idVerified;@PhotoVerifiedStatusConverter() PhotoVerifiedStatus get photoVerified; int get step;@JsonKey(name: 'primaryCurrency') Currency get primaryCurr; dynamic get isPasscodeSet;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.phoneCode, phoneCode) || other.phoneCode == phoneCode)&&(identical(other.email, email) || other.email == email)&&(identical(other.addressLine, addressLine) || other.addressLine == addressLine)&&(identical(other.city, city) || other.city == city)&&(identical(other.pincode, pincode) || other.pincode == pincode)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.username, username) || other.username == username)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.residentCountry, residentCountry) || other.residentCountry == residentCountry)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.idVerified, idVerified) || other.idVerified == idVerified)&&(identical(other.photoVerified, photoVerified) || other.photoVerified == photoVerified)&&(identical(other.step, step) || other.step == step)&&(identical(other.primaryCurr, primaryCurr) || other.primaryCurr == primaryCurr));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.phoneCode, phoneCode) || other.phoneCode == phoneCode)&&(identical(other.email, email) || other.email == email)&&(identical(other.addressLine, addressLine) || other.addressLine == addressLine)&&(identical(other.city, city) || other.city == city)&&(identical(other.pincode, pincode) || other.pincode == pincode)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.username, username) || other.username == username)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.residentCountry, residentCountry) || other.residentCountry == residentCountry)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.idVerified, idVerified) || other.idVerified == idVerified)&&(identical(other.photoVerified, photoVerified) || other.photoVerified == photoVerified)&&(identical(other.step, step) || other.step == step)&&(identical(other.primaryCurr, primaryCurr) || other.primaryCurr == primaryCurr)&&const DeepCollectionEquality().equals(other.isPasscodeSet, isPasscodeSet));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,phone,phoneCode,email,addressLine,city,pincode,fullName,username,dob,residentCountry,phoneVerified,idVerified,photoVerified,step,primaryCurr);
+int get hashCode => Object.hash(runtimeType,phone,phoneCode,email,addressLine,city,pincode,fullName,username,dob,residentCountry,phoneVerified,idVerified,photoVerified,step,primaryCurr,const DeepCollectionEquality().hash(isPasscodeSet));
 
 @override
 String toString() {
-  return 'User(phone: $phone, phoneCode: $phoneCode, email: $email, addressLine: $addressLine, city: $city, pincode: $pincode, fullName: $fullName, username: $username, dob: $dob, residentCountry: $residentCountry, phoneVerified: $phoneVerified, idVerified: $idVerified, photoVerified: $photoVerified, step: $step, primaryCurr: $primaryCurr)';
+  return 'User(phone: $phone, phoneCode: $phoneCode, email: $email, addressLine: $addressLine, city: $city, pincode: $pincode, fullName: $fullName, username: $username, dob: $dob, residentCountry: $residentCountry, phoneVerified: $phoneVerified, idVerified: $idVerified, photoVerified: $photoVerified, step: $step, primaryCurr: $primaryCurr, isPasscodeSet: $isPasscodeSet)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- String phone, String phoneCode, String? email, String? addressLine, String? city, String? pincode, String? fullName, String? username, DateTime? dob, Country? residentCountry,@PhoneVerifiedStatusConverter() PhoneVerifiedStatus phoneVerified,@IdVerifiedStatusConverter() IdVerifiedStatus idVerified,@PhotoVerifiedStatusConverter() PhotoVerifiedStatus photoVerified, int step,@JsonKey(name: 'primaryCurrency') Currency primaryCurr
+ String phone, String phoneCode, String? email, String? addressLine, String? city, String? pincode, String? fullName, String? username, DateTime? dob, Country? residentCountry,@PhoneVerifiedStatusConverter() PhoneVerifiedStatus phoneVerified,@IdVerifiedStatusConverter() IdVerifiedStatus idVerified,@PhotoVerifiedStatusConverter() PhotoVerifiedStatus photoVerified, int step,@JsonKey(name: 'primaryCurrency') Currency primaryCurr, dynamic isPasscodeSet
 });
 
 
@@ -66,7 +66,7 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? phone = null,Object? phoneCode = null,Object? email = freezed,Object? addressLine = freezed,Object? city = freezed,Object? pincode = freezed,Object? fullName = freezed,Object? username = freezed,Object? dob = freezed,Object? residentCountry = freezed,Object? phoneVerified = null,Object? idVerified = null,Object? photoVerified = null,Object? step = null,Object? primaryCurr = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? phone = null,Object? phoneCode = null,Object? email = freezed,Object? addressLine = freezed,Object? city = freezed,Object? pincode = freezed,Object? fullName = freezed,Object? username = freezed,Object? dob = freezed,Object? residentCountry = freezed,Object? phoneVerified = null,Object? idVerified = null,Object? photoVerified = null,Object? step = null,Object? primaryCurr = null,Object? isPasscodeSet = freezed,}) {
   return _then(_self.copyWith(
 phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,phoneCode: null == phoneCode ? _self.phoneCode : phoneCode // ignore: cast_nullable_to_non_nullable
@@ -83,7 +83,8 @@ as PhoneVerifiedStatus,idVerified: null == idVerified ? _self.idVerified : idVer
 as IdVerifiedStatus,photoVerified: null == photoVerified ? _self.photoVerified : photoVerified // ignore: cast_nullable_to_non_nullable
 as PhotoVerifiedStatus,step: null == step ? _self.step : step // ignore: cast_nullable_to_non_nullable
 as int,primaryCurr: null == primaryCurr ? _self.primaryCurr : primaryCurr // ignore: cast_nullable_to_non_nullable
-as Currency,
+as Currency,isPasscodeSet: freezed == isPasscodeSet ? _self.isPasscodeSet : isPasscodeSet // ignore: cast_nullable_to_non_nullable
+as dynamic,
   ));
 }
 /// Create a copy of User
@@ -115,7 +116,7 @@ $CurrencyCopyWith<$Res> get primaryCurr {
 @JsonSerializable()
 
 class _User implements User {
-   _User({required this.phone, required this.phoneCode, this.email, this.addressLine, this.city, this.pincode, this.fullName, this.username, this.dob, this.residentCountry, @PhoneVerifiedStatusConverter() this.phoneVerified = PhoneVerifiedStatus.initiated, @IdVerifiedStatusConverter() this.idVerified = IdVerifiedStatus.initiated, @PhotoVerifiedStatusConverter() this.photoVerified = PhotoVerifiedStatus.initiated, this.step = 1, @JsonKey(name: 'primaryCurrency') required this.primaryCurr});
+   _User({required this.phone, required this.phoneCode, this.email, this.addressLine, this.city, this.pincode, this.fullName, this.username, this.dob, this.residentCountry, @PhoneVerifiedStatusConverter() this.phoneVerified = PhoneVerifiedStatus.initiated, @IdVerifiedStatusConverter() this.idVerified = IdVerifiedStatus.initiated, @PhotoVerifiedStatusConverter() this.photoVerified = PhotoVerifiedStatus.initiated, this.step = 1, @JsonKey(name: 'primaryCurrency') required this.primaryCurr, this.isPasscodeSet = false});
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override final  String phone;
@@ -133,6 +134,7 @@ class _User implements User {
 @override@JsonKey()@PhotoVerifiedStatusConverter() final  PhotoVerifiedStatus photoVerified;
 @override@JsonKey() final  int step;
 @override@JsonKey(name: 'primaryCurrency') final  Currency primaryCurr;
+@override@JsonKey() final  dynamic isPasscodeSet;
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
@@ -147,16 +149,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.phoneCode, phoneCode) || other.phoneCode == phoneCode)&&(identical(other.email, email) || other.email == email)&&(identical(other.addressLine, addressLine) || other.addressLine == addressLine)&&(identical(other.city, city) || other.city == city)&&(identical(other.pincode, pincode) || other.pincode == pincode)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.username, username) || other.username == username)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.residentCountry, residentCountry) || other.residentCountry == residentCountry)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.idVerified, idVerified) || other.idVerified == idVerified)&&(identical(other.photoVerified, photoVerified) || other.photoVerified == photoVerified)&&(identical(other.step, step) || other.step == step)&&(identical(other.primaryCurr, primaryCurr) || other.primaryCurr == primaryCurr));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.phoneCode, phoneCode) || other.phoneCode == phoneCode)&&(identical(other.email, email) || other.email == email)&&(identical(other.addressLine, addressLine) || other.addressLine == addressLine)&&(identical(other.city, city) || other.city == city)&&(identical(other.pincode, pincode) || other.pincode == pincode)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.username, username) || other.username == username)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.residentCountry, residentCountry) || other.residentCountry == residentCountry)&&(identical(other.phoneVerified, phoneVerified) || other.phoneVerified == phoneVerified)&&(identical(other.idVerified, idVerified) || other.idVerified == idVerified)&&(identical(other.photoVerified, photoVerified) || other.photoVerified == photoVerified)&&(identical(other.step, step) || other.step == step)&&(identical(other.primaryCurr, primaryCurr) || other.primaryCurr == primaryCurr)&&const DeepCollectionEquality().equals(other.isPasscodeSet, isPasscodeSet));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,phone,phoneCode,email,addressLine,city,pincode,fullName,username,dob,residentCountry,phoneVerified,idVerified,photoVerified,step,primaryCurr);
+int get hashCode => Object.hash(runtimeType,phone,phoneCode,email,addressLine,city,pincode,fullName,username,dob,residentCountry,phoneVerified,idVerified,photoVerified,step,primaryCurr,const DeepCollectionEquality().hash(isPasscodeSet));
 
 @override
 String toString() {
-  return 'User(phone: $phone, phoneCode: $phoneCode, email: $email, addressLine: $addressLine, city: $city, pincode: $pincode, fullName: $fullName, username: $username, dob: $dob, residentCountry: $residentCountry, phoneVerified: $phoneVerified, idVerified: $idVerified, photoVerified: $photoVerified, step: $step, primaryCurr: $primaryCurr)';
+  return 'User(phone: $phone, phoneCode: $phoneCode, email: $email, addressLine: $addressLine, city: $city, pincode: $pincode, fullName: $fullName, username: $username, dob: $dob, residentCountry: $residentCountry, phoneVerified: $phoneVerified, idVerified: $idVerified, photoVerified: $photoVerified, step: $step, primaryCurr: $primaryCurr, isPasscodeSet: $isPasscodeSet)';
 }
 
 
@@ -167,7 +169,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- String phone, String phoneCode, String? email, String? addressLine, String? city, String? pincode, String? fullName, String? username, DateTime? dob, Country? residentCountry,@PhoneVerifiedStatusConverter() PhoneVerifiedStatus phoneVerified,@IdVerifiedStatusConverter() IdVerifiedStatus idVerified,@PhotoVerifiedStatusConverter() PhotoVerifiedStatus photoVerified, int step,@JsonKey(name: 'primaryCurrency') Currency primaryCurr
+ String phone, String phoneCode, String? email, String? addressLine, String? city, String? pincode, String? fullName, String? username, DateTime? dob, Country? residentCountry,@PhoneVerifiedStatusConverter() PhoneVerifiedStatus phoneVerified,@IdVerifiedStatusConverter() IdVerifiedStatus idVerified,@PhotoVerifiedStatusConverter() PhotoVerifiedStatus photoVerified, int step,@JsonKey(name: 'primaryCurrency') Currency primaryCurr, dynamic isPasscodeSet
 });
 
 
@@ -184,7 +186,7 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? phone = null,Object? phoneCode = null,Object? email = freezed,Object? addressLine = freezed,Object? city = freezed,Object? pincode = freezed,Object? fullName = freezed,Object? username = freezed,Object? dob = freezed,Object? residentCountry = freezed,Object? phoneVerified = null,Object? idVerified = null,Object? photoVerified = null,Object? step = null,Object? primaryCurr = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? phone = null,Object? phoneCode = null,Object? email = freezed,Object? addressLine = freezed,Object? city = freezed,Object? pincode = freezed,Object? fullName = freezed,Object? username = freezed,Object? dob = freezed,Object? residentCountry = freezed,Object? phoneVerified = null,Object? idVerified = null,Object? photoVerified = null,Object? step = null,Object? primaryCurr = null,Object? isPasscodeSet = freezed,}) {
   return _then(_User(
 phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,phoneCode: null == phoneCode ? _self.phoneCode : phoneCode // ignore: cast_nullable_to_non_nullable
@@ -201,7 +203,7 @@ as PhoneVerifiedStatus,idVerified: null == idVerified ? _self.idVerified : idVer
 as IdVerifiedStatus,photoVerified: null == photoVerified ? _self.photoVerified : photoVerified // ignore: cast_nullable_to_non_nullable
 as PhotoVerifiedStatus,step: null == step ? _self.step : step // ignore: cast_nullable_to_non_nullable
 as int,primaryCurr: null == primaryCurr ? _self.primaryCurr : primaryCurr // ignore: cast_nullable_to_non_nullable
-as Currency,
+as Currency,isPasscodeSet: freezed == isPasscodeSet ? _self.isPasscodeSet! : isPasscodeSet ,
   ));
 }
 

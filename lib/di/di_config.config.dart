@@ -20,6 +20,8 @@ import '../features/create_account/presentation/blocs/account_notifier_bloc/acco
     as _i175;
 import '../features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart'
     as _i135;
+import '../features/passscode/presentation/blocs/create_passcode_bloc/create_passcode_bloc.dart'
+    as _i525;
 import '../features/profile/data/user_profile_repo_rest_api_impl.dart' as _i959;
 import '../features/profile/domain/repos/user_profile_repo.dart' as _i619;
 import '../features/profile/presentation/bloc/support_currency_bloc/support_currency_list_bloc.dart'
@@ -88,6 +90,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i135.SignUpBloc>(
       () => _i135.SignUpBloc(gh<_i764.SignUpRepo>()),
+    );
+    gh.factory<_i525.CreatePasscodeBloc>(
+      () => _i525.CreatePasscodeBloc(gh<_i257.EditAccInfoRepo>()),
     );
     gh.factory<_i566.SupportCurrencyListCubit>(
       () => _i566.SupportCurrencyListCubit(gh<_i619.UserProfileRepo>()),

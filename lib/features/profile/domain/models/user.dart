@@ -63,6 +63,7 @@ abstract class User with _$User {
     PhotoVerifiedStatus photoVerified,
     @Default(1) int step,
     @JsonKey(name: 'primaryCurrency') required Currency primaryCurr,
+    @Default(false) isPasscodeSet,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
