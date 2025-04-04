@@ -1,6 +1,7 @@
 import 'package:coin_stack/core/api_config/remote_api.dart';
 import 'package:coin_stack/core/utls/failure.dart';
 import 'package:coin_stack/features/create_account/domain/models/generate_otp_request.dart';
+import 'package:coin_stack/features/create_account/domain/models/login_request.dart';
 import 'package:coin_stack/features/create_account/domain/models/verify_otp_request.dart';
 import 'package:coin_stack/features/create_account/domain/repos/sign_up_repo.dart';
 import 'package:dartz/dartz.dart';
@@ -22,6 +23,13 @@ class SignUpRepoImpl implements SignUpRepo {
   Future<Either<Failure, Null>> verifyOtp(VerifyOtpRequest req) async {
     await Future.delayed(Duration(seconds: 3));
     return Right(null);
-    return Left(ServerFailure(message: 'otp not valid'));
+    // return Left(ServerFailure(message: 'otp not valid'));
+  }
+
+  @override
+  Future<Either<Failure, Null>> login(LoginRequest req) async {
+    await Future.delayed(Duration(seconds: 3));
+    return Right(null);
+    // return Left(ServerFailure(message: 'Incorrect password'));
   }
 }

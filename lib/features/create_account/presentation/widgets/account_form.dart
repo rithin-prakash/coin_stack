@@ -1,6 +1,7 @@
 import 'package:coin_stack/core/shared_widgets/app_phone_code_field.dart';
 import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
 import 'package:coin_stack/core/utls/validation_helper.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sigup_form_bloc/signup_form_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,7 @@ class _State extends State<AccountForm> {
       form: () => context.read<SignupFormBloc>().form,
       builder: (context, form, child) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,6 +60,18 @@ class _State extends State<AccountForm> {
                 context.read<SignupFormBloc>().passwordVal,
                 'Password',
               ),
+            ),
+            SizedBox(height: 4),
+            BlocBuilder<AccountNotifierBloc, bool>(
+              builder: (_, s) {
+                if (s) {
+                  return Container();
+                }
+                return TextButton(
+                  onPressed: () {},
+                  child: Text('Forgot Password?'),
+                );
+              },
             ),
           ],
         );

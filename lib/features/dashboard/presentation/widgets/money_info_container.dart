@@ -17,6 +17,12 @@ class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
   var amountVisible = false;
 
   @override
+  void initState() {
+    super.initState();
+    context.read<SupportCurrencyListCubit>().getSupportedList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).primaryColor),
@@ -28,6 +34,14 @@ class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
         children: [
           BlocBuilder<SupportCurrencyListCubit, List<Currency>>(
             builder: (_, state) {
+              if (state.isEmpty) {
+                return Text(
+                  'Currency is empty',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.white),
+                );
+              }
               return DropdownButton<Currency>(
                 value: state.first,
                 padding: EdgeInsets.zero,
@@ -111,7 +125,9 @@ class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
               ),
               side: WidgetStatePropertyAll(BorderSide(color: Colors.white)),
             ),
-            onPressed: () {},
+            onPressed: () {
+              context.read<SupportCurrencyListCubit>().getSupportedList();
+            },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
