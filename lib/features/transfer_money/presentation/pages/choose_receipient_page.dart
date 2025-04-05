@@ -133,6 +133,7 @@ class _ChooseReceipientPageState extends State<ChooseReceipientPage> {
                                   radius: 24,
                                   backgroundImage: CachedNetworkImageProvider(
                                     state.list[i].profileUrl ?? '',
+                                    errorListener: (p0) {},
                                   ),
                                 ),
                                 title: Text(state.list[i].name),

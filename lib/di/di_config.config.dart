@@ -62,6 +62,8 @@ import '../features/transfer_money/presentation/blocs/connected_profiles_bloc/co
     as _i179;
 import '../features/transfer_money/presentation/blocs/select_profile_bloc/select_profile_bloc.dart'
     as _i548;
+import '../features/transfer_money/presentation/blocs/selected_purpose_bloc/select_purpose_bloc.dart'
+    as _i561;
 import '../features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart'
     as _i1032;
 
@@ -77,6 +79,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1032.TransactionProcessTypeBloc>(
       () => _i1032.TransactionProcessTypeBloc(),
     );
+    gh.factory<_i561.SelectPurposeBloc>(() => _i561.SelectPurposeBloc());
     gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
     gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
     gh.lazySingleton<_i37.TransferRepo>(() => _i220.TransferRepoRestApiImpl());

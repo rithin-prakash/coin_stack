@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/transfer_money/presentation/widgets/account_select_pay_button_container.dart';
 import 'package:coin_stack/features/transfer_money/presentation/widgets/transfer_amount_container.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class TransferMoneyPage extends StatelessWidget {
   const TransferMoneyPage({super.key});
 
