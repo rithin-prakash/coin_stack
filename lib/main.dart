@@ -8,6 +8,7 @@ import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bl
 import 'package:coin_stack/features/create_account/presentation/blocs/sigup_form_bloc/signup_form_bloc.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/support_currency_bloc/support_currency_list_bloc.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:month_year_picker/month_year_picker.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<SignUpBloc>()),
         BlocProvider(create: (_) => getIt<SupportCurrencyListCubit>()),
         BlocProvider(create: (_) => getIt<SignupFormBloc>()),
+        BlocProvider(create: (_) => getIt<TransactionProcessTypeBloc>()),
       ],
       child: MaterialApp.router(
         title: 'CoinStack',

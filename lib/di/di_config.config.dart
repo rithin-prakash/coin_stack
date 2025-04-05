@@ -55,6 +55,8 @@ import '../features/transaction_history/domain/repos/txn_history_repo.dart'
     as _i482;
 import '../features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_bloc.dart'
     as _i307;
+import '../features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart'
+    as _i1032;
 
 const String _mock = 'mock';
 
@@ -67,6 +69,9 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
     gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
+    gh.factory<_i1032.TransactionProcessTypeBloc>(
+      () => _i1032.TransactionProcessTypeBloc(),
+    );
     gh.lazySingleton<_i482.TxnHistoryRepo>(
       () => _i39.TxnHistoryRepoResApiImpl(),
     );

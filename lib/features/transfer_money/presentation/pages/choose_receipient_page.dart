@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+@RoutePage()
 class ChooseReceipientPage extends StatefulWidget {
   const ChooseReceipientPage({super.key});
 
