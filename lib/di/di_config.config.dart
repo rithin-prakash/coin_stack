@@ -49,6 +49,12 @@ import '../features/setup_account/presentation/blocs/personal_info_bloc/personal
 import '../features/splash/data/splash_repo_impl.dart' as _i702;
 import '../features/splash/domain/repos/splash_repo.dart' as _i73;
 import '../features/splash/presentation/bloc/first_opening_cubit.dart' as _i319;
+import '../features/transaction_history/data/txn_history_repo_rest_api_impl.dart'
+    as _i39;
+import '../features/transaction_history/domain/repos/txn_history_repo.dart'
+    as _i482;
+import '../features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_bloc.dart'
+    as _i307;
 
 const String _mock = 'mock';
 
@@ -61,6 +67,9 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
     gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
+    gh.lazySingleton<_i482.TxnHistoryRepo>(
+      () => _i39.TxnHistoryRepoResApiImpl(),
+    );
     gh.lazySingleton<_i73.SplashRepo>(() => _i702.SplashRepoImpl());
     gh.factory<_i319.FirstOpeningCubit>(
       () => _i319.FirstOpeningCubit(gh<_i73.SplashRepo>()),
@@ -68,6 +77,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i285.RemoteApi>(
       () => _i596.RemoteApiMockImpl(),
       registerFor: {_mock},
+    );
+    gh.factory<_i307.TxnByCategoryBloc>(
+      () => _i307.TxnByCategoryBloc(gh<_i482.TxnHistoryRepo>()),
     );
     gh.lazySingleton<_i619.UserProfileRepo>(
       () => _i959.UserProfileRepoRestApiImpl(gh<_i285.RemoteApi>()),
