@@ -24,5 +24,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: PasscodePageRoute.page),
     AutoRoute(page: CreateAccountSuccessPageRoute.page),
     AutoRoute(page: ChooseReceipientPageRoute.page),
+    AutoRoute(page: ScanQrPageRoute.page),
+    AutoRoute(page: SelectPurposePageRoute.page),
   ];
 }

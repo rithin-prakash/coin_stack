@@ -1,4 +1,5 @@
 import 'package:coin_stack/core/constants/app_dimen.dart';
+import 'package:coin_stack/core/theme/app_colors.dart';
 import 'package:coin_stack/di/di_config.dart';
 import 'package:coin_stack/features/dashboard/presentation/widgets/transaction_summery_item.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_bloc.dart';
@@ -154,8 +155,8 @@ class TxnCategoryLoadingShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey,
-      highlightColor: Colors.white,
+      baseColor: AppColors.simmerBg,
+      highlightColor: AppColors.simmerFg,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

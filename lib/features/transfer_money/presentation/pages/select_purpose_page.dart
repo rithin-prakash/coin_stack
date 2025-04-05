@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/transfer_money/presentation/widgets/purpose_item.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class SelectPurposePage extends StatelessWidget {
   const SelectPurposePage({super.key});
 

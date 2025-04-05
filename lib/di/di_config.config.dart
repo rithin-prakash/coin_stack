@@ -55,6 +55,13 @@ import '../features/transaction_history/domain/repos/txn_history_repo.dart'
     as _i482;
 import '../features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_bloc.dart'
     as _i307;
+import '../features/transfer_money/domain/data/transfer_repo_rest_api_impl.dart'
+    as _i220;
+import '../features/transfer_money/domain/repos/transfer_repo.dart' as _i37;
+import '../features/transfer_money/presentation/blocs/connected_profiles_bloc/connected_profiles_bloc.dart'
+    as _i179;
+import '../features/transfer_money/presentation/blocs/select_profile_bloc/select_profile_bloc.dart'
+    as _i548;
 import '../features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart'
     as _i1032;
 
@@ -67,11 +74,12 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
-    gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
     gh.factory<_i1032.TransactionProcessTypeBloc>(
       () => _i1032.TransactionProcessTypeBloc(),
     );
+    gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
+    gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
+    gh.lazySingleton<_i37.TransferRepo>(() => _i220.TransferRepoRestApiImpl());
     gh.lazySingleton<_i482.TxnHistoryRepo>(
       () => _i39.TxnHistoryRepoResApiImpl(),
     );
@@ -85,6 +93,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i307.TxnByCategoryBloc>(
       () => _i307.TxnByCategoryBloc(gh<_i482.TxnHistoryRepo>()),
+    );
+    gh.factory<_i548.SelectProfileBloc>(
+      () => _i548.SelectProfileBloc(gh<_i37.TransferRepo>()),
+    );
+    gh.factory<_i179.ConnectedProfilesBloc>(
+      () => _i179.ConnectedProfilesBloc(gh<_i37.TransferRepo>()),
     );
     gh.lazySingleton<_i619.UserProfileRepo>(
       () => _i959.UserProfileRepoRestApiImpl(gh<_i285.RemoteApi>()),
