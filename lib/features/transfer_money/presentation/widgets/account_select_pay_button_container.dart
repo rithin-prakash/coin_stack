@@ -1,10 +1,13 @@
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/di/di_config.dart';
+import 'package:coin_stack/features/transfer_money/domain/models/connected_profile.dart';
 import 'package:coin_stack/features/transfer_money/domain/models/payment_option.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/payment_option_bloc/payment_option_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/select_profile_bloc/select_profile_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/select_profile_bloc/select_profile_state.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/selecte_payment_option_bloc/select_payment_option_bloc.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/selected_purpose_bloc/select_purpose_bloc.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/send_money_bloc/send_money_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transfer_form_bloc/transfer_form_bloc.dart';
@@ -22,6 +25,19 @@ class AccountSelectPayButtonContainer extends StatefulWidget {
 
 class _AccountSelectPayButtonContainerState
     extends State<AccountSelectPayButtonContainer> {
+  sendOrReceive(
+    ConnectedProfile profile,
+    PaymentOption paymentOption,
+    String v,
+  ) {
+    context.read<SendMoneyBloc>().sendMoney(
+      profile,
+      context.read<SelectPurposeBloc>().state as PuroseOfTransfer,
+      paymentOption,
+      v,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -125,9 +141,13 @@ class _AccountSelectPayButtonContainerState
                                     ? null
                                     : !(paymentOption?.isActive ?? false)
                                     ? null
-                                    : profileState is SelectProfileLoaded
-                                    ? () {}
-                                    : null,
+                                    : profileState is! SelectProfileLoaded
+                                    ? null
+                                    : () => sendOrReceive(
+                                      profileState.profile,
+                                      paymentOption!,
+                                      v,
+                                    ),
                             child:
                                 txnType == TransactionProcessType.send
                                     ? Text('Send $v')

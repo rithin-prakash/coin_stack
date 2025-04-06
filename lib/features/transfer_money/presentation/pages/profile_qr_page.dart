@@ -103,13 +103,13 @@ class ProfileQrPage extends StatelessWidget {
                     'profile:coinstack:542452',
                     context,
                   );
-                  if (image == null) {
+                  if (image == null && context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Something went wrong')),
                     );
                     return;
                   }
-                  shareImage(image);
+                  shareImage(image!);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,8 @@
 import 'package:coin_stack/core/utls/failure.dart';
 import 'package:coin_stack/features/transfer_money/domain/models/connected_profile.dart';
 import 'package:coin_stack/features/transfer_money/domain/models/payment_option.dart';
+import 'package:coin_stack/features/transfer_money/domain/models/send_money_request.dart';
+import 'package:coin_stack/features/transfer_money/domain/models/send_money_response.dart';
 import 'package:coin_stack/features/transfer_money/domain/repos/transfer_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -63,5 +65,34 @@ class TransferRepoRestApiImpl implements TransferRepo {
     return Right(
       List<PaymentOption>.from(r.map((e) => PaymentOption.fromJson(e))),
     );
+  }
+
+  @override
+  Future<Either<Failure, SendMoneyResponse>> sendMoney(
+    SendMoneyRequest req,
+  ) async {
+    await Future.delayed(Duration(seconds: 4));
+    final r = {
+      "id": "",
+      "initiatedTime": "2025-04-11 10:23:43pm",
+      "completedTime": "2025-04-11 10:24:12pm",
+      "sendProfile": {
+        "name": "John Honai",
+        "phone": "+(121012)12121",
+        "id": "123113423",
+        "email": "sjfbiwr@sdjs.sdsdd",
+        "profileUrl": "",
+      },
+      "receiveProfile": {
+        "name": "John Honai",
+        "phone": "+(121012)12121",
+        "id": "123113423",
+        "email": "sjfbiwr@sdjs.sdsdd",
+        "profileUrl": "",
+      },
+      "status": "completed",
+    };
+
+    return Right(SendMoneyResponse.fromJson(r));
   }
 }

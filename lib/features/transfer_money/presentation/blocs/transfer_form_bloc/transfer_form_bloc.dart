@@ -14,7 +14,10 @@ class TransferFormBloc extends Cubit<FormGroup?> {
 
   TransferFormBloc() : super(null) {
     form = fb.group({
-      amount: FormControl<String>(validators: generateValidations(validation)),
+      amount: FormControl<String>(
+        value: '',
+        validators: generateValidations(validation),
+      ),
     });
     emit(form);
   }

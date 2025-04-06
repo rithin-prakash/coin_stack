@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/di/di_config.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/send_money_bloc/send_money_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transfer_form_bloc/transfer_form_bloc.dart';
@@ -16,8 +17,11 @@ class TransferMoneyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<TransferFormBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<TransferFormBloc>()),
+        BlocProvider(create: (_) => getIt<SendMoneyBloc>()),
+      ],
       child: Builder(
         builder: (context) {
           return Scaffold(

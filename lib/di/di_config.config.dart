@@ -68,6 +68,8 @@ import '../features/transfer_money/presentation/blocs/selecte_payment_option_blo
     as _i938;
 import '../features/transfer_money/presentation/blocs/selected_purpose_bloc/select_purpose_bloc.dart'
     as _i561;
+import '../features/transfer_money/presentation/blocs/send_money_bloc/send_money_bloc.dart'
+    as _i409;
 import '../features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart'
     as _i1032;
 import '../features/transfer_money/presentation/blocs/transfer_form_bloc/transfer_form_bloc.dart'
@@ -112,6 +114,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i179.ConnectedProfilesBloc>(
       () => _i179.ConnectedProfilesBloc(gh<_i37.TransferRepo>()),
+    );
+    gh.factory<_i409.SendMoneyBloc>(
+      () => _i409.SendMoneyBloc(gh<_i37.TransferRepo>()),
     );
     gh.factory<_i372.PaymentOptionBloc>(
       () => _i372.PaymentOptionBloc(gh<_i37.TransferRepo>()),
