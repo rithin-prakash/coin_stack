@@ -1,9 +1,15 @@
-import 'package:coin_stack/core/assets/app_assets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
+import 'package:coin_stack/core/utls/validation_helper.dart';
+import 'package:coin_stack/features/dashboard/presentation/widgets/supported_currency_dropdown.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/select_profile_bloc/select_profile_bloc.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/select_profile_bloc/select_profile_state.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/transfer_form_bloc/transfer_form_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-final curList = [('US Dollor', 'us'), ('Indian Ruppee', 'in')];
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TransferAmountContainer extends StatefulWidget {
   const TransferAmountContainer({super.key});
@@ -14,8 +20,6 @@ class TransferAmountContainer extends StatefulWidget {
 }
 
 class _TransferAmountContainerState extends State<TransferAmountContainer> {
-  var selectedCur = curList.first;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,78 +28,92 @@ class _TransferAmountContainerState extends State<TransferAmountContainer> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
       ),
-      child: Column(
-        children: [
-          SizedBox(height: 20),
-          CircleAvatar(
-            radius: 45,
-            backgroundImage: NetworkImage(
-              'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671116.jpg?t=st=1742637889~exp=1742641489~hmac=bc27ea8e7479df110df0322449bf3bb12a7103dbb5fe465dc08913780323a51f&w=1380',
-            ),
-          ),
-          SizedBox(height: 8),
-          Text('Name', style: Theme.of(context).textTheme.titleLarge),
-          SizedBox(height: 2),
-          Text('+9875689876', style: Theme.of(context).textTheme.bodyLarge),
-          DropdownButton<(String, String)>(
-            value: selectedCur,
-            padding: EdgeInsets.zero,
-            icon: Icon(Icons.keyboard_arrow_down_outlined),
-            underline: Container(),
-            items:
-                curList
-                    .map<DropdownMenuItem<(String, String)>>(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 10,
-                              backgroundImage: AssetImage(
-                                '${AppAssets.countryFlag}/${e.$2}.webp',
-                              ),
-                            ),
-                            SizedBox(width: 6),
-                            Text(e.$1),
-                          ],
-                        ),
-                      ),
-                    )
-                    .toList(),
-            onChanged: (v) {
-              if (v == null) return;
-              setState(() {
-                selectedCur = v;
-              });
-            },
-          ),
-          SizedBox(height: 20),
-          TextField(
-            style: TextStyle(fontSize: 40),
-            textAlign: TextAlign.center,
-            onTapOutside: (event) {
-              FocusScope.of(context).unfocus();
-            },
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: InputDecoration(
-              hintText: '0.0',
-              hintStyle: Theme.of(
+      child: BlocBuilder<SelectProfileBloc, SelectProfileState>(
+        builder: (_, state) {
+          if (state is SelectProfileLoading) {
+            return Shimmer.fromColors(
+              baseColor: AppColors.simmerBg,
+              highlightColor: AppColors.simmerFg,
+              child: Container(),
+            );
+          }
+          if (state is SelectProfileFailed) {
+            return Text(
+              'Profile loading failed\n ${state.failure.message}',
+              style: Theme.of(
                 context,
-              ).inputDecorationTheme.hintStyle?.copyWith(fontSize: 40),
-              border: UnderlineInputBorder(
-                borderSide: BorderSide(width: .9, color: AppColors.inputBorder),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(width: .9, color: AppColors.inputBorder),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(width: .9, color: AppColors.inputBorder),
-              ),
-            ),
-          ),
-          SizedBox(height: 20),
-        ],
+              ).textTheme.titleLarge?.copyWith(color: Colors.red),
+            );
+          }
+          if (state is SelectProfileLoaded) {
+            return Column(
+              children: [
+                SizedBox(height: 20),
+                CircleAvatar(
+                  radius: 45,
+                  backgroundImage: CachedNetworkImageProvider(
+                    state.profile.profileUrl ?? '',
+                    errorListener: (p0) {},
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  state.profile.name,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                SizedBox(height: 2),
+                Text(
+                  state.profile.phone,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                SupportedCurrencyDropdown(color: Colors.black),
+                SizedBox(height: 20),
+                ReactiveTextField(
+                  formControlName: amount,
+                  style: TextStyle(fontSize: 40),
+                  textAlign: TextAlign.center,
+                  showErrors: (control) => false,
+                  validationMessages: generateValidationMessages(
+                    context.read<TransferFormBloc>().validation,
+                    'amount',
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                  decoration: InputDecoration(
+                    hintText: '0.0',
+                    hintStyle: Theme.of(
+                      context,
+                    ).inputDecorationTheme.hintStyle?.copyWith(fontSize: 40),
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        width: .9,
+                        color: AppColors.inputBorder,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        width: .9,
+                        color: AppColors.inputBorder,
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        width: .9,
+                        color: AppColors.inputBorder,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+              ],
+            );
+          }
+          return Text(
+            'Profile not found',
+            style: Theme.of(context).textTheme.titleMedium,
+          );
+        },
       ),
     );
   }

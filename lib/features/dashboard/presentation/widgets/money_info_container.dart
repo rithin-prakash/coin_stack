@@ -1,5 +1,4 @@
-import 'package:coin_stack/core/assets/app_assets.dart';
-import 'package:coin_stack/features/profile/domain/models/currency.dart';
+import 'package:coin_stack/features/dashboard/presentation/widgets/supported_currency_dropdown.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/support_currency_bloc/support_currency_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,56 +31,7 @@ class _MoneyInfoContainerState extends State<MoneyInfoContainer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          BlocBuilder<SupportCurrencyListCubit, List<Currency>>(
-            builder: (_, state) {
-              if (state.isEmpty) {
-                return Text(
-                  'Currency is empty',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(color: Colors.white),
-                );
-              }
-              return DropdownButton<Currency>(
-                value: state.first,
-                padding: EdgeInsets.zero,
-                style: const TextStyle(color: Colors.white),
-                icon: Icon(
-                  Icons.keyboard_arrow_down_outlined,
-                  color: Colors.white,
-                ),
-                underline: Container(),
-                dropdownColor: Theme.of(context).primaryColorDark,
-                items:
-                    state
-                        .map<DropdownMenuItem<Currency>>(
-                          (e) => DropdownMenuItem<Currency>(
-                            value: e,
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 10,
-                                  backgroundImage: AssetImage(
-                                    '${AppAssets.countryFlag}/${e.flagCode}.webp',
-                                  ),
-                                ),
-                                SizedBox(width: 6),
-                                Text(
-                                  e.name,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                        .toList(),
-                onChanged: (v) {
-                  if (v == null) return;
-                },
-              );
-            },
-          ),
-
+          SupportedCurrencyDropdown(color: Colors.white),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
