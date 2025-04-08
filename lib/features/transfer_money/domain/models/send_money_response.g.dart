@@ -9,11 +9,13 @@ part of 'send_money_response.dart';
 _SendMoneyResponse _$SendMoneyResponseFromJson(Map<String, dynamic> json) =>
     _SendMoneyResponse(
       id: json['id'] as String,
-      completedTime:
-          json['completedTime'] == null
-              ? null
-              : DateTime.parse(json['completedTime'] as String),
-      initiatedTime: DateTime.parse(json['initiatedTime'] as String),
+      completedTime: _$JsonConverterFromJson<String, DateTime>(
+        json['completedTime'],
+        const DateTimeConverter().fromJson,
+      ),
+      initiatedTime: const DateTimeConverter().fromJson(
+        json['initiatedTime'] as String,
+      ),
       status: const TxnSendStatusTypeConverter().fromJson(
         json['status'] as String,
       ),
@@ -28,9 +30,22 @@ _SendMoneyResponse _$SendMoneyResponseFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SendMoneyResponseToJson(_SendMoneyResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'completedTime': instance.completedTime?.toIso8601String(),
-      'initiatedTime': instance.initiatedTime.toIso8601String(),
+      'completedTime': _$JsonConverterToJson<String, DateTime>(
+        instance.completedTime,
+        const DateTimeConverter().toJson,
+      ),
+      'initiatedTime': const DateTimeConverter().toJson(instance.initiatedTime),
       'status': const TxnSendStatusTypeConverter().toJson(instance.status),
       'sendProfile': instance.sendProfile,
       'receiveProfile': instance.receiveProfile,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

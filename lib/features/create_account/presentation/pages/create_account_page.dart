@@ -160,19 +160,20 @@ class CreateAccountPage extends StatelessWidget {
                 },
               ),
             ],
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BlocBuilder<AccountNotifierBloc, bool>(
-                  builder: (context, isNewAcc) {
-                    if (isNewAcc) {
-                      return AccountProgressIndicator(value: .1);
-                    }
-                    return Container();
-                  },
-                ),
-                Expanded(
-                  child: Padding(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  BlocBuilder<AccountNotifierBloc, bool>(
+                    builder: (context, isNewAcc) {
+                      if (isNewAcc) {
+                        return AccountProgressIndicator(value: .1);
+                      }
+                      return Container();
+                    },
+                  ),
+                  Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: AppDimen.pagePadding,
                     ),
@@ -199,16 +200,14 @@ class CreateAccountPage extends StatelessWidget {
                           textAlign: TextAlign.start,
                         ),
                         SizedBox(height: 20),
-                        Flexible(fit: FlexFit.loose, child: AccountForm()),
+                        AccountForm(),
                         SizedBox(height: 20),
                       ],
                     ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(AppDimen.pagePadding),
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: SizedBox(
+                  Container(
+                    padding: EdgeInsets.all(AppDimen.pagePadding),
+                    margin: EdgeInsets.only(bottom: 20),
                     width: double.infinity,
                     child: BlocBuilder<AccountNotifierBloc, bool>(
                       builder: (context, isNewAcc) {
@@ -255,8 +254,8 @@ class CreateAccountPage extends StatelessWidget {
                       },
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

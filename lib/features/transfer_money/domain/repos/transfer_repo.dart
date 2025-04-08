@@ -3,6 +3,8 @@ import 'package:coin_stack/features/transfer_money/domain/models/connected_profi
 import 'package:coin_stack/features/transfer_money/domain/models/payment_option.dart';
 import 'package:coin_stack/features/transfer_money/domain/models/send_money_request.dart';
 import 'package:coin_stack/features/transfer_money/domain/models/send_money_response.dart';
+import 'package:coin_stack/features/transfer_money/domain/models/transaction_details_request.dart';
+import 'package:coin_stack/features/transfer_money/domain/models/transaction_details_response.dart';
 import 'package:dartz/dartz.dart';
 
 abstract interface class TransferRepo {
@@ -10,4 +12,7 @@ abstract interface class TransferRepo {
   Future<Either<Failure, ConnectedProfile>> fetchProfileById(String id);
   Future<Either<Failure, List<PaymentOption>>> fetchPayOptions();
   Future<Either<Failure, SendMoneyResponse>> sendMoney(SendMoneyRequest req);
+  Future<Either<Failure, TransactionDetailsResponse>> transactionDetails(
+    TransactionDetailsRequest req,
+  );
 }

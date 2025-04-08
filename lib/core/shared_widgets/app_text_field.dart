@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AppTextField extends StatelessWidget {
@@ -12,6 +13,8 @@ class AppTextField extends StatelessWidget {
     this.obscureText = false,
     this.prefixText,
     this.validationMsg,
+    this.inputFormatters,
+    this.textInputType,
   });
 
   final String controlName;
@@ -22,6 +25,8 @@ class AppTextField extends StatelessWidget {
   final bool? obscureText;
   final String? prefixText;
   final Map<String, String Function(Object)>? validationMsg;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? textInputType;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +43,8 @@ class AppTextField extends StatelessWidget {
           formControlName: controlName,
           validationMessages: validationMsg,
           onTapOutside: (event) => FocusScope.of(context).unfocus(),
+          inputFormatters: inputFormatters,
+          keyboardType: textInputType,
           decoration: InputDecoration(
             hintText: hintText,
             // labelText: labelText,

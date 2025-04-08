@@ -4,6 +4,7 @@ import 'package:coin_stack/core/utls/validation_helper.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sigup_form_bloc/signup_form_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -35,6 +36,8 @@ class _State extends State<AccountForm> {
                     controlName: caPhone,
                     hintText: 'Mobile Number',
                     labelText: "",
+                    textInputType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     validationMsg: generateValidationMessages(
                       context.read<SignupFormBloc>().passwordVal,
                       'Phone',

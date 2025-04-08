@@ -1,7 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
+import 'package:coin_stack/core/shared_widgets/app_snackbar.dart';
+import 'package:coin_stack/core/utls/ui_helper.dart';
 import 'package:coin_stack/di/di_config.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/send_money_bloc/send_money_bloc.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/send_money_bloc/send_money_state.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transfer_form_bloc/transfer_form_bloc.dart';
@@ -24,54 +28,73 @@ class TransferMoneyPage extends StatelessWidget {
       ],
       child: Builder(
         builder: (context) {
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: AppBar(backgroundColor: Colors.grey.shade100),
-            backgroundColor: Colors.grey.shade100,
-            body: ReactiveFormBuilder(
-              form: () => context.read<TransferFormBloc>().form,
-              builder: (_, _, _) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: AppDimen.pagePadding,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BlocBuilder<
-                              TransactionProcessTypeBloc,
-                              TransactionProcessType
-                            >(
-                              builder: (_, state) {
-                                return Text(
-                                  state == TransactionProcessType.send
-                                      ? "Send money"
-                                      : "Recieve Money",
-                                  style: Theme.of(context).textTheme.titleLarge
-                                      ?.copyWith(fontWeight: FontWeight.bold),
-                                );
-                              },
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              'Proceed by entering the amount',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(height: 20),
-                            TransferAmountContainer(),
-                          ],
+          return BlocListener<SendMoneyBloc, SendMoneyState>(
+            listener: (context, state) {
+              if (state is SendMoneyLoading) {
+                showLoader(context);
+              } else if (state is SendMoneyLoaded) {
+                context.pop();
+                context.replaceRoute(
+                  SendMoneyResultPageRoute(id: state.response.id),
+                );
+              } else if (state is SendMoneyFailed) {
+                context.pop();
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(AppSnackbar(data: state.failure.message));
+              }
+            },
+            child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              appBar: AppBar(backgroundColor: Colors.grey.shade100),
+              backgroundColor: Colors.grey.shade100,
+              body: ReactiveFormBuilder(
+                form: () => context.read<TransferFormBloc>().form,
+                builder: (_, _, _) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppDimen.pagePadding,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BlocBuilder<
+                                TransactionProcessTypeBloc,
+                                TransactionProcessType
+                              >(
+                                builder: (_, state) {
+                                  return Text(
+                                    state == TransactionProcessType.send
+                                        ? "Send money"
+                                        : "Recieve Money",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(fontWeight: FontWeight.bold),
+                                  );
+                                },
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Proceed by entering the amount',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                                textAlign: TextAlign.start,
+                              ),
+                              SizedBox(height: 20),
+                              TransferAmountContainer(),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    AccountSelectPayButtonContainer(),
-                  ],
-                );
-              },
+                      AccountSelectPayButtonContainer(),
+                    ],
+                  );
+                },
+              ),
             ),
           );
         },

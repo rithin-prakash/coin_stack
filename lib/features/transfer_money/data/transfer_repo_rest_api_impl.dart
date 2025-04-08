@@ -3,6 +3,8 @@ import 'package:coin_stack/features/transfer_money/domain/models/connected_profi
 import 'package:coin_stack/features/transfer_money/domain/models/payment_option.dart';
 import 'package:coin_stack/features/transfer_money/domain/models/send_money_request.dart';
 import 'package:coin_stack/features/transfer_money/domain/models/send_money_response.dart';
+import 'package:coin_stack/features/transfer_money/domain/models/transaction_details_request.dart';
+import 'package:coin_stack/features/transfer_money/domain/models/transaction_details_response.dart';
 import 'package:coin_stack/features/transfer_money/domain/repos/transfer_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -74,8 +76,8 @@ class TransferRepoRestApiImpl implements TransferRepo {
     await Future.delayed(Duration(seconds: 4));
     final r = {
       "id": "",
-      "initiatedTime": "2025-04-11 10:23:43pm",
-      "completedTime": "2025-04-11 10:24:12pm",
+      "initiatedTime": "2025-04-11 10:23:43",
+      "completedTime": "2025-04-11 10:24:12",
       "sendProfile": {
         "name": "John Honai",
         "phone": "+(121012)12121",
@@ -94,5 +96,34 @@ class TransferRepoRestApiImpl implements TransferRepo {
     };
 
     return Right(SendMoneyResponse.fromJson(r));
+  }
+
+  @override
+  Future<Either<Failure, TransactionDetailsResponse>> transactionDetails(
+    TransactionDetailsRequest req,
+  ) async {
+    await Future.delayed(Duration(seconds: 4));
+    final r = {
+      "id": "",
+      "initiatedTime": "2025-04-11 10:23:43 pm",
+      "completedTime": "2025-04-11 10:24:12 pm",
+      "sendProfile": {
+        "name": "John Honai",
+        "phone": "+(121012)12121",
+        "id": "123113423",
+        "email": "sjfbiwr@sdjs.sdsdd",
+        "profileUrl": "",
+      },
+      "receiveProfile": {
+        "name": "John Honai",
+        "phone": "+(121012)12121",
+        "id": "123113423",
+        "email": "sjfbiwr@sdjs.sdsdd",
+        "profileUrl": "",
+      },
+      "status": "completed",
+    };
+
+    return Right(TransactionDetailsResponse.fromJson(r));
   }
 }

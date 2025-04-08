@@ -72,6 +72,8 @@ import '../features/transfer_money/presentation/blocs/send_money_bloc/send_money
     as _i409;
 import '../features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart'
     as _i1032;
+import '../features/transfer_money/presentation/blocs/transfer_details_bloc/transfer_details_bloc.dart'
+    as _i225;
 import '../features/transfer_money/presentation/blocs/transfer_form_bloc/transfer_form_bloc.dart'
     as _i345;
 
@@ -109,14 +111,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i307.TxnByCategoryBloc>(
       () => _i307.TxnByCategoryBloc(gh<_i482.TxnHistoryRepo>()),
     );
+    gh.factory<_i225.TransferDetailsBloc>(
+      () => _i225.TransferDetailsBloc(gh<_i37.TransferRepo>()),
+    );
+    gh.factory<_i409.SendMoneyBloc>(
+      () => _i409.SendMoneyBloc(gh<_i37.TransferRepo>()),
+    );
     gh.factory<_i548.SelectProfileBloc>(
       () => _i548.SelectProfileBloc(gh<_i37.TransferRepo>()),
     );
     gh.factory<_i179.ConnectedProfilesBloc>(
       () => _i179.ConnectedProfilesBloc(gh<_i37.TransferRepo>()),
-    );
-    gh.factory<_i409.SendMoneyBloc>(
-      () => _i409.SendMoneyBloc(gh<_i37.TransferRepo>()),
     );
     gh.factory<_i372.PaymentOptionBloc>(
       () => _i372.PaymentOptionBloc(gh<_i37.TransferRepo>()),

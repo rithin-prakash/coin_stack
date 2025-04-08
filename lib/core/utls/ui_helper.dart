@@ -5,6 +5,7 @@ showLoader(BuildContext context) {
   showDialog(
     context: context,
     useSafeArea: false,
+    barrierDismissible: true,
     builder: (_) {
       return FullScreenLoader();
     },
