@@ -34,7 +34,7 @@ class TransferMoneyPage extends StatelessWidget {
                 showLoader(context);
               } else if (state is SendMoneyLoaded) {
                 context.pop();
-                context.replaceRoute(
+                context.navigateTo(
                   SendMoneyResultPageRoute(id: state.response.id),
                 );
               } else if (state is SendMoneyFailed) {

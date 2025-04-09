@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/shared_widgets/app_snackbar.dart';
@@ -30,9 +31,8 @@ class SendMoneyResultPage extends StatelessWidget {
                   if (state is TransactionDetailsLoading) {
                     showLoader(context);
                   } else if (state is TransactionDetailsLoaded) {
-                    context.pop();
+                    // context.pop();
                   } else if (state is TransactionDetailsFailed) {
-                    context.pop();
                     context.pop();
                     ScaffoldMessenger.of(
                       context,
@@ -64,19 +64,64 @@ class SendMoneyResultPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           // SizedBox(height: 10),
-                          SizedBox(
-                            width: 200,
-                            height: 200,
-                            child:
-                                Theme.of(context).brightness == Brightness.light
-                                    ? RiveAnimation.asset(
-                                      AppAssets.failedLightRive,
-                                    )
-                                    : RiveAnimation.asset(
-                                      AppAssets.failedLightRive,
-                                    ),
+                          BlocBuilder<
+                            TransferDetailsBloc,
+                            TransactionDetailsState
+                          >(
+                            builder: (_, s) {
+                              if (s is TransactionDetailsLoaded) {
+                                if (s.response.status ==
+                                    TxnStatusType.completed) {
+                                  return SizedBox(
+                                    width: 200,
+                                    height: 200,
+                                    child:
+                                        Theme.of(context).brightness ==
+                                                Brightness.light
+                                            ? RiveAnimation.asset(
+                                              AppAssets.successRive,
+                                            )
+                                            : RiveAnimation.asset(
+                                              AppAssets.successRive,
+                                            ),
 
-                            // RiveAnimation.asset(AppAssets.successRive),
+                                    // RiveAnimation.asset(AppAssets.successRive),
+                                  );
+                                } else if (s.response.status ==
+                                    TxnStatusType.failed) {
+                                  SizedBox(
+                                    width: 200,
+                                    height: 200,
+                                    child:
+                                        Theme.of(context).brightness ==
+                                                Brightness.light
+                                            ? RiveAnimation.asset(
+                                              AppAssets.failedLightRive,
+                                            )
+                                            : RiveAnimation.asset(
+                                              AppAssets.failedLightRive,
+                                            ),
+
+                                    // RiveAnimation.asset(AppAssets.successRive),
+                                  );
+                                }
+                              }
+                              return SizedBox(
+                                width: 200,
+                                height: 200,
+                                child:
+                                    Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? RiveAnimation.asset(
+                                          AppAssets.pendingRive,
+                                        )
+                                        : RiveAnimation.asset(
+                                          AppAssets.pendingRive,
+                                        ),
+
+                                // RiveAnimation.asset(AppAssets.successRive),
+                              );
+                            },
                           ),
 
                           BlocBuilder<
@@ -86,6 +131,8 @@ class SendMoneyResultPage extends StatelessWidget {
                             builder: (_, state) {
                               if (state is TransactionDetailsLoaded) {
                                 return Container(
+                                  padding: EdgeInsets.all(12),
+
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(
                                       AppDimen.containerBorderRadius,
@@ -94,12 +141,36 @@ class SendMoneyResultPage extends StatelessWidget {
                                   ),
                                   child: Column(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Text('ID'),
-                                          Text(state.response.id),
-                                        ],
+                                      LabelValue(
+                                        label: "Transaction ID",
+                                        value: state.response.id,
                                       ),
+                                      LabelValue(
+                                        label: "Transfered To",
+                                        value:
+                                            state.response.receiveProfile.name,
+                                      ),
+                                      LabelValue(
+                                        label: "Receiver Name",
+                                        value:
+                                            state.response.receiveProfile.name,
+                                      ),
+                                      LabelValue(
+                                        label: "Receiver ID",
+                                        value: state.response.receiveProfile.id,
+                                      ),
+                                      LabelValue(
+                                        label: "Transaction Status",
+                                        value: state.response.status.named(),
+                                      ),
+                                      if (state.response.status ==
+                                          TxnStatusType.completed)
+                                        LabelValue(
+                                          label: "Completed Date&Time",
+                                          value:
+                                              state.response.completedTime!
+                                                  .toIso8601String(),
+                                        ),
                                     ],
                                   ),
                                 );
@@ -115,18 +186,23 @@ class SendMoneyResultPage extends StatelessWidget {
                               SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.router.pushAndPopUntil(
+                                      DashboardMainRoute(),
+                                      predicate: (_) => false,
+                                    );
+                                  },
                                   child: Text('Back to Home'),
                                 ),
                               ),
-                              SizedBox(height: 20),
-                              SizedBox(
-                                width: double.infinity,
-                                child: OutlinedButton(
-                                  onPressed: () {},
-                                  child: Text('Make another Payment'),
-                                ),
-                              ),
+                              // SizedBox(height: 20),
+                              // SizedBox(
+                              //   width: double.infinity,
+                              //   child: OutlinedButton(
+                              //     onPressed: () {},
+                              //     child: Text('Make another Payment'),
+                              //   ),
+                              // ),
                               SizedBox(height: 20),
                               RichText(
                                 textAlign: TextAlign.center,
@@ -159,6 +235,29 @@ class SendMoneyResultPage extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class LabelValue extends StatelessWidget {
+  const LabelValue({super.key, required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label),
+          SizedBox(width: 8),
+          Flexible(child: Text(value)),
+        ],
       ),
     );
   }

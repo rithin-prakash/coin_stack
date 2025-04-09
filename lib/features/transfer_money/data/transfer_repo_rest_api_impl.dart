@@ -121,9 +121,10 @@ class TransferRepoRestApiImpl implements TransferRepo {
         "email": "sjfbiwr@sdjs.sdsdd",
         "profileUrl": "",
       },
-      "status": "completed",
+      "status": "processing",
     };
 
     return Right(TransactionDetailsResponse.fromJson(r));
+    // return Left(ServerFailure(message: 'adcdasc'));
   }
 }

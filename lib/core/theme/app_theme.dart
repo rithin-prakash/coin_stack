@@ -7,7 +7,7 @@ class AppTheme {
   static final lightTheme = ThemeData(
     colorScheme: ColorScheme.light(primary: AppColors.primary),
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: const Color(0xFFF5F5F5),
       scrolledUnderElevation: 0.0,
     ),
     fontFamily: GoogleFonts.poppins().fontFamily,

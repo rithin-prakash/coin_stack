@@ -18,6 +18,10 @@ import '../features/create_account/data/sign_up_repo_impl.dart' as _i510;
 import '../features/create_account/domain/repos/sign_up_repo.dart' as _i764;
 import '../features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart'
     as _i175;
+import '../features/create_account/presentation/blocs/create_account_privacy_policy_bloc/create_account_privacy_bloc.dart'
+    as _i883;
+import '../features/create_account/presentation/blocs/create_account_tnc_bloc/create_account_tnc_bloc.dart'
+    as _i386;
 import '../features/create_account/presentation/blocs/login_bloc/login_bloc.dart'
     as _i444;
 import '../features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart'
@@ -157,6 +161,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i525.CreatePasscodeBloc(gh<_i257.EditAccInfoRepo>()),
     );
     gh.factory<_i444.LoginBloc>(() => _i444.LoginBloc(gh<_i764.SignUpRepo>()));
+    gh.factory<_i386.CreateAccountTncBloc>(
+      () => _i386.CreateAccountTncBloc(gh<_i764.SignUpRepo>()),
+    );
+    gh.factory<_i883.CreateAccountPrivacyBloc>(
+      () => _i883.CreateAccountPrivacyBloc(gh<_i764.SignUpRepo>()),
+    );
     gh.factory<_i566.SupportCurrencyListCubit>(
       () => _i566.SupportCurrencyListCubit(gh<_i619.UserProfileRepo>()),
     );

@@ -18,6 +18,8 @@ enum TxnStatusType {
       (e) => e.name.toLowerCase() == v.toLowerCase(),
     );
   }
+
+  named() => name.toUpperCase();
 }
 
 @freezed
