@@ -23,4 +23,5 @@ class AppAssets {
   static const successRive = '$_rivePath/success_payment.riv';
   static const failedLightRive = '$_rivePath/error_light.riv';
   static const pendingRive = '$_rivePath/request_sent.riv';
+  static const pendingRiveLight = '$_rivePath/request_sent_light.riv';
 }

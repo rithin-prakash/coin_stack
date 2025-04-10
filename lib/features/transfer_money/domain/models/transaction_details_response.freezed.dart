@@ -102,8 +102,8 @@ $ConnectedProfileCopyWith<$Res> get receiveProfile {
 /// @nodoc
 @JsonSerializable()
 
-class _TransactionDetailsResponse implements TransactionDetailsResponse {
-  const _TransactionDetailsResponse({required this.id, @DateTimeConverter() required this.completedTime, @DateTimeConverter() required this.initiatedTime, @TxnStatusTypeConverter() required this.status, required this.sendProfile, required this.receiveProfile});
+class _TransactionDetailsResponse extends TransactionDetailsResponse {
+   _TransactionDetailsResponse({required this.id, @DateTimeConverter() required this.completedTime, @DateTimeConverter() required this.initiatedTime, @TxnStatusTypeConverter() required this.status, required this.sendProfile, required this.receiveProfile}): super._();
   factory _TransactionDetailsResponse.fromJson(Map<String, dynamic> json) => _$TransactionDetailsResponseFromJson(json);
 
 @override final  String id;

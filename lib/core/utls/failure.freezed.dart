@@ -172,4 +172,134 @@ as int?,
 
 }
 
+/// @nodoc
+mixin _$ShareFileFailure {
+
+ String get message; int? get code;
+/// Create a copy of ShareFileFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ShareFileFailureCopyWith<ShareFileFailure> get copyWith => _$ShareFileFailureCopyWithImpl<ShareFileFailure>(this as ShareFileFailure, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ShareFileFailure&&(identical(other.message, message) || other.message == message)&&(identical(other.code, code) || other.code == code));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message,code);
+
+@override
+String toString() {
+  return 'ShareFileFailure(message: $message, code: $code)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ShareFileFailureCopyWith<$Res> implements $FailureCopyWith<$Res> {
+  factory $ShareFileFailureCopyWith(ShareFileFailure value, $Res Function(ShareFileFailure) _then) = _$ShareFileFailureCopyWithImpl;
+@useResult
+$Res call({
+ String message, int? code
+});
+
+
+
+
+}
+/// @nodoc
+class _$ShareFileFailureCopyWithImpl<$Res>
+    implements $ShareFileFailureCopyWith<$Res> {
+  _$ShareFileFailureCopyWithImpl(this._self, this._then);
+
+  final ShareFileFailure _self;
+  final $Res Function(ShareFileFailure) _then;
+
+/// Create a copy of ShareFileFailure
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,Object? code = freezed,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,code: freezed == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
+}
+
+}
+
+
+/// @nodoc
+
+
+class _ShareFileFailure implements ShareFileFailure {
+   _ShareFileFailure({required this.message, this.code});
+  
+
+@override final  String message;
+@override final  int? code;
+
+/// Create a copy of ShareFileFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ShareFileFailureCopyWith<_ShareFileFailure> get copyWith => __$ShareFileFailureCopyWithImpl<_ShareFileFailure>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShareFileFailure&&(identical(other.message, message) || other.message == message)&&(identical(other.code, code) || other.code == code));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message,code);
+
+@override
+String toString() {
+  return 'ShareFileFailure(message: $message, code: $code)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ShareFileFailureCopyWith<$Res> implements $ShareFileFailureCopyWith<$Res> {
+  factory _$ShareFileFailureCopyWith(_ShareFileFailure value, $Res Function(_ShareFileFailure) _then) = __$ShareFileFailureCopyWithImpl;
+@override @useResult
+$Res call({
+ String message, int? code
+});
+
+
+
+
+}
+/// @nodoc
+class __$ShareFileFailureCopyWithImpl<$Res>
+    implements _$ShareFileFailureCopyWith<$Res> {
+  __$ShareFileFailureCopyWithImpl(this._self, this._then);
+
+  final _ShareFileFailure _self;
+  final $Res Function(_ShareFileFailure) _then;
+
+/// Create a copy of ShareFileFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,Object? code = freezed,}) {
+  return _then(_ShareFileFailure(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,code: freezed == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
+}
+
+
+}
+
 // dart format on

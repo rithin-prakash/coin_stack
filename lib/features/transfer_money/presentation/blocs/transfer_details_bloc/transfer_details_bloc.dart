@@ -11,6 +11,7 @@ class TransferDetailsBloc extends Cubit<TransactionDetailsState> {
   TransferDetailsBloc(this._repo) : super(TransactionDetailsState.initial());
 
   getDetails(String id) async {
+    // await Future.delayed(Duration(seconds: 6));
     emit(TransactionDetailsState.loading());
 
     final res = await _repo.transactionDetails(

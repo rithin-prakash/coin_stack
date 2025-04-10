@@ -50,6 +50,11 @@ import '../features/setup_account/presentation/blocs/email_bloc/email_bloc.dart'
     as _i55;
 import '../features/setup_account/presentation/blocs/personal_info_bloc/personal_info_bloc.dart'
     as _i173;
+import '../features/share_files/data/share_files_repo_share_plus_impl.dart'
+    as _i792;
+import '../features/share_files/domain/repo/share_files_repo.dart' as _i82;
+import '../features/share_files/presentation/share_file_bloc/share_file_bloc.dart'
+    as _i724;
 import '../features/splash/data/splash_repo_impl.dart' as _i702;
 import '../features/splash/domain/repos/splash_repo.dart' as _i73;
 import '../features/splash/presentation/bloc/first_opening_cubit.dart' as _i319;
@@ -103,6 +108,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i482.TxnHistoryRepo>(
       () => _i39.TxnHistoryRepoResApiImpl(),
     );
+    gh.lazySingleton<_i82.ShareFilesRepo>(
+      () => _i792.ShareFilesRepoSharePlusImpl(),
+    );
     gh.lazySingleton<_i73.SplashRepo>(() => _i702.SplashRepoImpl());
     gh.factory<_i319.FirstOpeningCubit>(
       () => _i319.FirstOpeningCubit(gh<_i73.SplashRepo>()),
@@ -111,6 +119,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i285.RemoteApi>(
       () => _i596.RemoteApiMockImpl(),
       registerFor: {_mock},
+    );
+    gh.factory<_i724.ShareFileBloc>(
+      () => _i724.ShareFileBloc(gh<_i82.ShareFilesRepo>()),
     );
     gh.factory<_i307.TxnByCategoryBloc>(
       () => _i307.TxnByCategoryBloc(gh<_i482.TxnHistoryRepo>()),
