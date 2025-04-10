@@ -11,7 +11,7 @@ class ShareFilesRepoSharePlusImpl implements ShareFilesRepo {
   Future<Either<Failure, Null>> shareFiles(List<ShareFileItem> files) async {
     final file = List<XFile>.from(
       files.map((e) {
-        XFile.fromData(
+        return XFile.fromData(
           e.data,
           mimeType: e.mimeType == MimeType.image ? 'image/jpeg' : null,
         );
