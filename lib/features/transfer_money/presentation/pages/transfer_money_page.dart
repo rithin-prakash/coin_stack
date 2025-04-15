@@ -4,6 +4,8 @@ import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/shared_widgets/app_snackbar.dart';
 import 'package:coin_stack/core/utls/ui_helper.dart';
 import 'package:coin_stack/di/di_config.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/request_money_bloc/request_money_bloc.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/request_money_bloc/request_money_state.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/send_money_bloc/send_money_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/send_money_bloc/send_money_state.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type.dart';
@@ -25,25 +27,47 @@ class TransferMoneyPage extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt<TransferFormBloc>()),
         BlocProvider(create: (_) => getIt<SendMoneyBloc>()),
+        BlocProvider(create: (_) => getIt<RequestMoneyBloc>()),
       ],
       child: Builder(
         builder: (context) {
-          return BlocListener<SendMoneyBloc, SendMoneyState>(
-            listener: (context, state) {
-              if (state is SendMoneyLoading) {
-                showLoader(context);
-              } else if (state is SendMoneyLoaded) {
-                context.pop();
-                context.navigateTo(
-                  SendMoneyResultPageRoute(id: state.response.id),
-                );
-              } else if (state is SendMoneyFailed) {
-                context.pop();
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(AppSnackbar(data: state.failure.message));
-              }
-            },
+          return MultiBlocListener(
+            listeners: [
+              BlocListener<SendMoneyBloc, SendMoneyState>(
+                listener: (context, state) {
+                  if (state is SendMoneyLoading) {
+                    showLoader(context);
+                  } else if (state is SendMoneyLoaded) {
+                    context.pop();
+                    context.navigateTo(
+                      SendMoneyResultPageRoute(id: state.response.id),
+                    );
+                  } else if (state is SendMoneyFailed) {
+                    context.pop();
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(AppSnackbar(data: state.failure.message));
+                  }
+                },
+              ),
+              BlocListener<RequestMoneyBloc, RequestMoneyState>(
+                listener: (context, state) {
+                  if (state is RequestMoneyLoading) {
+                    showLoader(context);
+                  } else if (state is RequestMoneyLoaded) {
+                    context.pop();
+                    context.navigateTo(
+                      RequestMoneyResultPageRoute(id: state.response.id),
+                    );
+                  } else if (state is RequestMoneyFailed) {
+                    context.pop();
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(AppSnackbar(data: state.failure.message));
+                  }
+                },
+              ),
+            ],
             child: Scaffold(
               resizeToAvoidBottomInset: false,
               appBar: AppBar(backgroundColor: Colors.grey.shade100),
