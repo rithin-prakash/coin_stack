@@ -6,16 +6,19 @@ class TransactionCatergoryItem extends StatelessWidget {
     required this.title,
     required this.iconColor,
     required this.icon,
+    required this.isActive,
+    required this.onTap,
   });
 
   final String title;
   final Color iconColor;
   final IconData icon;
-
+  final bool isActive;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -26,14 +29,15 @@ class TransactionCatergoryItem extends StatelessWidget {
           ),
           SizedBox(height: 6),
           Text(title),
-          Container(
-            decoration: BoxDecoration(
-              color: iconColor,
-              borderRadius: BorderRadius.circular(2),
+          if (isActive)
+            Container(
+              decoration: BoxDecoration(
+                color: iconColor,
+                borderRadius: BorderRadius.circular(2),
+              ),
+              width: 4,
+              height: 4,
             ),
-            width: 4,
-            height: 4,
-          ),
         ],
       ),
     );

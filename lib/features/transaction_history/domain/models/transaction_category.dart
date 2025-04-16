@@ -2,8 +2,7 @@ enum TransactionCategory {
   spending,
   income,
   bills,
-  saving,
-  factory;
+  saving;
 
   factory TransactionCategory.fromInt(int v) {
     return switch (v) {
@@ -20,7 +19,6 @@ enum TransactionCategory {
       TransactionCategory.bills => 3,
       TransactionCategory.saving => 4,
       TransactionCategory.spending => 1,
-      _ => -1,
     };
   }
 }

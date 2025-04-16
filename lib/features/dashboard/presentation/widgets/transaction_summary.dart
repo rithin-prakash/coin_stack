@@ -1,16 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
-import 'package:coin_stack/core/theme/app_colors.dart';
 import 'package:coin_stack/di/di_config.dart';
 import 'package:coin_stack/features/dashboard/presentation/widgets/transaction_summery_item.dart';
-import 'package:coin_stack/features/transaction_history/domain/models/transaction_cateogory.dart';
+import 'package:coin_stack/features/dashboard/presentation/widgets/txn_category_loading_shimmer.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/transaction_category.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/selected_txn_cat_bloc/selected_txn_cat_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 
 class TransactionSummary extends StatelessWidget {
   const TransactionSummary({super.key});
@@ -100,7 +99,7 @@ class TransactionSummary extends StatelessWidget {
                           amountColor: Colors.green,
                           onTap: () {
                             context.read<SelectedTxnCatBloc>().changeCategory(
-                              TransactionCategory.spending,
+                              TransactionCategory.income,
                             );
                             context.navigateTo(TransactionHistoryPageRoute());
                           },
@@ -172,43 +171,6 @@ class TransactionSummary extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class TxnCategoryLoadingShimmer extends StatelessWidget {
-  const TxnCategoryLoadingShimmer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: AppColors.simmerBg,
-      highlightColor: AppColors.simmerFg,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(25),
-              ),
-            ),
-            SizedBox(width: 5),
-            Flexible(
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

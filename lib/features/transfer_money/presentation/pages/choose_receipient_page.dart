@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/di/di_config.dart';
-import 'package:coin_stack/features/dashboard/presentation/widgets/transaction_summary.dart';
+import 'package:coin_stack/features/dashboard/presentation/widgets/txn_category_loading_shimmer.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/connected_profiles_bloc/connected_profiles_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/connected_profiles_bloc/connected_profiles_state.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/select_profile_bloc/select_profile_bloc.dart';
