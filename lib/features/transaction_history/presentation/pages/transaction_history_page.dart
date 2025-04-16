@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/transaction_history/presentation/widgets/calander_selector.dart';
 import 'package:coin_stack/features/transaction_history/presentation/widgets/category_wise_history_list.dart';
@@ -5,6 +6,7 @@ import 'package:coin_stack/features/transaction_history/presentation/widgets/mai
 import 'package:coin_stack/features/transaction_history/presentation/widgets/transaction_categories_container.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class TransactionHistoryPage extends StatelessWidget {
   const TransactionHistoryPage({super.key});
 

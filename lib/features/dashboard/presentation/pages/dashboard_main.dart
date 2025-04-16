@@ -65,11 +65,11 @@ class _DashboardMainState extends State<DashboardMain> {
               ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.pie_chart),
               label: 'History',
               activeIcon: Column(
                 children: [
-                  Icon(Icons.person),
+                  Icon(Icons.pie_chart),
                   Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor,

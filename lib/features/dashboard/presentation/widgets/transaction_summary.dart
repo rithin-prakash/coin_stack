@@ -1,7 +1,11 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/core/theme/app_colors.dart';
 import 'package:coin_stack/di/di_config.dart';
 import 'package:coin_stack/features/dashboard/presentation/widgets/transaction_summery_item.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/transaction_cateogory.dart';
+import 'package:coin_stack/features/transaction_history/presentation/blocs/selected_txn_cat_bloc/selected_txn_cat_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_state.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +69,12 @@ class TransactionSummary extends StatelessWidget {
                           title: 'Spending',
                           value: '-\$${state.history.amount}',
                           amountColor: Colors.red,
+                          onTap: () {
+                            context.read<SelectedTxnCatBloc>().changeCategory(
+                              TransactionCategory.spending,
+                            );
+                            context.navigateTo(TransactionHistoryPageRoute());
+                          },
                         );
                       }
                       return Container();
@@ -88,6 +98,12 @@ class TransactionSummary extends StatelessWidget {
                           title: 'Income',
                           value: '-\$${state.history.amount}',
                           amountColor: Colors.green,
+                          onTap: () {
+                            context.read<SelectedTxnCatBloc>().changeCategory(
+                              TransactionCategory.spending,
+                            );
+                            context.navigateTo(TransactionHistoryPageRoute());
+                          },
                         );
                       }
                       return Container();
@@ -98,7 +114,7 @@ class TransactionSummary extends StatelessWidget {
                   create:
                       (_) =>
                           getIt<TxnByCategoryBloc>()
-                            ..loadHistory(TransactionCategory.income),
+                            ..loadHistory(TransactionCategory.bills),
                   child: Builder(
                     builder: (context) {
                       var state = context.watch<TxnByCategoryBloc>().state;
@@ -111,6 +127,12 @@ class TransactionSummary extends StatelessWidget {
                           title: 'Bills',
                           value: '-\$800',
                           amountColor: Colors.red,
+                          onTap: () {
+                            context.read<SelectedTxnCatBloc>().changeCategory(
+                              TransactionCategory.bills,
+                            );
+                            context.navigateTo(TransactionHistoryPageRoute());
+                          },
                         );
                       }
                       return Container();
@@ -121,7 +143,7 @@ class TransactionSummary extends StatelessWidget {
                   create:
                       (_) =>
                           getIt<TxnByCategoryBloc>()
-                            ..loadHistory(TransactionCategory.income),
+                            ..loadHistory(TransactionCategory.saving),
                   child: Builder(
                     builder: (context) {
                       var state = context.watch<TxnByCategoryBloc>().state;
@@ -134,6 +156,12 @@ class TransactionSummary extends StatelessWidget {
                           title: 'Saving',
                           value: '-\$1000',
                           amountColor: Colors.orange,
+                          onTap: () {
+                            context.read<SelectedTxnCatBloc>().changeCategory(
+                              TransactionCategory.saving,
+                            );
+                            context.navigateTo(TransactionHistoryPageRoute());
+                          },
                         );
                       }
                       return Container();

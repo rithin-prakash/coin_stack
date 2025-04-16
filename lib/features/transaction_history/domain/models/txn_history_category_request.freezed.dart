@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TxnHistoryCategoryRequest {
 
- TransactionCategory get category;
+@TxnCategoryConverter() TransactionCategory get category;
 /// Create a copy of TxnHistoryCategoryRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $TxnHistoryCategoryRequestCopyWith<$Res>  {
   factory $TxnHistoryCategoryRequestCopyWith(TxnHistoryCategoryRequest value, $Res Function(TxnHistoryCategoryRequest) _then) = _$TxnHistoryCategoryRequestCopyWithImpl;
 @useResult
 $Res call({
- TransactionCategory category
+@TxnCategoryConverter() TransactionCategory category
 });
 
 
@@ -80,10 +80,10 @@ as TransactionCategory,
 @JsonSerializable()
 
 class _TxnHistoryCategoryRequest implements TxnHistoryCategoryRequest {
-  const _TxnHistoryCategoryRequest({required this.category});
+  const _TxnHistoryCategoryRequest({@TxnCategoryConverter() required this.category});
   factory _TxnHistoryCategoryRequest.fromJson(Map<String, dynamic> json) => _$TxnHistoryCategoryRequestFromJson(json);
 
-@override final  TransactionCategory category;
+@override@TxnCategoryConverter() final  TransactionCategory category;
 
 /// Create a copy of TxnHistoryCategoryRequest
 /// with the given fields replaced by the non-null parameter values.
@@ -118,7 +118,7 @@ abstract mixin class _$TxnHistoryCategoryRequestCopyWith<$Res> implements $TxnHi
   factory _$TxnHistoryCategoryRequestCopyWith(_TxnHistoryCategoryRequest value, $Res Function(_TxnHistoryCategoryRequest) _then) = __$TxnHistoryCategoryRequestCopyWithImpl;
 @override @useResult
 $Res call({
- TransactionCategory category
+@TxnCategoryConverter() TransactionCategory category
 });
 
 
