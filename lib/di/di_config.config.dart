@@ -66,6 +66,8 @@ import '../features/transaction_history/presentation/blocs/selected_txn_cat_bloc
     as _i1041;
 import '../features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_bloc.dart'
     as _i307;
+import '../features/transaction_history/presentation/blocs/txn_date_selection_bloc/txn_date_selection_bloc.dart'
+    as _i1059;
 import '../features/transaction_history/presentation/blocs/txn_list_by_category_bloc/txn_list_by_category_bloc.dart'
     as _i216;
 import '../features/transfer_money/data/transfer_repo_rest_api_impl.dart'
@@ -112,6 +114,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
     gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
     gh.factory<_i1041.SelectedTxnCatBloc>(() => _i1041.SelectedTxnCatBloc());
+    gh.factory<_i1059.TxnDateSelectionBloc>(
+      () => _i1059.TxnDateSelectionBloc(),
+    );
     gh.lazySingleton<_i82.ShareFilesRepo>(
       () => _i792.ShareFilesRepoSharePlusImpl(),
     );

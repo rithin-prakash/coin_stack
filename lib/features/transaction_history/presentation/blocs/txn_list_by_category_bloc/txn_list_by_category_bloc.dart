@@ -11,11 +11,15 @@ class TxnListByCategoryBloc extends Cubit<TxnListByCategoryState> {
 
   TxnListByCategoryBloc(this._repo) : super(TxnListByCategoryState.initial());
 
-  loadList(TransactionCategory category) async {
+  loadList(TransactionCategory category, DateTime dateTime) async {
     emit(TxnListByCategoryState.loading());
 
     final res = await _repo.loadTxnHistoryByCategory(
-      TxnHistoryByCategoryRequest(category: category, month: '', year: ''),
+      TxnHistoryByCategoryRequest(
+        category: category,
+        month: dateTime.month.toString(),
+        year: dateTime.year.toString(),
+      ),
     );
 
     res.fold(

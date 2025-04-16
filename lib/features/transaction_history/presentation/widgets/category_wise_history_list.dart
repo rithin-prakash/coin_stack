@@ -1,5 +1,6 @@
 import 'package:coin_stack/features/transaction_history/domain/models/transaction_category.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/selected_txn_cat_bloc/selected_txn_cat_bloc.dart';
+import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_date_selection_bloc/txn_date_selection_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_list_by_category_bloc/txn_list_by_category_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_list_by_category_bloc/txn_list_by_category_state.dart';
 import 'package:coin_stack/features/transaction_history/presentation/widgets/txn_history_by_category_shimmer.dart';
@@ -20,6 +21,7 @@ class _CategoryWiseHistoryListState extends State<CategoryWiseHistoryList> {
     super.initState();
     context.read<TxnListByCategoryBloc>().loadList(
       context.read<SelectedTxnCatBloc>().state,
+      context.read<TxnDateSelectionBloc>().state,
     );
   }
 
@@ -60,7 +62,10 @@ class _CategoryWiseHistoryListState extends State<CategoryWiseHistoryList> {
                     child: Text(s.failure.message),
                     onPressed: () {
                       final state = context.read<SelectedTxnCatBloc>().state;
-                      context.read<TxnListByCategoryBloc>().loadList(state);
+                      context.read<TxnListByCategoryBloc>().loadList(
+                        state,
+                        context.read<TxnDateSelectionBloc>().state,
+                      );
                     },
                   );
                 } else if (s is TxnListByCategoryLoaded) {
