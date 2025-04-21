@@ -1,4 +1,5 @@
 import 'package:coin_stack/core/utls/failure.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/spend_request.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/transaction_category.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/transaction_item.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/txn_history_by_category.dart';
@@ -71,7 +72,7 @@ class TxnHistoryRepoRestApiImpl implements TxnHistoryRepo {
   }
 
   @override
-  Future<Either<Failure, double>> loadSpend() async {
+  Future<Either<Failure, double>> loadSpend(SpendRequest req) async {
     await Future.delayed(Duration(seconds: 3));
 
     return Right(200);

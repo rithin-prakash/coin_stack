@@ -2,6 +2,7 @@ import 'package:coin_stack/features/transaction_history/presentation/blocs/balan
 import 'package:coin_stack/features/transaction_history/presentation/blocs/balance_bloc/balance_state.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/spend_bloc/spend_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/spend_bloc/spend_state.dart';
+import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_date_selection_bloc/txn_date_selection_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/widgets/main_summary_item.dart';
 import 'package:coin_stack/features/transaction_history/presentation/widgets/main_summary_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,8 @@ class _MainSummaryContainerState extends State<MainSummaryContainer> {
     super.initState();
 
     context.read<BalanceBloc>().loadBalance();
-    context.read<SpendBloc>().loadSpend();
+    final date = context.read<TxnDateSelectionBloc>().state;
+    context.read<SpendBloc>().loadSpend(date);
   }
 
   @override
@@ -44,7 +46,8 @@ class _MainSummaryContainerState extends State<MainSummaryContainer> {
                 } else if (s is SpendFailed) {
                   return TextButton(
                     onPressed: () {
-                      context.read<SpendBloc>().loadSpend();
+                      final date = context.watch<TxnDateSelectionBloc>().state;
+                      context.read<SpendBloc>().loadSpend(date);
                     },
                     child: Text(s.failure.message),
                   );

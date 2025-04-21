@@ -1,4 +1,5 @@
 import 'package:coin_stack/core/utls/failure.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/spend_request.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/transaction_item.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/txn_history_by_category.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/txn_history_by_category_request.dart';
@@ -15,5 +16,5 @@ abstract class TxnHistoryRepo {
   );
 
   Future<Either<Failure, double>> loadBalance();
-  Future<Either<Failure, double>> loadSpend();
+  Future<Either<Failure, double>> loadSpend(SpendRequest spendRequest);
 }

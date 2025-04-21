@@ -14,9 +14,6 @@ class BalanceBloc extends Cubit<BalanceState> {
 
     final res = await _repo.loadBalance();
 
-    print("------------------------------------------------------");
-    print(res);
-
     res.fold(
       (l) => emit(BalanceState.failed(l)),
       (r) => emit(BalanceState.loaded(r)),
