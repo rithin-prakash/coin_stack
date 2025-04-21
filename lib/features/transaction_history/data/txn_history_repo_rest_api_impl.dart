@@ -62,4 +62,18 @@ class TxnHistoryRepoRestApiImpl implements TxnHistoryRepo {
       List<TransactionItem>.from(r.map((e) => TransactionItem.fromJson(e))),
     );
   }
+
+  @override
+  Future<Either<Failure, double>> loadBalance() async {
+    await Future.delayed(Duration(seconds: 3));
+
+    return Right(300200);
+  }
+
+  @override
+  Future<Either<Failure, double>> loadSpend() async {
+    await Future.delayed(Duration(seconds: 3));
+
+    return Right(200);
+  }
 }

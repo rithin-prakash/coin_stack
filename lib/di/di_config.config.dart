@@ -62,8 +62,12 @@ import '../features/transaction_history/data/txn_history_repo_rest_api_impl.dart
     as _i39;
 import '../features/transaction_history/domain/repos/txn_history_repo.dart'
     as _i482;
+import '../features/transaction_history/presentation/blocs/balance_bloc/balance_bloc.dart'
+    as _i386;
 import '../features/transaction_history/presentation/blocs/selected_txn_cat_bloc/selected_txn_cat_bloc.dart'
     as _i1041;
+import '../features/transaction_history/presentation/blocs/spend_bloc/spend_bloc.dart'
+    as _i508;
 import '../features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_bloc.dart'
     as _i307;
 import '../features/transaction_history/presentation/blocs/txn_date_selection_bloc/txn_date_selection_bloc.dart'
@@ -140,6 +144,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i216.TxnListByCategoryBloc>(
       () => _i216.TxnListByCategoryBloc(gh<_i482.TxnHistoryRepo>()),
+    );
+    gh.factory<_i386.BalanceBloc>(
+      () => _i386.BalanceBloc(gh<_i482.TxnHistoryRepo>()),
+    );
+    gh.factory<_i508.SpendBloc>(
+      () => _i508.SpendBloc(gh<_i482.TxnHistoryRepo>()),
     );
     gh.factory<_i225.TransferDetailsBloc>(
       () => _i225.TransferDetailsBloc(gh<_i37.TransferRepo>()),

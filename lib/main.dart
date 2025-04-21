@@ -9,7 +9,9 @@ import 'package:coin_stack/features/create_account/presentation/blocs/sigup_form
 import 'package:coin_stack/features/profile/presentation/bloc/support_currency_bloc/support_currency_list_bloc.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
 import 'package:coin_stack/features/share_files/presentation/share_file_bloc/share_file_bloc.dart';
+import 'package:coin_stack/features/transaction_history/presentation/blocs/balance_bloc/balance_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/selected_txn_cat_bloc/selected_txn_cat_bloc.dart';
+import 'package:coin_stack/features/transaction_history/presentation/blocs/spend_bloc/spend_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_list_by_category_bloc/txn_list_by_category_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/select_profile_bloc/select_profile_bloc.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/selected_purpose_bloc/select_purpose_bloc.dart';
@@ -44,6 +46,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<ShareFileBloc>()),
         BlocProvider(create: (_) => getIt<SelectedTxnCatBloc>()),
         BlocProvider(create: (_) => getIt<TxnListByCategoryBloc>()),
+        BlocProvider(create: (_) => getIt<BalanceBloc>()),
+        BlocProvider(create: (_) => getIt<SpendBloc>()),
       ],
       child: MaterialApp.router(
         title: 'CoinStack',

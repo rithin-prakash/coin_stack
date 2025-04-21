@@ -13,4 +13,7 @@ abstract class TxnHistoryRepo {
   Future<Either<Failure, List<TransactionItem>>> loadTxnHistoryByCategory(
     TxnHistoryByCategoryRequest request,
   );
+
+  Future<Either<Failure, double>> loadBalance();
+  Future<Either<Failure, double>> loadSpend();
 }
