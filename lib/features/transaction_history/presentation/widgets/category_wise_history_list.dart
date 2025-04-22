@@ -1,4 +1,5 @@
 import 'package:coin_stack/features/transaction_history/domain/models/transaction_category.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/transaction_item.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/selected_txn_cat_bloc/selected_txn_cat_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_date_selection_bloc/txn_date_selection_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_list_by_category_bloc/txn_list_by_category_bloc.dart';
@@ -72,32 +73,7 @@ class _CategoryWiseHistoryListState extends State<CategoryWiseHistoryList> {
                   if (s.list.isEmpty) {
                     return Text("Empty");
                   }
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: s.list.length,
-                    separatorBuilder: (context, index) {
-                      return Divider(color: Colors.grey.shade400);
-                    },
-                    itemBuilder: (_, i) {
-                      final x = s.list[i];
-                      return ListTile(
-                        titleTextStyle: Theme.of(context).textTheme.titleMedium,
-                        contentPadding: EdgeInsets.zero,
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(x.url),
-                        ),
-                        title: Text(x.title),
-                        subtitle: Text(x.completedTime.toIso8601String()),
-                        trailing: Text(
-                          "-\$${x.amount}",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.titleMedium?.copyWith(color: Colors.red),
-                        ),
-                      );
-                    },
-                  );
+                  return _CatList(s.list);
                 }
                 return Container();
               },
@@ -105,6 +81,59 @@ class _CategoryWiseHistoryListState extends State<CategoryWiseHistoryList> {
           ],
         );
       },
+    );
+  }
+}
+
+class _CatList extends StatelessWidget {
+  const _CatList(this.list);
+
+  final List<TransactionItem> list;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: list.length,
+      separatorBuilder: (context, index) {
+        return Divider(color: Colors.grey.shade400);
+      },
+      itemBuilder: (_, i) {
+        final s = context.watch<SelectedTxnCatBloc>().state;
+        final color =
+            s == TransactionCategory.spending
+                ? Colors.red
+                : s == TransactionCategory.bills
+                ? Colors.orange
+                : Colors.green;
+        final x = list[i];
+        return _CatItem(x: x, amountColor: color);
+      },
+    );
+  }
+}
+
+class _CatItem extends StatelessWidget {
+  const _CatItem({required this.x, required this.amountColor});
+
+  final TransactionItem x;
+  final Color amountColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      titleTextStyle: Theme.of(context).textTheme.titleMedium,
+      contentPadding: EdgeInsets.zero,
+      leading: CircleAvatar(backgroundImage: NetworkImage(x.url)),
+      title: Text(x.title),
+      subtitle: Text(x.completedTime.toIso8601String()),
+      trailing: Text(
+        "-\$${x.amount}",
+        style: Theme.of(
+          context,
+        ).textTheme.titleMedium?.copyWith(color: amountColor),
+      ),
     );
   }
 }

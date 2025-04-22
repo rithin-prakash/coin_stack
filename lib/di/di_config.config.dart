@@ -115,12 +115,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i938.SelectPaymentOptionBloc(),
     );
     gh.factory<_i561.SelectPurposeBloc>(() => _i561.SelectPurposeBloc());
-    gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
-    gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
-    gh.factory<_i1041.SelectedTxnCatBloc>(() => _i1041.SelectedTxnCatBloc());
     gh.factory<_i1059.TxnDateSelectionBloc>(
       () => _i1059.TxnDateSelectionBloc(),
     );
+    gh.factory<_i1041.SelectedTxnCatBloc>(() => _i1041.SelectedTxnCatBloc());
+    gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
+    gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
     gh.lazySingleton<_i82.ShareFilesRepo>(
       () => _i792.ShareFilesRepoSharePlusImpl(),
     );
@@ -139,14 +139,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i724.ShareFileBloc>(
       () => _i724.ShareFileBloc(gh<_i82.ShareFilesRepo>()),
     );
+    gh.factory<_i386.BalanceBloc>(
+      () => _i386.BalanceBloc(gh<_i482.TxnHistoryRepo>()),
+    );
     gh.factory<_i307.TxnByCategoryBloc>(
       () => _i307.TxnByCategoryBloc(gh<_i482.TxnHistoryRepo>()),
     );
     gh.factory<_i216.TxnListByCategoryBloc>(
       () => _i216.TxnListByCategoryBloc(gh<_i482.TxnHistoryRepo>()),
-    );
-    gh.factory<_i386.BalanceBloc>(
-      () => _i386.BalanceBloc(gh<_i482.TxnHistoryRepo>()),
     );
     gh.factory<_i508.SpendBloc>(
       () => _i508.SpendBloc(gh<_i482.TxnHistoryRepo>()),
@@ -157,14 +157,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i409.SendMoneyBloc>(
       () => _i409.SendMoneyBloc(gh<_i37.TransferRepo>()),
     );
+    gh.factory<_i771.RequestMoneyBloc>(
+      () => _i771.RequestMoneyBloc(gh<_i37.TransferRepo>()),
+    );
     gh.factory<_i548.SelectProfileBloc>(
       () => _i548.SelectProfileBloc(gh<_i37.TransferRepo>()),
     );
     gh.factory<_i179.ConnectedProfilesBloc>(
       () => _i179.ConnectedProfilesBloc(gh<_i37.TransferRepo>()),
-    );
-    gh.factory<_i771.RequestMoneyBloc>(
-      () => _i771.RequestMoneyBloc(gh<_i37.TransferRepo>()),
     );
     gh.factory<_i372.PaymentOptionBloc>(
       () => _i372.PaymentOptionBloc(gh<_i37.TransferRepo>()),
