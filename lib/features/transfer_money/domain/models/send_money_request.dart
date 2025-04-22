@@ -1,5 +1,5 @@
+import 'package:coin_stack/features/card/domain/models/payment_option.dart';
 import 'package:coin_stack/features/transfer_money/domain/models/connected_profile.dart';
-import 'package:coin_stack/features/transfer_money/domain/models/payment_option.dart';
 import 'package:coin_stack/features/transfer_money/presentation/blocs/payment_option_bloc/payment_option_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

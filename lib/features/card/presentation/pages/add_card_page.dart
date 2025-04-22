@@ -86,6 +86,7 @@ class AddCardPage extends StatelessWidget {
                         controlName: 'cvv',
                         labelText: 'CVV',
                         hintText: '\u25cf \u25cf \u25cf',
+                        obscureText: true,
                       ),
                     ],
                   ),

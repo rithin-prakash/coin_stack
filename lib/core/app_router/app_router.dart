@@ -32,5 +32,6 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: CreateAccountPrivacyPolicyPageRoute.page),
     AutoRoute(page: RequestMoneyResultPageRoute.page),
     AutoRoute(page: TransactionHistoryPageRoute.page),
+    AutoRoute(page: CardListPageRoute.page),
   ];
 }

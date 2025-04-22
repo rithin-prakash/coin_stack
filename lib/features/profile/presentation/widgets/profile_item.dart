@@ -17,6 +17,7 @@ class ProfileItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       leading: CircleAvatar(
         radius: 24,
         backgroundColor: iconBgColor,

@@ -1,5 +1,5 @@
 import 'package:coin_stack/core/utls/failure.dart';
-import 'package:coin_stack/features/transfer_money/domain/models/payment_option.dart';
+import 'package:coin_stack/features/card/domain/models/payment_option.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'select_payment_option_state.freezed.dart';
