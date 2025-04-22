@@ -105,6 +105,12 @@ class _TransactionHistoryGraphState extends State<TransactionHistoryGraph> {
     final spot =
         data.map((e) => FlSpot(e.x.toDouble(), e.y.toDouble())).toList();
     return LineChartData(
+      lineTouchData: LineTouchData(
+        handleBuiltInTouches: true,
+        touchTooltipData: LineTouchTooltipData(
+          getTooltipColor: (touchedSpot) => Colors.black,
+        ),
+      ),
       gridData: FlGridData(
         show: false,
         drawVerticalLine: true,
@@ -162,6 +168,8 @@ class _TransactionHistoryGraphState extends State<TransactionHistoryGraph> {
           belowBarData: BarAreaData(
             show: true,
             gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors:
                   gradientColors
                       .map((color) => color.withValues(alpha: 0.3))
