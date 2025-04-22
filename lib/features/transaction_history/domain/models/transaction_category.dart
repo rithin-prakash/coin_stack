@@ -1,3 +1,5 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 enum TransactionCategory {
   spending,
   income,
@@ -21,4 +23,14 @@ enum TransactionCategory {
       TransactionCategory.spending => 1,
     };
   }
+}
+
+class TxnCategoryConverter implements JsonConverter<TransactionCategory, int> {
+  const TxnCategoryConverter();
+
+  @override
+  TransactionCategory fromJson(int json) => TransactionCategory.fromInt(json);
+
+  @override
+  int toJson(TransactionCategory object) => object.toInt();
 }

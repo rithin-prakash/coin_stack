@@ -72,6 +72,8 @@ import '../features/transaction_history/presentation/blocs/txn_by_category_bloc/
     as _i307;
 import '../features/transaction_history/presentation/blocs/txn_date_selection_bloc/txn_date_selection_bloc.dart'
     as _i1059;
+import '../features/transaction_history/presentation/blocs/txn_history_graph_bloc/txn_history_graph_bloc.dart'
+    as _i795;
 import '../features/transaction_history/presentation/blocs/txn_list_by_category_bloc/txn_list_by_category_bloc.dart'
     as _i216;
 import '../features/transfer_money/data/transfer_repo_rest_api_impl.dart'
@@ -150,6 +152,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i508.SpendBloc>(
       () => _i508.SpendBloc(gh<_i482.TxnHistoryRepo>()),
+    );
+    gh.factory<_i795.TxnHistoryGraphBloc>(
+      () => _i795.TxnHistoryGraphBloc(gh<_i482.TxnHistoryRepo>()),
     );
     gh.factory<_i225.TransferDetailsBloc>(
       () => _i225.TransferDetailsBloc(gh<_i37.TransferRepo>()),

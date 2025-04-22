@@ -1,5 +1,4 @@
 import 'package:coin_stack/features/transaction_history/domain/models/transaction_category.dart';
-import 'package:coin_stack/features/transaction_history/domain/models/txn_history_category_request.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'transaction_item.freezed.dart';

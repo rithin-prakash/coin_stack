@@ -4,6 +4,8 @@ import 'package:coin_stack/features/transaction_history/domain/models/transactio
 import 'package:coin_stack/features/transaction_history/domain/models/txn_history_by_category.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/txn_history_by_category_request.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/txn_history_category_request.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/txn_history_graph_request.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/txn_history_graph_response.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class TxnHistoryRepo {
@@ -17,4 +19,8 @@ abstract class TxnHistoryRepo {
 
   Future<Either<Failure, double>> loadBalance();
   Future<Either<Failure, double>> loadSpend(SpendRequest spendRequest);
+
+  Future<Either<Failure, TxnHistoryGraphResponse>> loadHistoryGraph(
+    TxnHistoryGraphRequest request,
+  );
 }

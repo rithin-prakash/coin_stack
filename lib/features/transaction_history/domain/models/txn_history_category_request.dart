@@ -13,13 +13,3 @@ abstract class TxnHistoryCategoryRequest with _$TxnHistoryCategoryRequest {
   factory TxnHistoryCategoryRequest.fromJson(Map<String, dynamic> json) =>
       _$TxnHistoryCategoryRequestFromJson(json);
 }
-
-class TxnCategoryConverter implements JsonConverter<TransactionCategory, int> {
-  const TxnCategoryConverter();
-
-  @override
-  TransactionCategory fromJson(int json) => TransactionCategory.fromInt(json);
-
-  @override
-  int toJson(TransactionCategory object) => object.toInt();
-}

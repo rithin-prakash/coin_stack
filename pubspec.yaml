@@ -35,6 +35,7 @@ dependencies:
   flutter_bloc: ^9.1.0
   cached_network_image: ^3.4.1
   flutter_html: ^3.0.0
+  fl_chart: ^0.71.0
 
   #domain
   dartz:

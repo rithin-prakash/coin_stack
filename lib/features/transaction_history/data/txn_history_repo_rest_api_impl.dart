@@ -5,6 +5,8 @@ import 'package:coin_stack/features/transaction_history/domain/models/transactio
 import 'package:coin_stack/features/transaction_history/domain/models/txn_history_by_category.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/txn_history_by_category_request.dart';
 import 'package:coin_stack/features/transaction_history/domain/models/txn_history_category_request.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/txn_history_graph_request.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/txn_history_graph_response.dart';
 import 'package:coin_stack/features/transaction_history/domain/repos/txn_history_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -76,5 +78,27 @@ class TxnHistoryRepoRestApiImpl implements TxnHistoryRepo {
     await Future.delayed(Duration(seconds: 3));
 
     return Right(200);
+  }
+
+  @override
+  Future<Either<Failure, TxnHistoryGraphResponse>> loadHistoryGraph(
+    TxnHistoryGraphRequest request,
+  ) async {
+    await Future.delayed(Duration(seconds: 2));
+
+    final x = {
+      "category": 1,
+      "date": "2025-06-01 08:45:10",
+      "data": [
+        {"x": 1, "y": 5},
+        {"x": 3, "y": 8},
+        {"x": 7, "y": 2},
+        {"x": 8, "y": 4},
+        {"x": 5, "y": 2},
+        {"x": 3, "y": 6},
+      ],
+    };
+
+    return Right(TxnHistoryGraphResponse.fromJson(x));
   }
 }

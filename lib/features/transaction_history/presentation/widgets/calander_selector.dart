@@ -1,6 +1,7 @@
 import 'package:coin_stack/features/transaction_history/presentation/blocs/selected_txn_cat_bloc/selected_txn_cat_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/spend_bloc/spend_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_date_selection_bloc/txn_date_selection_bloc.dart';
+import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_history_graph_bloc/txn_history_graph_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_list_by_category_bloc/txn_list_by_category_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,10 @@ class CalanderSelector extends StatelessWidget {
         );
 
         context.read<SpendBloc>().loadSpend(state);
+        context.read<TxnHistoryGraphBloc>().loadHistoryGraph(
+          context.read<SelectedTxnCatBloc>().state,
+          state,
+        );
       },
       child: InkWell(
         onTap: () async {
