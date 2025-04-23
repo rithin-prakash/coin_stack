@@ -1,4 +1,5 @@
 import 'package:coin_stack/core/utls/failure.dart';
+import 'package:coin_stack/features/card/domain/models/add_card_request.dart';
 import 'package:coin_stack/features/card/domain/models/payment_option.dart';
 import 'package:coin_stack/features/card/domain/repos/card_repo.dart';
 import 'package:dartz/dartz.dart';
@@ -29,5 +30,11 @@ class CardRepoRestApiImpl implements CardRepo {
     return Right(
       List<PaymentOption>.from(r.map((e) => PaymentOption.fromJson(e))),
     );
+  }
+
+  @override
+  Future<Either<Failure, Null>> addCard(AddCardRequest cardRequest) async {
+    await Future.delayed(Duration(seconds: 4));
+    return Right(null);
   }
 }

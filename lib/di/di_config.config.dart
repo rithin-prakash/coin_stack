@@ -18,6 +18,8 @@ import '../features/card/data/card_repo_rest_api_impl.dart' as _i671;
 import '../features/card/domain/repos/card_repo.dart' as _i117;
 import '../features/card/presentation/blocs/add_card_bloc/add_card_bloc.dart'
     as _i443;
+import '../features/card/presentation/blocs/card_list_bloc.dart/card_list_bloc.dart'
+    as _i189;
 import '../features/create_account/data/sign_up_repo_impl.dart' as _i510;
 import '../features/create_account/domain/repos/sign_up_repo.dart' as _i764;
 import '../features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart'
@@ -127,7 +129,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1041.SelectedTxnCatBloc>(() => _i1041.SelectedTxnCatBloc());
     gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
     gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
-    gh.factory<_i443.AddCardBloc>(() => _i443.AddCardBloc());
     gh.lazySingleton<_i82.ShareFilesRepo>(
       () => _i792.ShareFilesRepoSharePlusImpl(),
     );
@@ -138,6 +139,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i372.PaymentOptionBloc>(
       () => _i372.PaymentOptionBloc(gh<_i117.CardRepo>()),
+    );
+    gh.factory<_i189.CardListBloc>(
+      () => _i189.CardListBloc(gh<_i117.CardRepo>()),
     );
     gh.factory<_i319.FirstOpeningCubit>(
       () => _i319.FirstOpeningCubit(gh<_i73.SplashRepo>()),
@@ -179,6 +183,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i179.ConnectedProfilesBloc>(
       () => _i179.ConnectedProfilesBloc(gh<_i37.TransferRepo>()),
+    );
+    gh.factory<_i443.AddCardBloc>(
+      () => _i443.AddCardBloc(gh<_i117.CardRepo>()),
     );
     gh.lazySingleton<_i619.UserProfileRepo>(
       () => _i959.UserProfileRepoRestApiImpl(gh<_i285.RemoteApi>()),

@@ -3,6 +3,8 @@ import 'package:coin_stack/core/app_router/app_router.dart';
 import 'package:coin_stack/core/theme/app_theme.dart';
 import 'package:coin_stack/di/build_env.dart';
 import 'package:coin_stack/di/di_config.dart';
+import 'package:coin_stack/features/card/presentation/blocs/add_card_bloc/add_card_bloc.dart';
+import 'package:coin_stack/features/card/presentation/blocs/card_list_bloc.dart/card_list_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sigup_form_bloc/signup_form_bloc.dart';
@@ -48,6 +50,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<TxnListByCategoryBloc>()),
         BlocProvider(create: (_) => getIt<BalanceBloc>()),
         BlocProvider(create: (_) => getIt<SpendBloc>()),
+        BlocProvider(create: (_) => getIt<AddCardBloc>()),
+        BlocProvider(create: (_) => getIt<CardListBloc>()),
       ],
       child: MaterialApp.router(
         title: 'CoinStack',
