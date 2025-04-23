@@ -1,7 +1,9 @@
 import 'package:coin_stack/core/api_config/remote_api.dart';
 import 'package:coin_stack/core/utls/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: RemoteApi)
 class RemoteApiDioImpl implements RemoteApi {
   @override
   Future<Either<Failure, dynamic>> delete(

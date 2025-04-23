@@ -62,7 +62,9 @@ class ProfileMenu extends StatelessWidget {
           ProfileItem(
             icon: Icon(Icons.edit_document, color: Colors.green, size: 30),
             iconBgColor: Colors.green.withValues(alpha: .3),
-            onTap: () {},
+            onTap: () {
+              context.navigateTo(CreateAccountTncPageRoute());
+            },
             title: 'Terms and Conditions',
           ),
         ],

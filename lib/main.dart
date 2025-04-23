@@ -9,6 +9,7 @@ import 'package:coin_stack/features/create_account/presentation/blocs/account_no
 import 'package:coin_stack/features/create_account/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/sigup_form_bloc/signup_form_bloc.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/support_currency_bloc/support_currency_list_bloc.dart';
+import 'package:coin_stack/features/profile/presentation/bloc/theme_bloc/theme_bloc.dart';
 import 'package:coin_stack/features/profile/presentation/bloc/user_bloc/user_bloc.dart';
 import 'package:coin_stack/features/share_files/presentation/share_file_bloc/share_file_bloc.dart';
 import 'package:coin_stack/features/transaction_history/presentation/blocs/balance_bloc/balance_bloc.dart';
@@ -52,16 +53,24 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<SpendBloc>()),
         BlocProvider(create: (_) => getIt<AddCardBloc>()),
         BlocProvider(create: (_) => getIt<CardListBloc>()),
+        BlocProvider(create: (_) => getIt<ThemeBloc>()),
       ],
-      child: MaterialApp.router(
-        title: 'CoinStack',
-        theme: AppTheme.lightTheme,
-        routerConfig: appRouter.config(),
-        localizationsDelegates: [
-          // GlobalMaterialLocalizations.delegate,
-          MonthYearPickerLocalizations.delegate,
-        ],
-        // debugShowMaterialGrid: true,
+      child: Builder(
+        builder: (context) {
+          final state = context.watch<ThemeBloc>().state;
+          return MaterialApp.router(
+            title: 'CoinStack',
+            theme: AppTheme.lightTheme,
+            themeMode: state ? ThemeMode.light : ThemeMode.dark,
+            darkTheme: AppTheme.darkTheme,
+            routerConfig: appRouter.config(),
+            localizationsDelegates: [
+              // GlobalMaterialLocalizations.delegate,
+              MonthYearPickerLocalizations.delegate,
+            ],
+            // debugShowMaterialGrid: true,
+          );
+        },
       ),
     );
   }

@@ -13,6 +13,7 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../core/api_config/remote_api.dart' as _i285;
+import '../core/api_config/remote_api_dio_impl.dart' as _i845;
 import '../features/card/data/card_repo_rest_api_impl.dart' as _i671;
 import '../features/card/domain/repos/card_repo.dart' as _i117;
 import '../features/card/presentation/blocs/add_card_bloc/add_card_bloc.dart'
@@ -39,6 +40,8 @@ import '../features/profile/data/user_profile_repo_rest_api_impl.dart' as _i959;
 import '../features/profile/domain/repos/user_profile_repo.dart' as _i619;
 import '../features/profile/presentation/bloc/support_currency_bloc/support_currency_list_bloc.dart'
     as _i566;
+import '../features/profile/presentation/bloc/theme_bloc/theme_bloc.dart'
+    as _i686;
 import '../features/profile/presentation/bloc/user_bloc/user_bloc.dart'
     as _i486;
 import '../features/setup_account/data/edit_account_info_repo_rest_api_impl.dart'
@@ -126,17 +129,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1041.SelectedTxnCatBloc>(() => _i1041.SelectedTxnCatBloc());
     gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
     gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
+    gh.factory<_i686.ThemeBloc>(() => _i686.ThemeBloc());
     gh.lazySingleton<_i82.ShareFilesRepo>(
       () => _i792.ShareFilesRepoSharePlusImpl(),
     );
     gh.lazySingleton<_i73.SplashRepo>(() => _i702.SplashRepoImpl());
-    gh.lazySingleton<_i764.SignUpRepo>(
-      () => _i510.SignUpRepoImpl(gh<_i285.RemoteApi>()),
-    );
-    gh.factory<_i135.SignUpBloc>(
-      () => _i135.SignUpBloc(gh<_i764.SignUpRepo>()),
-    );
     gh.lazySingleton<_i117.CardRepo>(() => _i671.CardRepoRestApiImpl());
+    gh.lazySingleton<_i285.RemoteApi>(() => _i845.RemoteApiDioImpl());
     gh.lazySingleton<_i482.TxnHistoryRepo>(
       () => _i39.TxnHistoryRepoRestApiImpl(),
     );
@@ -183,13 +182,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i179.ConnectedProfilesBloc>(
       () => _i179.ConnectedProfilesBloc(gh<_i37.TransferRepo>()),
     );
-    gh.factory<_i444.LoginBloc>(() => _i444.LoginBloc(gh<_i764.SignUpRepo>()));
-    gh.factory<_i386.CreateAccountTncBloc>(
-      () => _i386.CreateAccountTncBloc(gh<_i764.SignUpRepo>()),
-    );
-    gh.factory<_i883.CreateAccountPrivacyBloc>(
-      () => _i883.CreateAccountPrivacyBloc(gh<_i764.SignUpRepo>()),
-    );
     gh.factory<_i443.AddCardBloc>(
       () => _i443.AddCardBloc(gh<_i117.CardRepo>()),
     );
@@ -214,8 +206,21 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i55.EmailBloc>(
       () => _i55.EmailBloc(gh<_i257.EditAccInfoRepo>()),
     );
+    gh.lazySingleton<_i764.SignUpRepo>(
+      () => _i510.SignUpRepoImpl(gh<_i285.RemoteApi>()),
+    );
+    gh.factory<_i135.SignUpBloc>(
+      () => _i135.SignUpBloc(gh<_i764.SignUpRepo>()),
+    );
     gh.factory<_i525.CreatePasscodeBloc>(
       () => _i525.CreatePasscodeBloc(gh<_i257.EditAccInfoRepo>()),
+    );
+    gh.factory<_i444.LoginBloc>(() => _i444.LoginBloc(gh<_i764.SignUpRepo>()));
+    gh.factory<_i386.CreateAccountTncBloc>(
+      () => _i386.CreateAccountTncBloc(gh<_i764.SignUpRepo>()),
+    );
+    gh.factory<_i883.CreateAccountPrivacyBloc>(
+      () => _i883.CreateAccountPrivacyBloc(gh<_i764.SignUpRepo>()),
     );
     gh.factory<_i566.SupportCurrencyListCubit>(
       () => _i566.SupportCurrencyListCubit(gh<_i619.UserProfileRepo>()),
