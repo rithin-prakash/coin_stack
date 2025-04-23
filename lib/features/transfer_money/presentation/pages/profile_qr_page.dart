@@ -107,7 +107,7 @@ class ProfileQrPage extends StatelessWidget {
                     );
                     return;
                   }
-                  shareImage(image!, context);
+                  if (context.mounted) shareImage(image!, context);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

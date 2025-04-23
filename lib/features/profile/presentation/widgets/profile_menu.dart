@@ -36,7 +36,7 @@ class ProfileMenu extends StatelessWidget {
             icon: Icon(Icons.credit_card, color: Colors.orange, size: 30),
             iconBgColor: Colors.orange.withValues(alpha: .3),
             onTap: () {
-              context.navigateTo(CardListPageRoute());
+              context.navigateTo(CardListPageRoute(fromProfile: true));
             },
             title: 'Cards',
           ),

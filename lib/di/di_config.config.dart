@@ -13,7 +13,6 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../core/api_config/remote_api.dart' as _i285;
-import '../core/api_config/remote_api_mock_impl.dart' as _i596;
 import '../features/card/data/card_repo_rest_api_impl.dart' as _i671;
 import '../features/card/domain/repos/card_repo.dart' as _i117;
 import '../features/card/presentation/blocs/add_card_bloc/add_card_bloc.dart'
@@ -106,8 +105,6 @@ import '../features/transfer_money/presentation/blocs/transfer_details_bloc/tran
 import '../features/transfer_money/presentation/blocs/transfer_form_bloc/transfer_form_bloc.dart'
     as _i345;
 
-const String _mock = 'mock';
-
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
@@ -133,24 +130,26 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i792.ShareFilesRepoSharePlusImpl(),
     );
     gh.lazySingleton<_i73.SplashRepo>(() => _i702.SplashRepoImpl());
+    gh.lazySingleton<_i764.SignUpRepo>(
+      () => _i510.SignUpRepoImpl(gh<_i285.RemoteApi>()),
+    );
+    gh.factory<_i135.SignUpBloc>(
+      () => _i135.SignUpBloc(gh<_i764.SignUpRepo>()),
+    );
     gh.lazySingleton<_i117.CardRepo>(() => _i671.CardRepoRestApiImpl());
     gh.lazySingleton<_i482.TxnHistoryRepo>(
       () => _i39.TxnHistoryRepoRestApiImpl(),
     );
-    gh.factory<_i372.PaymentOptionBloc>(
-      () => _i372.PaymentOptionBloc(gh<_i117.CardRepo>()),
-    );
     gh.factory<_i189.CardListBloc>(
       () => _i189.CardListBloc(gh<_i117.CardRepo>()),
+    );
+    gh.factory<_i372.PaymentOptionBloc>(
+      () => _i372.PaymentOptionBloc(gh<_i117.CardRepo>()),
     );
     gh.factory<_i319.FirstOpeningCubit>(
       () => _i319.FirstOpeningCubit(gh<_i73.SplashRepo>()),
     );
     gh.lazySingleton<_i37.TransferRepo>(() => _i778.TransferRepoRestApiImpl());
-    gh.lazySingleton<_i285.RemoteApi>(
-      () => _i596.RemoteApiMockImpl(),
-      registerFor: {_mock},
-    );
     gh.factory<_i724.ShareFileBloc>(
       () => _i724.ShareFileBloc(gh<_i82.ShareFilesRepo>()),
     );
@@ -163,11 +162,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i216.TxnListByCategoryBloc>(
       () => _i216.TxnListByCategoryBloc(gh<_i482.TxnHistoryRepo>()),
     );
-    gh.factory<_i508.SpendBloc>(
-      () => _i508.SpendBloc(gh<_i482.TxnHistoryRepo>()),
-    );
     gh.factory<_i795.TxnHistoryGraphBloc>(
       () => _i795.TxnHistoryGraphBloc(gh<_i482.TxnHistoryRepo>()),
+    );
+    gh.factory<_i508.SpendBloc>(
+      () => _i508.SpendBloc(gh<_i482.TxnHistoryRepo>()),
     );
     gh.factory<_i225.TransferDetailsBloc>(
       () => _i225.TransferDetailsBloc(gh<_i37.TransferRepo>()),
@@ -183,6 +182,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i179.ConnectedProfilesBloc>(
       () => _i179.ConnectedProfilesBloc(gh<_i37.TransferRepo>()),
+    );
+    gh.factory<_i444.LoginBloc>(() => _i444.LoginBloc(gh<_i764.SignUpRepo>()));
+    gh.factory<_i386.CreateAccountTncBloc>(
+      () => _i386.CreateAccountTncBloc(gh<_i764.SignUpRepo>()),
+    );
+    gh.factory<_i883.CreateAccountPrivacyBloc>(
+      () => _i883.CreateAccountPrivacyBloc(gh<_i764.SignUpRepo>()),
     );
     gh.factory<_i443.AddCardBloc>(
       () => _i443.AddCardBloc(gh<_i117.CardRepo>()),
@@ -208,21 +214,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i55.EmailBloc>(
       () => _i55.EmailBloc(gh<_i257.EditAccInfoRepo>()),
     );
-    gh.lazySingleton<_i764.SignUpRepo>(
-      () => _i510.SignUpRepoImpl(gh<_i285.RemoteApi>()),
-    );
-    gh.factory<_i135.SignUpBloc>(
-      () => _i135.SignUpBloc(gh<_i764.SignUpRepo>()),
-    );
     gh.factory<_i525.CreatePasscodeBloc>(
       () => _i525.CreatePasscodeBloc(gh<_i257.EditAccInfoRepo>()),
-    );
-    gh.factory<_i444.LoginBloc>(() => _i444.LoginBloc(gh<_i764.SignUpRepo>()));
-    gh.factory<_i386.CreateAccountTncBloc>(
-      () => _i386.CreateAccountTncBloc(gh<_i764.SignUpRepo>()),
-    );
-    gh.factory<_i883.CreateAccountPrivacyBloc>(
-      () => _i883.CreateAccountPrivacyBloc(gh<_i764.SignUpRepo>()),
     );
     gh.factory<_i566.SupportCurrencyListCubit>(
       () => _i566.SupportCurrencyListCubit(gh<_i619.UserProfileRepo>()),

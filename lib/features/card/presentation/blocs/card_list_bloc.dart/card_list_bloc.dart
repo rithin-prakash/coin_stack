@@ -13,7 +13,7 @@ class CardListBloc extends Cubit<List<PaymentOption>> {
     final res = await _transferRepo.fetchPayOptions();
 
     res.fold((l) {}, (r) {
-      emit(state + r);
+      emit(r);
     });
   }
 }

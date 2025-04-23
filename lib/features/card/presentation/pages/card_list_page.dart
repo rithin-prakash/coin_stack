@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/card/presentation/blocs/add_card_bloc/add_card_bloc.dart';
 import 'package:coin_stack/features/card/presentation/blocs/add_card_bloc/add_card_state.dart';
@@ -9,7 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class CardListPage extends StatelessWidget {
-  const CardListPage({super.key});
+  const CardListPage({super.key, required this.fromProfile});
+
+  final bool fromProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,9 @@ class CardListPage extends StatelessWidget {
             Expanded(child: CardList()),
             SizedBox(height: 12),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.navigateTo(AddCardPageRoute());
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -51,7 +56,14 @@ class CardListPage extends StatelessWidget {
             SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
-              child: OutlinedButton(onPressed: () {}, child: Text('Done')),
+              child: OutlinedButton(
+                onPressed: () {
+                  if (fromProfile) {
+                    context.pop();
+                  }
+                },
+                child: Text('Done'),
+              ),
             ),
             SizedBox(height: 20),
           ],

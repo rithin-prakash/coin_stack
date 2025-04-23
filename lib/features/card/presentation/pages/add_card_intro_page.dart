@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+@RoutePage()
 class AddCardintroPage extends StatelessWidget {
   const AddCardintroPage({super.key});
 
