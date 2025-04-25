@@ -4,12 +4,26 @@ import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
 import 'package:coin_stack/core/utls/validation_helper.dart';
 import 'package:coin_stack/features/card/presentation/blocs/add_card_bloc/add_card_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @RoutePage()
 class AddCardPage extends StatelessWidget {
-  const AddCardPage({super.key});
+  AddCardPage({super.key});
+
+  final cardMaskFormatter = MaskTextInputFormatter(
+    mask: "#### #### #### ####",
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
+
+  final monthYearMaskFormatter = MaskTextInputFormatter(
+    mask: "##/##",
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +101,8 @@ class AddCardPage extends StatelessWidget {
                           labelText: 'Card Number',
                           hintText: '1234 5678 9012 3456',
                           prefixIcon: Icon(Icons.credit_card),
+                          textInputType: TextInputType.number,
+                          inputFormatters: [cardMaskFormatter],
                           validationMsg: generateValidationMessages(
                             context.read<AddCardBloc>().cardNumberValidation,
                             'Card Number',
@@ -98,8 +114,10 @@ class AddCardPage extends StatelessWidget {
                           labelText: 'Month/Year',
                           hintText: 'MM/YY',
                           prefixIcon: Icon(Icons.calendar_month),
+                          inputFormatters: [monthYearMaskFormatter],
+                          textInputType: TextInputType.number,
                           validationMsg: generateValidationMessages(
-                            context.read<AddCardBloc>().textVal,
+                            context.read<AddCardBloc>().monthYearValidation,
                             'Month/Year',
                           ),
                         ),
@@ -109,6 +127,11 @@ class AddCardPage extends StatelessWidget {
                           labelText: 'CVV',
                           hintText: '\u25cf \u25cf \u25cf',
                           obscureText: true,
+                          textInputType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(3),
+                          ],
                           validationMsg: generateValidationMessages(
                             context.read<AddCardBloc>().textVal,
                             'CVV',

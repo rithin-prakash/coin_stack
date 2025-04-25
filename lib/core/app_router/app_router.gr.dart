@@ -70,18 +70,36 @@ import 'package:flutter/material.dart' as _i30;
 
 /// generated route for
 /// [_i1.AddCardPage]
-class AddCardPageRoute extends _i29.PageRouteInfo<void> {
-  const AddCardPageRoute({List<_i29.PageRouteInfo>? children})
-    : super(AddCardPageRoute.name, initialChildren: children);
+class AddCardPageRoute extends _i29.PageRouteInfo<AddCardPageRouteArgs> {
+  AddCardPageRoute({_i30.Key? key, List<_i29.PageRouteInfo>? children})
+    : super(
+        AddCardPageRoute.name,
+        args: AddCardPageRouteArgs(key: key),
+        initialChildren: children,
+      );
 
   static const String name = 'AddCardPageRoute';
 
   static _i29.PageInfo page = _i29.PageInfo(
     name,
     builder: (data) {
-      return const _i1.AddCardPage();
+      final args = data.argsAs<AddCardPageRouteArgs>(
+        orElse: () => const AddCardPageRouteArgs(),
+      );
+      return _i1.AddCardPage(key: args.key);
     },
   );
+}
+
+class AddCardPageRouteArgs {
+  const AddCardPageRouteArgs({this.key});
+
+  final _i30.Key? key;
+
+  @override
+  String toString() {
+    return 'AddCardPageRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

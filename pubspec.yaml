@@ -36,6 +36,7 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_html: ^3.0.0
   fl_chart: ^0.71.0
+  mask_text_input_formatter: ^2.9.0
 
   #domain
   dartz:

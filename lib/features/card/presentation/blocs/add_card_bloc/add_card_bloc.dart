@@ -1,6 +1,7 @@
 import 'package:coin_stack/core/utls/validation_helper.dart';
 import 'package:coin_stack/core/validation/card_number_validation.dart';
 import 'package:coin_stack/core/validation/email_validation_cr.dart';
+import 'package:coin_stack/core/validation/month_year_validation.dart';
 import 'package:coin_stack/core/validation/text_validation.dart';
 import 'package:coin_stack/features/card/domain/models/add_card_request.dart';
 import 'package:coin_stack/features/card/domain/repos/card_repo.dart';
@@ -31,7 +32,7 @@ class AddCardBloc extends Cubit<AddCardState> {
         validators: generateValidations(cardNumberValidation),
       ),
       cardMonthYear: FormControl<String>(
-        validators: generateValidations(textVal),
+        validators: generateValidations(monthYearValidation),
       ),
       cardCvv: FormControl<String>(validators: generateValidations(textVal)),
     });
@@ -40,6 +41,7 @@ class AddCardBloc extends Cubit<AddCardState> {
   final textVal = TextValidation();
   final cardEmailVal = EmailValidationCr();
   final cardNumberValidation = CardNumberValidation();
+  final monthYearValidation = MonthYearValidation();
 
   String get month =>
       (form.control(cardMonthYear).value as String).split('/').first;

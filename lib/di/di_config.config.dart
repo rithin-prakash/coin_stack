@@ -123,13 +123,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i938.SelectPaymentOptionBloc(),
     );
     gh.factory<_i561.SelectPurposeBloc>(() => _i561.SelectPurposeBloc());
+    gh.factory<_i686.ThemeBloc>(() => _i686.ThemeBloc());
     gh.factory<_i1059.TxnDateSelectionBloc>(
       () => _i1059.TxnDateSelectionBloc(),
     );
     gh.factory<_i1041.SelectedTxnCatBloc>(() => _i1041.SelectedTxnCatBloc());
     gh.factory<_i175.AccountNotifierBloc>(() => _i175.AccountNotifierBloc());
     gh.factory<_i528.SignupFormBloc>(() => _i528.SignupFormBloc());
-    gh.factory<_i686.ThemeBloc>(() => _i686.ThemeBloc());
     gh.lazySingleton<_i82.ShareFilesRepo>(
       () => _i792.ShareFilesRepoSharePlusImpl(),
     );
