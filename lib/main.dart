@@ -3,6 +3,8 @@ import 'package:coin_stack/core/app_router/app_router.dart';
 import 'package:coin_stack/core/theme/app_theme.dart';
 import 'package:coin_stack/di/build_env.dart';
 import 'package:coin_stack/di/di_config.dart';
+import 'package:coin_stack/features/auth/presentation/blocs/app_settings_bloc/app_settings_bloc.dart';
+import 'package:coin_stack/features/auth/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:coin_stack/features/card/presentation/blocs/add_card_bloc/add_card_bloc.dart';
 import 'package:coin_stack/features/card/presentation/blocs/card_list_bloc.dart/card_list_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
@@ -54,6 +56,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<AddCardBloc>()),
         BlocProvider(create: (_) => getIt<CardListBloc>()),
         BlocProvider(create: (_) => getIt<ThemeBloc>()),
+        BlocProvider(create: (_) => getIt<AuthBloc>()),
+        BlocProvider(create: (_) => getIt<AppSettingsBloc>()),
       ],
       child: Builder(
         builder: (context) {

@@ -14,6 +14,11 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../core/api_config/remote_api.dart' as _i285;
 import '../core/api_config/remote_api_dio_impl.dart' as _i845;
+import '../features/auth/data/auth_repo_rest_api_impl.dart' as _i332;
+import '../features/auth/domain/repos/auth_repo.dart' as _i623;
+import '../features/auth/presentation/blocs/app_settings_bloc/app_settings_bloc.dart'
+    as _i1055;
+import '../features/auth/presentation/blocs/auth_bloc/auth_bloc.dart' as _i700;
 import '../features/card/data/card_repo_rest_api_impl.dart' as _i671;
 import '../features/card/domain/repos/card_repo.dart' as _i117;
 import '../features/card/presentation/blocs/add_card_bloc/add_card_bloc.dart'
@@ -148,9 +153,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i319.FirstOpeningCubit>(
       () => _i319.FirstOpeningCubit(gh<_i73.SplashRepo>()),
     );
+    gh.lazySingleton<_i623.AuthRepo>(() => _i332.AuthRepoRestApiImpl());
     gh.lazySingleton<_i37.TransferRepo>(() => _i778.TransferRepoRestApiImpl());
     gh.factory<_i724.ShareFileBloc>(
       () => _i724.ShareFileBloc(gh<_i82.ShareFilesRepo>()),
+    );
+    gh.factory<_i700.AuthBloc>(() => _i700.AuthBloc(gh<_i623.AuthRepo>()));
+    gh.factory<_i1055.AppSettingsBloc>(
+      () => _i1055.AppSettingsBloc(gh<_i623.AuthRepo>()),
     );
     gh.factory<_i386.BalanceBloc>(
       () => _i386.BalanceBloc(gh<_i482.TxnHistoryRepo>()),
