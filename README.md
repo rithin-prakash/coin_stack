@@ -69,14 +69,23 @@ The application consists of the following 16 screens:
 📂 Folder Structure
 
 lib/
-    ├── core/      # Common utilities, theme, and constants
-    ├── feature
-    ├       ├── data/     # Data sources, models, and repositories
-    ├       ├── domain/    # Entities and use cases
-    ├       ├── presentation/      # UI screens and widgets
-    ├                  ├── screens/
-    ├                  └── widgets/
-    └── main.dart
+├── core/                      # Shared utilities, constants, themes, etc.
+├── feature/                   # Feature-first structure
+│   ├── auth/                  # Example feature: Auth
+│   │   ├── presentation/
+│   │   │   ├── pages/         # Screens for auth
+│   │   │   └── widgets/       # UI components for auth
+│   │   ├── domain/
+│   │   │   ├── models/        # Entity models
+│   │   │   └── repos/         # Repository interfaces
+│   │   └── data/
+│   │       └── repo_impl/     # Repository implementations
+│   ├── home/                  # Another feature (e.g. Homepage)
+│   │   └── ...                # Same structure as above
+│   └── ...                    # More features like send, receive, profile, etc.
+├── routes/                    # App-level navigation
+└── main.dart                  # App entry point
+
 
 📸 Some Screenshots
 
