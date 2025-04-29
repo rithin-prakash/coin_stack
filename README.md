@@ -4,7 +4,7 @@ Coin Stack is a modern, secure fintech mobile application built using Flutter. T
 
 ## 🚀 Features
 
-- Follows **Clean Architecture**: Divides the app into presentation, domain, and data layers for a scalable and testable codebase.
+- Follows **Clean Architecture**: Divides the app into presentation, domain, and data layers for a scalable and testable codebase with my own touch suitable for this project.
 - Built with **Flutter** for high performance and cross-platform support.
 - Utilizes a professional, user-friendly UI from a publicly available Figma community design.
 - Includes a complete user flow for a finance-focused application, from onboarding to transaction handling.
@@ -19,8 +19,8 @@ All UI designs used in this project are based on the [Coinpay Fintech Finance Mo
 Coin Stack implements Clean Architecture using the following layer separation:
 
 - **Presentation Layer**: Widgets, screens, and UI logic.
-- **Domain Layer**: Use cases and entities (pure Dart code, no Flutter).
-- **Data Layer**: Repositories and data sources (API, local DB, etc).
+- **Domain Layer**: Use cases and model.
+- **Data Layer**: Repositories (API, local DB, etc).
 
 ## 📄 Screens
 
