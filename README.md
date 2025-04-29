@@ -79,7 +79,16 @@ lib/
     └── main.dart
 
 📸 Some Screenshots
-<img src="screenshots/login.png" alt="Login" width="300"/>
+
+
+<img src="screenshots/login.png" alt="Login" width="200"/>
+<img src="screenshots/sighup.png" alt="Signup" width="200"/>
+<img src="screenshots/otp.png" alt="OTP" width="200"/>
+<img src="screenshots/dashboard.png" alt="Dashboard" width="200"/>
+<img src="screenshots/history.png" alt="History" width="200"/>
+<img src="screenshots/support.png" alt="Support" width="200"/>
+<img src="screenshots/profile.png" alt="Profile" width="200"/>
+
 
 <!-- ![Login](screenshots/login.png)
 ![Signup](screenshots/sighup.png)
