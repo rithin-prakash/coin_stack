@@ -70,22 +70,31 @@ The application consists of the following 16 screens:
 
 ```plaintext
 lib/
-├── core/                      # Shared utilities, constants, themes, etc.
-├── feature/                   # Feature-first structure
-│   ├── auth/                  # Example feature: Auth
+├── core/                         # Global, reusable app-level utilities
+│   ├── routes/                   # App-wide route definitions
+│   ├── assets/                   # Asset paths (e.g. icons, images)
+│   ├── configs/                  # App config (env settings, flavors)
+│   ├── constants/                # App-wide constants
+│   ├── theme/                    # App themes and styling
+│   ├── validation/               # Reusable form validators
+│   └── ...                       # Any other shared utilities
+├── feature/                      # Feature-first architecture
+│   ├── auth/                     # Authentication feature
 │   │   ├── presentation/
-│   │   │   ├── pages/         # Screens for auth
-│   │   │   └── widgets/       # UI components for auth
+│   │   │   ├── pages/
+│   │   │   └── widgets/
 │   │   ├── domain/
-│   │   │   ├── models/        # Entity models
-│   │   │   └── repos/         # Repository interfaces
+│   │   │   ├── models/
+│   │   │   └── repos/
 │   │   └── data/
-│   │       └── repo_impl/     # Repository implementations
-│   ├── home/                  # Another feature (e.g. Homepage)
-│   │   └── ...                # Same structure as above
-│   └── ...                    # More features like send, receive, profile, etc.
-├── routes/                    # App-level navigation
-└── main.dart                  # App entry point
+│   │       └── repo_impl/
+│   ├── home/                     # Homepage feature
+│   ├── send/                     # Send money feature
+│   ├── receive/                  # Receive money feature
+│   ├── transaction/              # Transaction history feature
+│   ├── profile/                  # Profile & settings
+│   └── ...                       # Other screens like onboarding, support, etc.
+└── main.dart                     # App entry point
 ```
 
 
