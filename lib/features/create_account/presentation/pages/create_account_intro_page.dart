@@ -1,31 +1,38 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/assets/app_assets.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
-import 'package:coin_stack/core/theme/app_colors.dart';
-import 'package:coin_stack/features/create_account/presentation/pages/create_account_page.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
 import 'package:coin_stack/features/create_account/presentation/widgets/account_progress_indicator.dart';
+import 'package:coin_stack/features/create_account/presentation/widgets/tn_c_acreate_account.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+@RoutePage()
 class CreateAccountIntroPage extends StatelessWidget {
   const CreateAccountIntroPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(backgroundColor: Colors.white),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           AccountProgressIndicator(value: .1),
+          SvgPicture.asset(
+            AppAssets.createAccount,
+            // width: MediaQuery.sizeOf(context).width,
+          ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppDimen.pagePadding),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimen.pagePadding,
+              vertical: AppDimen.pagePadding,
+            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  AppAssets.createAccount,
-                  // width: MediaQuery.sizeOf(context).width,
-                ),
                 Text(
                   "Create your Coinstack account",
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
@@ -39,14 +46,13 @@ class CreateAccountIntroPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20),
+
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => CreateAccountPage()),
-                      );
+                      context.navigateTo(CreateAccountPageRoute());
+                      context.read<AccountNotifierBloc>().creatingAcc(true);
                     },
                     child: Text('Sign Up'),
                   ),
@@ -55,46 +61,15 @@ class CreateAccountIntroPage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      context.navigateTo(CreateAccountPageRoute());
+                      context.read<AccountNotifierBloc>().creatingAcc(false);
+                    },
                     child: Text('Log In'),
                   ),
                 ),
                 SizedBox(height: 20),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: 'By continuing, you accpet our \n',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: 'Terms and Conditions',
-                        style: TextStyle(
-                          color: AppColors.primary,
-
-                          fontFamily: GoogleFonts.poppins().fontFamily,
-                        ),
-                      ),
-                      TextSpan(
-                        text: ' and ',
-                        style: TextStyle(
-                          color: Colors.black,
-
-                          fontFamily: GoogleFonts.poppins().fontFamily,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'Privacy Policy',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontFamily: GoogleFonts.poppins().fontFamily,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                TnCAcreateAccount(),
               ],
             ),
           ),

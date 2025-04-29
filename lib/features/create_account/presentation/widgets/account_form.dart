@@ -1,45 +1,80 @@
 import 'package:coin_stack/core/shared_widgets/app_phone_code_field.dart';
 import 'package:coin_stack/core/shared_widgets/app_text_field.dart';
-import 'package:country_code_picker/country_code_picker.dart';
+import 'package:coin_stack/core/utls/validation_helper.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/account_notifier_bloc/account_notifier_bloc.dart';
+import 'package:coin_stack/features/create_account/presentation/blocs/sigup_form_bloc/signup_form_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AccountForm extends StatelessWidget {
-  AccountForm({super.key});
+class AccountForm extends StatefulWidget {
+  const AccountForm({super.key});
 
-  final form = fb.group({
-    'password': Validators.email,
-    'phone': Validators.email,
-    'code': FormControl<CountryCode>(validators: [Validators.required]),
-  });
+  @override
+  State<StatefulWidget> createState() => _State();
+}
 
+class _State extends State<AccountForm> {
+  var showPassword = false;
   @override
   Widget build(BuildContext context) {
     return ReactiveFormBuilder(
-      form: () => form,
+      form: () => context.read<SignupFormBloc>().form,
       builder: (context, form, child) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppPhoneCodeField(controlName: 'code', labelText: 'Phone'),
+                AppPhoneCodeField(controlName: caPhoneCode, labelText: 'Phone'),
                 SizedBox(width: 8),
                 Expanded(
                   child: AppTextField(
-                    controlName: 'phone',
+                    controlName: caPhone,
                     hintText: 'Mobile Number',
+                    labelText: "",
+                    textInputType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    validationMsg: generateValidationMessages(
+                      context.read<SignupFormBloc>().passwordVal,
+                      'Phone',
+                    ),
                   ),
                 ),
               ],
             ),
             SizedBox(height: 12),
             AppTextField(
-              controlName: 'password',
+              controlName: caPassword,
               hintText: '\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF',
               prefixIcon: Icon(Icons.lock),
-              suffixIcon: Icon(Icons.visibility),
-              obscureText: true,
+              suffixIcon: IconButton(
+                icon: Icon(Icons.visibility),
+                onPressed:
+                    () => setState(() {
+                      showPassword = !showPassword;
+                    }),
+              ),
+              obscureText: showPassword,
+              validationMsg: generateValidationMessages(
+                context.read<SignupFormBloc>().passwordVal,
+                'Password',
+              ),
+            ),
+            SizedBox(height: 4),
+            BlocBuilder<AccountNotifierBloc, bool>(
+              builder: (_, s) {
+                if (s) {
+                  return Container();
+                }
+                return TextButton(
+                  onPressed: () {},
+                  child: Text('Forgot Password?'),
+                );
+              },
             ),
           ],
         );

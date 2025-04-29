@@ -45,10 +45,11 @@ class AppPhoneCodeField extends ReactiveFormField<CountryCode, CountryCode> {
                    borderRadius: BorderRadius.circular(
                      AppDimen.inputBorderRadius,
                    ),
-                   color: Colors.white,
+                   color: Theme.of(field.context).scaffoldBackgroundColor,
                  ),
                  padding: EdgeInsets.zero,
                  child: CountryCodePicker(
+                   initialSelection: field.value?.code,
                    padding: EdgeInsets.zero,
                    onChanged: (value) {
                      field.didChange(value);

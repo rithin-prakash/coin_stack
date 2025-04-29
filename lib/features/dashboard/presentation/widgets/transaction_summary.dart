@@ -1,6 +1,15 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
+import 'package:coin_stack/di/di_config.dart';
 import 'package:coin_stack/features/dashboard/presentation/widgets/transaction_summery_item.dart';
+import 'package:coin_stack/features/dashboard/presentation/widgets/txn_category_loading_shimmer.dart';
+import 'package:coin_stack/features/transaction_history/domain/models/transaction_category.dart';
+import 'package:coin_stack/features/transaction_history/presentation/blocs/selected_txn_cat_bloc/selected_txn_cat_bloc.dart';
+import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_bloc.dart';
+import 'package:coin_stack/features/transaction_history/presentation/blocs/txn_by_category_bloc/txn_by_category_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TransactionSummary extends StatelessWidget {
   const TransactionSummary({super.key});
@@ -42,38 +51,122 @@ class TransactionSummary extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               children: [
-                TransactionSummeryItem(
-                  icon: Icons.credit_card,
-                  iconColor: Theme.of(context).primaryColor,
-                  title: 'Spending',
-                  value: '-\$500',
-                  amountColor: Colors.red,
+                BlocProvider(
+                  create:
+                      (_) =>
+                          getIt<TxnByCategoryBloc>()
+                            ..loadHistory(TransactionCategory.spending),
+                  child: Builder(
+                    builder: (context) {
+                      var state = context.watch<TxnByCategoryBloc>().state;
+                      if (state is TxnByCategoryLoading) {
+                        return TxnCategoryLoadingShimmer();
+                      } else if (state is TxnByCategoryLoaded) {
+                        return TransactionSummeryItem(
+                          icon: Icons.credit_card,
+                          iconColor: Theme.of(context).primaryColor,
+                          title: 'Spending',
+                          value: '-\$${state.history.amount}',
+                          amountColor: Colors.red,
+                          onTap: () {
+                            context.read<SelectedTxnCatBloc>().changeCategory(
+                              TransactionCategory.spending,
+                            );
+                            context.navigateTo(TransactionHistoryPageRoute());
+                          },
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
                 ),
-                Divider(color: Colors.grey.shade400),
-                TransactionSummeryItem(
-                  icon: Icons.wallet,
-                  iconColor: Colors.green,
-                  title: 'Income',
-                  value: '-\$20400',
-                  amountColor: Colors.green,
+                BlocProvider(
+                  create:
+                      (_) =>
+                          getIt<TxnByCategoryBloc>()
+                            ..loadHistory(TransactionCategory.income),
+                  child: Builder(
+                    builder: (context) {
+                      var state = context.watch<TxnByCategoryBloc>().state;
+                      if (state is TxnByCategoryLoading) {
+                        return TxnCategoryLoadingShimmer();
+                      } else if (state is TxnByCategoryLoaded) {
+                        return TransactionSummeryItem(
+                          icon: Icons.wallet,
+                          iconColor: Colors.green,
+                          title: 'Income',
+                          value: '-\$${state.history.amount}',
+                          amountColor: Colors.green,
+                          onTap: () {
+                            context.read<SelectedTxnCatBloc>().changeCategory(
+                              TransactionCategory.income,
+                            );
+                            context.navigateTo(TransactionHistoryPageRoute());
+                          },
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
                 ),
-                Divider(color: Colors.grey.shade400),
-                TransactionSummeryItem(
-                  icon: Icons.sell,
-                  iconColor: Colors.orange,
-                  title: 'Bills',
-                  value: '-\$800',
-                  amountColor: Colors.red,
+                BlocProvider(
+                  create:
+                      (_) =>
+                          getIt<TxnByCategoryBloc>()
+                            ..loadHistory(TransactionCategory.bills),
+                  child: Builder(
+                    builder: (context) {
+                      var state = context.watch<TxnByCategoryBloc>().state;
+                      if (state is TxnByCategoryLoading) {
+                        return TxnCategoryLoadingShimmer();
+                      } else if (state is TxnByCategoryLoaded) {
+                        return TransactionSummeryItem(
+                          icon: Icons.sell,
+                          iconColor: Colors.orange,
+                          title: 'Bills',
+                          value: '-\$800',
+                          amountColor: Colors.red,
+                          onTap: () {
+                            context.read<SelectedTxnCatBloc>().changeCategory(
+                              TransactionCategory.bills,
+                            );
+                            context.navigateTo(TransactionHistoryPageRoute());
+                          },
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
                 ),
-                Divider(color: Colors.grey.shade400),
-                TransactionSummeryItem(
-                  icon: Icons.savings,
-                  iconColor: Colors.deepOrange,
-                  title: 'Saving',
-                  value: '-\$1000',
-                  amountColor: Colors.orange,
+                BlocProvider(
+                  create:
+                      (_) =>
+                          getIt<TxnByCategoryBloc>()
+                            ..loadHistory(TransactionCategory.saving),
+                  child: Builder(
+                    builder: (context) {
+                      var state = context.watch<TxnByCategoryBloc>().state;
+                      if (state is TxnByCategoryLoading) {
+                        return TxnCategoryLoadingShimmer();
+                      } else if (state is TxnByCategoryLoaded) {
+                        return TransactionSummeryItem(
+                          icon: Icons.savings,
+                          iconColor: Colors.deepOrange,
+                          title: 'Saving',
+                          value: '-\$1000',
+                          amountColor: Colors.orange,
+                          onTap: () {
+                            context.read<SelectedTxnCatBloc>().changeCategory(
+                              TransactionCategory.saving,
+                            );
+                            context.navigateTo(TransactionHistoryPageRoute());
+                          },
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
                 ),
-                Divider(color: Colors.grey.shade400),
               ],
             ),
           ),

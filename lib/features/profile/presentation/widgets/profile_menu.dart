@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/profile/presentation/widgets/dark_mode_button.dart';
 import 'package:coin_stack/features/profile/presentation/widgets/profile_item.dart';
@@ -33,7 +35,9 @@ class ProfileMenu extends StatelessWidget {
           ProfileItem(
             icon: Icon(Icons.credit_card, color: Colors.orange, size: 30),
             iconBgColor: Colors.orange.withValues(alpha: .3),
-            onTap: () {},
+            onTap: () {
+              context.navigateTo(CardListPageRoute(fromProfile: true));
+            },
             title: 'Cards',
           ),
           Divider(color: Colors.grey.shade400),
@@ -58,7 +62,9 @@ class ProfileMenu extends StatelessWidget {
           ProfileItem(
             icon: Icon(Icons.edit_document, color: Colors.green, size: 30),
             iconBgColor: Colors.green.withValues(alpha: .3),
-            onTap: () {},
+            onTap: () {
+              context.navigateTo(CreateAccountTncPageRoute());
+            },
             title: 'Terms and Conditions',
           ),
         ],

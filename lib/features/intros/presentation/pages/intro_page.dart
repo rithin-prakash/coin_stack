@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
-import 'package:coin_stack/features/create_account/presentation/pages/create_account_intro_page.dart';
 import 'package:coin_stack/features/intros/presentation/widgets/animated_dot.dart';
 import 'package:coin_stack/features/intros/presentation/widgets/into_page_builder.dart';
 import 'package:coin_stack/features/intros/presentation/widgets/intro_money_abroad.dart';
@@ -7,6 +8,7 @@ import 'package:coin_stack/features/intros/presentation/widgets/intro_receive_mo
 import 'package:coin_stack/features/intros/presentation/widgets/intro_trust_page.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
 
@@ -31,9 +33,11 @@ class _IntroPageState extends State<IntroPage> {
                 controller: controller,
                 pages: pages,
                 onPageChange: (p0) {
-                  setState(() {
-                    currentPage = p0;
-                  });
+                  if (p0 != currentPage) {
+                    setState(() {
+                      currentPage = p0;
+                    });
+                  }
                 },
               ),
             ),
@@ -55,19 +59,18 @@ class _IntroPageState extends State<IntroPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (currentPage == pages.length - 1) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => CreateAccountIntroPage(),
-                        ),
-                      );
+                      context.replaceRoute(CreateAccountIntroPageRoute());
                       return;
                     }
 
+                    setState(() {
+                      currentPage++;
+                    });
+
                     controller.animateToPage(
-                      currentPage++,
-                      duration: Duration(seconds: 300),
-                      curve: Curves.ease,
+                      currentPage,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeIn,
                     );
                   },
                   child: Text("Next"),

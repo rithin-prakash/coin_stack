@@ -1,0 +1,1 @@
+enum TransactionProcessType { send, receive }

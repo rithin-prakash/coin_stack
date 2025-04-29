@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/core/constants/app_dimen.dart';
 import 'package:coin_stack/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:coin_stack/features/profile/presentation/pages/profile_page.dart';
@@ -5,6 +6,7 @@ import 'package:coin_stack/features/support/presentation/pages/support_page.dart
 import 'package:coin_stack/features/transaction_history/presentation/pages/transaction_history_page.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class DashboardMain extends StatefulWidget {
   const DashboardMain({super.key});
 
@@ -63,11 +65,11 @@ class _DashboardMainState extends State<DashboardMain> {
               ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.pie_chart),
               label: 'History',
               activeIcon: Column(
                 children: [
-                  Icon(Icons.person),
+                  Icon(Icons.pie_chart),
                   Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor,

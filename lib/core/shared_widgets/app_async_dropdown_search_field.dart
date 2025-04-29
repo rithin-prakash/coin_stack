@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 
-class AppAsyncDropdownSearchField extends StatelessWidget {
-  AppAsyncDropdownSearchField({
+class AppAsyncDropdownSearchField<T> extends StatefulWidget {
+  const AppAsyncDropdownSearchField({
     super.key,
     required this.controlName,
     this.hintText,
@@ -11,6 +11,10 @@ class AppAsyncDropdownSearchField extends StatelessWidget {
     this.suffixIcon,
     this.obscureText = false,
     this.prefixText,
+    this.asyncItems,
+    required this.compareFn,
+    required this.initialCall,
+    this.validationMessages,
   });
 
   final String controlName;
@@ -20,8 +24,25 @@ class AppAsyncDropdownSearchField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool? obscureText;
   final String? prefixText;
+  final Future<List<T>> Function()? asyncItems;
+  final bool Function(T, T) compareFn;
+  final VoidCallback initialCall;
+  final Map<String, String Function(Object)>? validationMessages;
 
+  @override
+  State<AppAsyncDropdownSearchField<T>> createState() =>
+      _AppAsyncDropdownSearchFieldState<T>();
+}
+
+class _AppAsyncDropdownSearchFieldState<T>
+    extends State<AppAsyncDropdownSearchField<T>> {
   final controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.initialCall();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +50,25 @@ class AppAsyncDropdownSearchField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (labelText != null)
+        if (widget.labelText != null)
           Text(
-            labelText!,
+            widget.labelText!,
             style: Theme.of(context).inputDecorationTheme.labelStyle,
           ),
-        ReactiveDropdownSearch(
-          formControlName: controlName,
+        ReactiveDropdownSearch<T, T>(
+          formControlName: widget.controlName,
+          validationMessages: widget.validationMessages,
+          items:
+              widget.asyncItems != null
+                  ? (s, __) => widget.asyncItems!()
+                  : null,
           suffixProps: DropdownSuffixProps(
             dropdownButtonProps: DropdownButtonProps(
               iconOpened: Icon(Icons.keyboard_arrow_up, size: 24),
               iconClosed: Icon(Icons.keyboard_arrow_down, size: 24),
             ),
           ),
-          compareFn: (item1, item2) {
-            return true;
-          },
+          compareFn: widget.compareFn,
         ),
       ],
     );

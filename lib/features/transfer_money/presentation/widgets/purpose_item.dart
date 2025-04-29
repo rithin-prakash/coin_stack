@@ -9,6 +9,7 @@ class PurposeItem extends StatelessWidget {
     required this.color,
     required this.value,
     required this.icon,
+    required this.onTap,
   });
 
   final String title;
@@ -16,6 +17,7 @@ class PurposeItem extends StatelessWidget {
   final Color color;
   final bool value;
   final IconData icon;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class PurposeItem extends StatelessWidget {
         border: Border(bottom: BorderSide(color: value ? color : Colors.white)),
       ),
       child: ListTile(
+        onTap: onTap,
         leading: CircleAvatar(
           backgroundColor: color.withValues(alpha: .3),
           child: Icon(icon, color: color),

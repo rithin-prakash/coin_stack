@@ -1,4 +1,9 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:coin_stack/core/app_router/app_router.gr.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type.dart';
+import 'package:coin_stack/features/transfer_money/presentation/blocs/transaction_process_type_bloc/transaction_process_type_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainFeatureContainer extends StatelessWidget {
   const MainFeatureContainer({super.key});
@@ -26,7 +31,12 @@ class SendMoneyHomeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.read<TransactionProcessTypeBloc>().changeType(
+          TransactionProcessType.send,
+        );
+        context.navigateTo(ChooseReceipientPageRoute());
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -45,7 +55,12 @@ class ReceiveMoneyHomeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.read<TransactionProcessTypeBloc>().changeType(
+          TransactionProcessType.receive,
+        );
+        context.navigateTo(ChooseReceipientPageRoute());
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

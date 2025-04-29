@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:coin_stack/features/transfer_money/presentation/widgets/flash_light_container.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+@RoutePage()
 class ScanQrPage extends StatefulWidget {
   const ScanQrPage({super.key});
 

@@ -18,6 +18,10 @@ class AppAssets {
   static const pageNotFound = '$_svgPath/404.svg';
 
   //rive
-  static const confettiRive = '$_rivePath/confetti.riv';
+  static const confettiDarkRive = '$_rivePath/confetti_dark.riv';
+  static const confettiLightRive = '$_rivePath/confetti_light.riv';
   static const successRive = '$_rivePath/success_payment.riv';
+  static const failedLightRive = '$_rivePath/error_light.riv';
+  static const pendingRive = '$_rivePath/request_sent.riv';
+  static const pendingRiveLight = '$_rivePath/request_sent_light.riv';
 }

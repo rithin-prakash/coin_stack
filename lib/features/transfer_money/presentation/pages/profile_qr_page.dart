@@ -2,9 +2,10 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:coin_stack/core/constants/app_dimen.dart';
+import 'package:coin_stack/features/share_files/presentation/share_file_bloc/share_file_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ProfileQrPage extends StatelessWidget {
   const ProfileQrPage({super.key});
@@ -44,11 +45,8 @@ class ProfileQrPage extends StatelessWidget {
     }
   }
 
-  shareImage(Uint8List data) {
-    Share.shareXFiles(
-      [XFile.fromData(data, mimeType: 'image/jpeg')],
-      fileNameOverrides: ['coinstack-name.jpg'],
-    );
+  shareImage(Uint8List data, BuildContext context) {
+    context.read<ShareFileBloc>().shareFile(data, 'image', null, null);
   }
 
   @override
@@ -103,13 +101,13 @@ class ProfileQrPage extends StatelessWidget {
                     'profile:coinstack:542452',
                     context,
                   );
-                  if (image == null) {
+                  if (image == null && context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Something went wrong')),
                     );
                     return;
                   }
-                  shareImage(image);
+                  if (context.mounted) shareImage(image!, context);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
