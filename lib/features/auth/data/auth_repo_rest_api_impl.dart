@@ -10,14 +10,14 @@ class AuthRepoRestApiImpl implements AuthRepo {
   Future<Either<Failure, bool>> isUserLoggedIn() async {
     await Future.delayed(Duration(seconds: 2));
 
-    return Right(true);
+    return Right(false);
   }
 
   @override
   Future<Either<Failure, AppSettings>> loadAppSettings() async {
     await Future.delayed(Duration(seconds: 2));
 
-    return Left(ServerFailure(message: 'message'));
-    // return Right(AppSettings(minVersion: '0.0.1'));
+    // return Left(ServerFailure(message: 'message'));
+    return Right(AppSettings(minVersion: '0.0.1'));
   }
 }

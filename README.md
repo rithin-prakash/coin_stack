@@ -78,6 +78,15 @@ lib/
     ├                  └── widgets/
     └── main.dart
 
+📸 Some Screenshots
+![Login](screenshots/login.png)
+![Signup](screenshots/sighup.png)
+![OTP](screenshots/otp.png)
+![Dashboard](screenshots/dashboard.png)
+![History](screenshots/history.png)
+![Support](screenshots/support.png)
+![Profile](screenshots/profile.png)
+
 
 📜 License
 This project is for educational and non-commercial use. UI design copyrights belong to the original Figma creator.
