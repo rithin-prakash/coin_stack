@@ -80,14 +80,19 @@ lib/
 
 📸 Some Screenshots
 
-
+<p float="left">
 <img src="screenshots/login.png" alt="Login" width="200"/>
-<img src="screenshots/sighup.png" alt="Signup" width="200"/>
+<img src="screenshots/signup.png" alt="Signup" width="200"/>
 <img src="screenshots/otp.png" alt="OTP" width="200"/>
 <img src="screenshots/dashboard.png" alt="Dashboard" width="200"/>
+</p>
+
+
+<p float="left">
 <img src="screenshots/history.png" alt="History" width="200"/>
 <img src="screenshots/support.png" alt="Support" width="200"/>
 <img src="screenshots/profile.png" alt="Profile" width="200"/>
+</p>
 
 
 <!-- ![Login](screenshots/login.png)
