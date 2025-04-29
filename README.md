@@ -68,6 +68,7 @@ The application consists of the following 16 screens:
 
 📂 Folder Structure
 
+```plaintext
 lib/
 ├── core/                      # Shared utilities, constants, themes, etc.
 ├── feature/                   # Feature-first structure
@@ -85,6 +86,7 @@ lib/
 │   └── ...                    # More features like send, receive, profile, etc.
 ├── routes/                    # App-level navigation
 └── main.dart                  # App entry point
+```
 
 
 📸 Some Screenshots
