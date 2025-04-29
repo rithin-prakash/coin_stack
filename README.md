@@ -79,7 +79,7 @@ lib/
     └── main.dart
 
 📸 Some Screenshots
-<img src="screenshots/splash.png" alt="Splash Screen" width="300"/>
+<img src="screenshots/login.png" alt="Login" width="300"/>
 
 <!-- ![Login](screenshots/login.png)
 ![Signup](screenshots/sighup.png)
